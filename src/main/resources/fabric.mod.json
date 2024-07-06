@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "modid",
+	"version": "${version}",
+	"name": "Simple Animated Guns",
+	"description": "3D animated guns",
+	"authors": [
+		"Elidhan"
+	],
+	"contact": {
+		"sources": "https://github.com/elidhan/Simple-Animated-Guns"
+	},
+
+	"license": "CC-BY-4.0",
+
+
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.elidhan.anim_guns.AnimatedGuns"
+		],
+		"client": [
+			"net.elidhan.anim_guns.AnimatedGunsClient"
+		]
+	},
+	"mixins": [
+		"anim_guns.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"azurelib": ">=2.0.29"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
