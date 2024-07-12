@@ -29,6 +29,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     private boolean isReloading;
     private boolean isAiming = false;
     private ItemStack currentGun;
+    private int meleeTick;
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
 
     @Inject(method = "tickMovement", at = @At("HEAD"))
@@ -42,12 +43,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Inject(method = "tickMovement", at = @At("TAIL"))
     public void tickMovement(CallbackInfo ci)
     {
-        if(!isAiming && aimTick > 0) aimTick--;
+        if(meleeTick > 0)
+            meleeTick--;
+        if(!isAiming && aimTick > 0)
+            aimTick--;
 
         if(isReloading())
-        {
             tickReload();
-        }
     }
 
     //=====Reloading=====//
@@ -97,6 +99,17 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     }
     //====================//
 
+    //=======Melee========//
+    @Override
+    public void melee()
+    {
+        meleeTick = 10;
+        this.sendMessage(Text.literal("Melee"));
+    }
+    @Override
+    public int getMeleeProgress() {return meleeTick;}
+    //===================//
+
     //=======Aiming=======//
     @Override
     public void tickAim()
@@ -107,6 +120,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     }
     @Override
     public void stopAim() {this.isAiming = false;}
+    @Override
     public int getAimTick() {return this.aimTick;}
     //====================//
 }

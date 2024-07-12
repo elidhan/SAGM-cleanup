@@ -28,7 +28,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		//Intercept Attack mouse key
 		ClientPreAttackCallback.EVENT.register(new ClientPreAttackHandler());
 
-		//Packets STuff
+		//Reg
 		ModNetworking.registerS2CPackets();
 
 		//KeyBinds

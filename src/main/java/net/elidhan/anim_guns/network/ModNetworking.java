@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 
 public class ModNetworking
 {
+    //Client-to-Server
     public static final Identifier C2S_RELOAD = new Identifier(AnimatedGuns.MOD_ID, "c2s_reload");
     public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
     public static final Identifier C2S_AIM = new Identifier(AnimatedGuns.MOD_ID, "c2s_aim");
@@ -22,7 +23,8 @@ public class ModNetworking
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_MELEE, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-
+            if (player instanceof IFPlayerWIthGun && ((IFPlayerWIthGun) player).getMeleeProgress() <= 0)
+                ((IFPlayerWIthGun) player).melee();
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_AIM, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
@@ -33,7 +35,7 @@ public class ModNetworking
             ((GunItem)(player.getMainHandStack().getItem())).shoot(player);
         }));
     }
-
+    //Server-to-Client
     public static final Identifier S2C_RECOIL = new Identifier(AnimatedGuns.MOD_ID, "s2c_recoil");
     public static void registerS2CPackets()
     {
