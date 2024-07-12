@@ -1,6 +1,7 @@
 package net.elidhan.anim_guns.item;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class GunMagFedItem extends GunItem
 {
@@ -12,7 +13,7 @@ public class GunMagFedItem extends GunItem
     }
 
     @Override
-    public void shoot(PlayerEntity player)
+    public void shoot(ServerPlayerEntity player, ItemStack stack)
     {
 
     }

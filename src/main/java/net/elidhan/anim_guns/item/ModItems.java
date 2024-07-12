@@ -8,7 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class ModItems
 {
-    public static final Item TESTGUN = registerItem("testgun", new GunItem(new Item.Settings(), 1,5,20, new int[] {1,1,1}, new float[] {1,1,1}, new float[] {1,1,1}));
+    public static final Item TESTGUN = registerItem("testgun", new GunItem(new Item.Settings(), 1,2,20, new int[] {1,1,1}, new float[] {1,1,1}, new float[] {1,1,1}));
 
     private static Item registerItem(String name, Item item)
     {

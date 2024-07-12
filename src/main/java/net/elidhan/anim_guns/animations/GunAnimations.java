@@ -5,7 +5,7 @@ import mod.azure.azurelib.core.animation.RawAnimation;
 
 public final class GunAnimations
 {
-    public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
+    public static final RawAnimation IDLE = RawAnimation.begin().thenPlay("idle");
     public static final RawAnimation FIRING = RawAnimation.begin().then("firing", Animation.LoopType.HOLD_ON_LAST_FRAME);//.thenLoop("idle");
     public static final RawAnimation RELOAD_START = RawAnimation.begin().then("reload_start", Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation RELOAD_MAGOUT = RawAnimation.begin().then("reload_magout", Animation.LoopType.PLAY_ONCE);
