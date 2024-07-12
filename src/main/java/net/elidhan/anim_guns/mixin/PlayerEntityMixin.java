@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,9 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayerWIthGun
 {
-    @Shadow public abstract void sendMessage(Text message, boolean overlay);
-
+    private static final TrackedData<Boolean> IS_AIMING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Integer> AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> RELOAD_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Boolean> IS_RELOADING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int reloadTick;
     private int aimTick;
     private boolean isReloading;
@@ -45,8 +45,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     {
         if(meleeTick > 0)
             meleeTick--;
-        if(!isAiming && aimTick > 0)
-            aimTick--;
+        if(!this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) > 0)
+            this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) - 1, 0, 4));
 
         if(isReloading())
             tickReload();
@@ -114,13 +114,24 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Override
     public void tickAim()
     {
-        this.isAiming = true;
-        sendMessage(Text.literal("Aim Ticks: "+(this.aimTick)));
-        this.aimTick = MathUtils.clamp(++this.aimTick, 1, 20);
+        sendMessage(Text.literal("AimTicks: "+(this.dataTracker.get(AIM_TICK))));
+        this.dataTracker.set(IS_AIMING, true);
+        this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) + 1, 0, 4));
     }
     @Override
-    public void stopAim() {this.isAiming = false;}
+    public void stopAim() {this.dataTracker.set(IS_AIMING, false);}
     @Override
-    public int getAimTick() {return this.aimTick;}
+    public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
     //====================//
+
+    //Data Track
+    @Inject(method = "initDataTracker", at = @At("HEAD"))
+    private void initDataTracker(CallbackInfo ci)
+    {
+        this.dataTracker.startTracking(IS_AIMING, false);
+        this.dataTracker.startTracking(IS_RELOADING, false);
+        this.dataTracker.startTracking(RELOAD_TICK, 0);
+        this.dataTracker.startTracking(AIM_TICK, 0);
+    }
+
 }

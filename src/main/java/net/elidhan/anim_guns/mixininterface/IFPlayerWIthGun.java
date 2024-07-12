@@ -12,7 +12,10 @@ public interface IFPlayerWIthGun
     void tickAim();
     void stopAim();
     int getAimTick();
+    boolean isAiming();
 
     void melee();
     int getMeleeProgress();
+
+
 }

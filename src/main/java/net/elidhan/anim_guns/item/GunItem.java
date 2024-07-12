@@ -61,10 +61,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
+        //Assign ID if no ID
         if(!stack.getOrCreateNbt().contains(ID_NBT_KEY, NbtElement.NUMBER_TYPE) && world instanceof ServerWorld)
-        {
             stack.getOrCreateNbt().putLong(ID_NBT_KEY, AnimatableIdCache.getFreeId((ServerWorld) world));
-        }
     }
 
     //Shooty Shooty
@@ -74,9 +73,11 @@ public class GunItem extends Item implements FabricItem, GeoItem
         player.getItemCooldownManager().set(this, this.fireRate);
 
         //Actually shoot
-        AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
 
-        player.sendMessage(Text.literal("Shot"));
+        //To be added
+
+        //Animation
+        AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
     }
     public void tickReload(ItemStack gun, NbtCompound gunNbt) {}
     public void stopReload(ItemStack gun, NbtCompound gunNbt) {}
