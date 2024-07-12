@@ -18,7 +18,6 @@ public class ClientPreAttackHandler implements ClientPreAttackCallback
         if (mainHandItem.getItem() instanceof GunItem)
         {
             ClientPlayNetworking.send(ModNetworking.C2S_SHOOT, PacketByteBufs.empty());
-
             return true;
         }
 

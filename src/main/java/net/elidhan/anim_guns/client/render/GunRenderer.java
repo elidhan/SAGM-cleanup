@@ -13,6 +13,7 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 
 public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer<GunItem>
 {
@@ -25,14 +26,15 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     public void renderRecursively(MatrixStack poseStack, GunItem animatable, GeoBone bone, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
     {
         MinecraftClient client = MinecraftClient.getInstance();
+        float delta = client.getTickDelta();
 
         poseStack.push();
 
-        boolean isAiming = ((IFPlayerWIthGun)client.player).isAiming();
-        float f = lerp(0f, isAiming ? 4f:0f, 0.1f);
+        float f = MathHelper.lerp(delta, (float)((IFPlayerWIthGun)client.player).getPreviousAimTick(), (float)((IFPlayerWIthGun)client.player).getAimTick());
 
-        //do render stuff here
-        if (bone.getName().equals("gunbody") || bone.getName().equals("magazine2")) poseStack.translate((-f/16f), 0, 0);
+        //do translation/rotation stuff here
+        if (bone.getName().equals("gunbody") || bone.getName().equals("magazine2") || bone.getName().equals("muzzleflash"))
+            poseStack.translate(-f/16, 0, 0);
 
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.pop();

@@ -96,7 +96,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         if(user instanceof IFPlayerWIthGun player && !player.isReloading())
         {
-            player.tickAim();
+            player.startAim();
         }
     }
     @Override

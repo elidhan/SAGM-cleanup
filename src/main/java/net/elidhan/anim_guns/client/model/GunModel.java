@@ -1,5 +1,6 @@
 package net.elidhan.anim_guns.client.model;
 
+import mod.azure.azurelib.core.animation.AnimatableManager;
 import mod.azure.azurelib.core.animation.AnimationState;
 import mod.azure.azurelib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
@@ -46,9 +47,12 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
     public void handleAnimations(GunItem animatable, long instanceId, AnimationState<GunItem> animationState)
     {
         Perspective perspective = MinecraftClient.getInstance().options.getPerspective();
+        AnimatableManager<GunItem> animatableManager = animatable.getAnimatableInstanceCache().getManagerForId(instanceId);
 
         if(!perspective.isFirstPerson())
+        {
             return;
+        }
 
         super.handleAnimations(animatable, instanceId, animationState);
     }

@@ -45,7 +45,10 @@ public class ModNetworking
     {
         ClientPlayNetworking.registerGlobalReceiver(S2C_RECOIL, ((client, handler, buf, responseSender) ->
         {
+            client.execute(() ->
+            {
 
+            });
         }));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->
         {
@@ -53,18 +56,21 @@ public class ModNetworking
             ItemStack stack = buf.readItemStack();
             String animation = buf.readString();
 
-            GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
-
-            AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
-
-            if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
+            client.execute(() ->
             {
-                animationController.forceAnimationReset();
-            }
-            else
-            {
-                animationController.tryTriggerAnimation(animation);
-            }
+                GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
+
+                AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
+
+                if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
+                {
+                    animationController.forceAnimationReset();
+                }
+                else
+                {
+                    animationController.tryTriggerAnimation(animation);
+                }
+            });
         }));
     }
 }
