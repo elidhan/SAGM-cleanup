@@ -46,9 +46,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
             meleeTick--;
 
         if(!this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) > 0)
-            this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) - 1, 0, 4));
+            this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) - 1, 0, 2));
         else if (this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) < 4)
-            this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) + 1, 0, 4));
+            this.dataTracker.set(AIM_TICK, MathUtils.clamp(this.dataTracker.get(AIM_TICK) + 1, 0, 2));
 
         if(isReloading())
             tickReload();
