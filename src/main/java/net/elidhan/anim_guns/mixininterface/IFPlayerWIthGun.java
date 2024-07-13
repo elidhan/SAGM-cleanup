@@ -9,8 +9,7 @@ public interface IFPlayerWIthGun
     boolean isReloading();
     int getReloadProgressTick();
 
-    void startAim();
-    void stopAim();
+    void toggleAim(boolean b);
     int getAimTick();
     int getPreviousAimTick();
     boolean isAiming();

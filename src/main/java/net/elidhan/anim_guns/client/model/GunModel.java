@@ -47,7 +47,6 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
     public void handleAnimations(GunItem animatable, long instanceId, AnimationState<GunItem> animationState)
     {
         Perspective perspective = MinecraftClient.getInstance().options.getPerspective();
-        AnimatableManager<GunItem> animatableManager = animatable.getAnimatableInstanceCache().getManagerForId(instanceId);
 
         if(!perspective.isFirstPerson())
         {

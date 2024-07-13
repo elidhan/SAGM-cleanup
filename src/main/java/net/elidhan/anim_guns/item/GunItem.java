@@ -86,9 +86,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        user.setCurrentHand(hand);
+        if (world.isClient() || hand != Hand.MAIN_HAND) return TypedActionResult.fail(user.getStackInHand(hand));
+
+        if(user instanceof IFPlayerWIthGun player && !player.isReloading())
+            player.toggleAim(!player.isAiming());
+
         return TypedActionResult.pass(user.getStackInHand(hand));
     }
+    /*
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
     {
@@ -109,6 +114,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
             player.stopAim();
         }
     }
+     */
 
     //Getters
     public int getReloadTime()

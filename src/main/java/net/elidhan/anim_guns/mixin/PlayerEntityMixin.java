@@ -101,13 +101,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=======Aiming=======//
     @Override
-    public void startAim()
-    {
-        sendMessage(Text.literal("AimTicks: "+(this.dataTracker.get(AIM_TICK))));
-        this.dataTracker.set(IS_AIMING, true);
-    }
-    @Override
-    public void stopAim() {this.dataTracker.set(IS_AIMING, false);}
+    public void toggleAim(boolean b) {this.dataTracker.set(IS_AIMING, b);}
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
     @Override
