@@ -86,6 +86,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
+        if (hand != Hand.MAIN_HAND) return TypedActionResult.fail(user.getStackInHand(hand));
+
         if(world instanceof ServerWorld && user instanceof IFPlayerWIthGun player && !player.isReloading())
             player.toggleAim(!player.isAiming());
 

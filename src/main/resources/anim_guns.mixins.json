@@ -9,6 +9,8 @@
     "defaultRequire": 1
   },
   "client": [
+    "client.GameRendererMixin",
+    "client.InGameHudMixin",
     "client.MinecraftClientMixin"
   ]
 }

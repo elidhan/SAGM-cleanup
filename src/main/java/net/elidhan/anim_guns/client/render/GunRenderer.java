@@ -8,6 +8,7 @@ import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -65,7 +66,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         //Must also take into account the first person right-hand translation values
 
         //centeredY = (Distance from Y-value 0 in Blockbench to y-center of screen in-game) - (FirstPersonRightHand Y value) - (Iron Sight bone positional Y-value)
-        float centeredX = ((-8.975f)-(posX*16))/16f;
+        float centeredX = ((-8.9675f)-(posX*16))/16f;
         float centeredY = 0.50875f - posY - (ironSightAdjust/16f);
 
         poseStack.push();
@@ -83,6 +84,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
                 PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) client.getEntityRenderDispatcher().getRenderer(client.player);
                 PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
+                ModelPart playerArm = bone.getName().equals("leftArm") ? playerEntityModel.leftArm : playerEntityModel.rightArm;
+                ModelPart playerSleeve = bone.getName().equals("leftArm") ? playerEntityModel.leftSleeve : playerEntityModel.rightSleeve;
 
                 RenderUtils.translateMatrixToBone(poseStack, bone);
                 RenderUtils.translateToPivotPoint(poseStack, bone);
@@ -96,13 +99,13 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
                 poseStack.scale(0.67f, 1.33f, 0.67f);
                 poseStack.translate(bone.getName().equals("leftArm") ? -0.25 : 0.25, -0.43625, 0.1625);
-                playerEntityModel.leftArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
-                playerEntityModel.leftArm.setAngles(0, 0, 0);
-                playerEntityModel.leftArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, 1);
+                playerArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
+                playerArm.setAngles(0, 0, 0);
+                playerArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, 1);
 
-                playerEntityModel.leftSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
-                playerEntityModel.leftSleeve.setAngles(0, 0, 0);
-                playerEntityModel.leftSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, 1);
+                playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
+                playerSleeve.setAngles(0, 0, 0);
+                playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, 1);
             }
         }
 

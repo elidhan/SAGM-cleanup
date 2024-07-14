@@ -24,20 +24,21 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     private static final TrackedData<Integer> PREVIOUS_AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> RELOAD_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> IS_RELOADING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<ItemStack> currentGun = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
+    private ItemStack currentGun;
     private int meleeTick;
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
 
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void getCurrentGun(CallbackInfo ci)
     {
-        if (this.getMainHandStack().getItem() instanceof GunItem)
-            this.dataTracker.set(currentGun,this.getMainHandStack());
+        if(this.getMainHandStack().getItem() instanceof GunItem)
+            this.currentGun = this.getMainHandStack();
         else
-            this.dataTracker.set(currentGun,ItemStack.EMPTY);
-
-        if((this.getMainHandStack() != this.dataTracker.get(currentGun) || this.dataTracker.get(currentGun) == ItemStack.EMPTY))
-            toggleAim(false);
+        {
+            if(this.isAiming())
+                toggleAim(false);
+            this.currentGun = ItemStack.EMPTY;
+        }
     }
     @Inject(method = "tickMovement", at = @At("TAIL"))
     public void tickMovement(CallbackInfo ci)
@@ -68,12 +69,12 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     }
     private void tickReload()
     {
-        if (this.dataTracker.get(currentGun) == ItemStack.EMPTY)
+        if (this.currentGun == ItemStack.EMPTY || !(this.currentGun.getItem() instanceof GunItem))
         {
             stopReload();
             return;
         }
-        if (getReloadProgressTick() >= ((GunItem)(this.dataTracker.get(currentGun).getItem())).getReloadTime())
+        if (getReloadProgressTick() >= ((GunItem)(this.currentGun.getItem())).getReloadTime())
         {
             stopReload();
             return;
@@ -98,7 +99,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=======Aiming=======//
     @Override
-    public void toggleAim(boolean b) {this.dataTracker.set(IS_AIMING, b);}
+    public void toggleAim(boolean b) {
+        System.out.println("aim:"+b);
+        this.dataTracker.set(IS_AIMING, b);}
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
     @Override
@@ -116,7 +119,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         this.dataTracker.startTracking(RELOAD_TICK, 0);
         this.dataTracker.startTracking(AIM_TICK, 0);
         this.dataTracker.startTracking(PREVIOUS_AIM_TICK, 0);
-        this.dataTracker.startTracking(currentGun, ItemStack.EMPTY);
     }
 
 }
