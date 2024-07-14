@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
 
 public class AnimatedGunsClient implements ClientModInitializer
@@ -40,6 +42,10 @@ public class AnimatedGunsClient implements ClientModInitializer
 			}
 			while (meleeKey.wasPressed())
 			{
+				if (client.player != null && client.interactionManager != null && client.crosshairTarget != null && client.crosshairTarget.getType() == HitResult.Type.ENTITY)
+				{
+					client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
+				}
 				ClientPlayNetworking.send(C2S_MELEE, PacketByteBufs.empty());
 			}
 		});
