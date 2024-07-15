@@ -3,7 +3,8 @@
   "package": "net.elidhan.anim_guns.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "client.LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

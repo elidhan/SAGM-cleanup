@@ -84,3 +84,10 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}

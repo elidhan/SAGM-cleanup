@@ -4,6 +4,7 @@ import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.renderer.GeoItemRenderer;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
+import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -36,7 +37,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        if(transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) return;
+        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -46,6 +47,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         MinecraftClient client = MinecraftClient.getInstance();
         float delta = client.getTickDelta();
+        VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
         BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), client.player.getWorld(), client.player, 0);
@@ -76,7 +78,12 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
         {
-            case "gunbody", "magazine2", "muzzleflash" -> poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+            case "gunbody", "magazine2" -> poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+            case "muzzleflash" ->
+            {
+                poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+                buffer1 = this.bufferSource.getBuffer(MuzzleFlashRenderType.getMuzzleFlash());
+            }
             case "leftArm", "rightArm" ->
             {
                 bone.setHidden(true);
@@ -109,7 +116,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
         }
 
-        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+        super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.pop();
     }
 }

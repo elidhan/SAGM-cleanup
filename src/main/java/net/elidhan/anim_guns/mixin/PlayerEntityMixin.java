@@ -63,7 +63,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=====Reloading=====//
     @Override
-    public void startReload() {setReloading(true);}
+    public void startReload()
+    {
+        toggleAim(false);
+        setReloading(true);
+    }
     @Override
     public void stopReload()
     {
@@ -119,7 +123,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=======Aiming=======//
     @Override
-    public void toggleAim(boolean b) {this.dataTracker.set(IS_AIMING, b);}
+    public void toggleAim(boolean b)
+    {
+        this.dataTracker.set(IS_AIMING, b);
+        if (b) this.setSprinting(false);
+    }
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
     @Override
