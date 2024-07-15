@@ -1,11 +1,13 @@
 package net.elidhan.anim_guns;
 
+import net.elidhan.anim_guns.client.render.BulletRenderer;
 import net.elidhan.anim_guns.event.client.ClientPreAttackHandler;
 import net.elidhan.anim_guns.network.ModNetworking;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.option.KeyBinding;
@@ -32,6 +34,9 @@ public class AnimatedGunsClient implements ClientModInitializer
 
 		//Reg
 		ModNetworking.registerS2CPackets();
+
+		//Entity Render
+		EntityRendererRegistry.register(AnimatedGuns.BulletEntityType, BulletRenderer::new);
 
 		//KeyBinds
 		ClientTickEvents.START_CLIENT_TICK.register(client ->

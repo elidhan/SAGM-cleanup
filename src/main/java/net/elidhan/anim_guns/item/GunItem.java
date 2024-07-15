@@ -12,7 +12,9 @@ import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
+import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.util.BulletUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.Entity;
@@ -26,6 +28,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.function.Consumer;
@@ -71,8 +74,23 @@ public class GunItem extends Item implements FabricItem, GeoItem
         player.getItemCooldownManager().set(this, this.fireRate);
 
         //Actually shoot
+        BulletProjectileEntity bullet = new BulletProjectileEntity(player, player.getWorld(), this.damage, 1);
+        bullet.setPosition(player.getX(), player.getEyeY(), player.getZ());
 
-        //To be added
+        double spreadX = -spread[0] + Math.random() * (spread[0] - (-spread[0]));
+        double spreadY = -spread[1] + Math.random() * (spread[1] - (-spread[1]));
+
+        Vec3d vertiSpread = BulletUtil.vertiSpread(player, spreadX);
+        Vec3d horiSpread = BulletUtil.horiSpread(player, spreadY);
+
+        Vec3d result = player.getRotationVector().add(vertiSpread).add(horiSpread);
+
+        bullet.setVelocity(result.getX(), result.getY(), result.getZ(), 20, 0);
+        bullet.setBaseVel(bullet.getVelocity());
+        bullet.setOwner(player);
+
+
+        player.getWorld().spawnEntity(bullet);
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
