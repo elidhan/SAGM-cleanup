@@ -1,6 +1,7 @@
 package net.elidhan.anim_guns.mixin;
 
-import mod.azure.azurelib.core.utils.MathUtils;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
 import net.minecraft.entity.EntityType;
@@ -10,9 +11,12 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
@@ -28,17 +32,17 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     private int meleeTick;
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
 
+    //=====Tick=====//
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void getCurrentGun(CallbackInfo ci)
     {
-        if(this.getMainHandStack().getItem() instanceof GunItem)
-            this.currentGun = this.getMainHandStack();
-        else
+        if(this.getMainHandStack().getOrCreateNbt().get("AzureLibID") != this.currentGun.getOrCreateNbt().get("AzureLibID") && this.getWorld() instanceof ServerWorld)
         {
-            if(this.isAiming())
-                toggleAim(false);
-            this.currentGun = ItemStack.EMPTY;
+            toggleAim(false);
+            stopReload();
         }
+
+        this.currentGun = this.getMainHandStack();
     }
     @Inject(method = "tickMovement", at = @At("TAIL"))
     public void tickMovement(CallbackInfo ci)
@@ -58,7 +62,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     }
 
     //=====Reloading=====//
-
     @Override
     public void startReload() {setReloading(true);}
     @Override
@@ -69,6 +72,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     }
     private void tickReload()
     {
+        if (!(this.getWorld() instanceof ServerWorld)) return;
+
         if (this.currentGun == ItemStack.EMPTY || !(this.currentGun.getItem() instanceof GunItem))
         {
             stopReload();
@@ -95,6 +100,17 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     public void melee() {meleeTick = 10;}
     @Override
     public int getMeleeProgress() {return meleeTick;}
+
+    @WrapOperation(method = "attack", constant = @Constant(classValue = SwordItem.class))
+    private boolean sweepMeleeIfGun(Object obj, Operation<Boolean> original)
+    {
+        return original.call(obj) || obj instanceof GunItem;
+    }
+    @Inject(method = "resetLastAttackedTicks", at = @At("HEAD"), cancellable = true)
+    private void dontResetIfGun(CallbackInfo ci)
+    {
+        if(this.getMainHandStack().getItem() instanceof GunItem) ci.cancel();
+    }
     //===================//
 
     //=======Aiming=======//
@@ -120,5 +136,4 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         this.dataTracker.startTracking(AIM_TICK, 0);
         this.dataTracker.startTracking(PREVIOUS_AIM_TICK, 0);
     }
-
 }
