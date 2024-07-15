@@ -2,7 +2,7 @@ package net.elidhan.anim_guns.mixin.client;
 
 import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -31,7 +31,7 @@ public class GameRendererMixin
     @Inject(method = "renderHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;bobView(Lnet/minecraft/client/util/math/MatrixStack;F)V", shift = At.Shift.BEFORE))
     private void bobViewGun(MatrixStack matrices, Camera camera, float tickDelta, CallbackInfo ci)
     {
-        if (this.client.player instanceof IFPlayerWIthGun playerWIthGun
+        if (this.client.player instanceof IFPlayerWithGun playerWIthGun
                 && ((ClientPlayerEntity)playerWIthGun).getMainHandStack().getItem() instanceof GunItem
                 && !playerWIthGun.isAiming()
                 && !((ClientPlayerEntity) playerWIthGun).isSprinting())

@@ -6,7 +6,7 @@ import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -60,7 +60,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         }
         //Need to account for sight attachment heights in the future
 
-        //DistanceX from 0 to center of in-game screen = -8.975
+        //DistanceX from 0 to center of in-game screen = -8.9675
         //DistanceY from 0 to center of in-game screen = 0.50875
         //Must take into account iron sight/sight attachment height values (taken from BlockBench's edit mode) and adjust accordingly
         //Must also take into account the first person right-hand translation values
@@ -71,7 +71,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         poseStack.push();
         //Get Aim Progress
-        float f = MathHelper.lerp(delta, (float)((IFPlayerWIthGun)client.player).getPreviousAimTick(), (float)((IFPlayerWIthGun)client.player).getAimTick());
+        float f = MathHelper.lerp(delta, (float)((IFPlayerWithGun)client.player).getPreviousAimTick(), (float)((IFPlayerWithGun)client.player).getAimTick());
 
         //Does different things depending on which bone is being rendered
         switch (bone.getName())

@@ -19,4 +19,9 @@ public class ModItems
     {
         AnimatedGuns.LOGGER.info("Registering Items for " + AnimatedGuns.MOD_ID);
     }
+
+    public static void registerModItemGroups()
+    {
+        //TODO: Add items and item groups
+    }
 }

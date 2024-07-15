@@ -19,6 +19,7 @@ public class AnimatedGuns implements ModInitializer
 
 		//Reg
 		ModItems.registerModItems();
+		ModItems.registerModItemGroups();
 		ModNetworking.registerC2SPackets();
 	}
 }

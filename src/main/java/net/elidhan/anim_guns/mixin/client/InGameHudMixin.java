@@ -1,6 +1,6 @@
 package net.elidhan.anim_guns.mixin.client;
 
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -19,6 +19,6 @@ public class InGameHudMixin
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
     private void hideCrossHair(DrawContext context, CallbackInfo ci)
     {
-        if(this.client.player instanceof IFPlayerWIthGun player && player.isAiming()) ci.cancel();
+        if(this.client.player instanceof IFPlayerWithGun player && player.isAiming()) ci.cancel();
     }
 }

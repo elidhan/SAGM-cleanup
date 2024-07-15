@@ -4,7 +4,7 @@ import mod.azure.azurelib.core.animatable.GeoAnimatable;
 import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
@@ -21,13 +21,13 @@ public class ModNetworking
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-            if (!((IFPlayerWIthGun) player).isReloading())
-                ((IFPlayerWIthGun)player).startReload();
+            if (!((IFPlayerWithGun) player).isReloading())
+                ((IFPlayerWithGun)player).startReload();
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_MELEE, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-            if (player instanceof IFPlayerWIthGun && ((IFPlayerWIthGun) player).getMeleeProgress() <= 0)
-                ((IFPlayerWIthGun) player).melee();
+            if (player instanceof IFPlayerWithGun && ((IFPlayerWithGun) player).getMeleeProgress() <= 0)
+                ((IFPlayerWithGun) player).melee();
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_AIM, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {

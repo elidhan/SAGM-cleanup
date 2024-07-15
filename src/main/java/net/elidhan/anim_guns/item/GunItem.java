@@ -12,11 +12,10 @@ import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +23,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -88,7 +86,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         if (hand != Hand.MAIN_HAND) return TypedActionResult.fail(user.getStackInHand(hand));
 
-        if(world instanceof ServerWorld && user instanceof IFPlayerWIthGun player && !player.isReloading())
+        if(world instanceof ServerWorld && user instanceof IFPlayerWithGun player && !player.isReloading())
             player.toggleAim(!player.isAiming());
 
         return TypedActionResult.pass(user.getStackInHand(hand));

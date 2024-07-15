@@ -1,7 +1,7 @@
 package net.elidhan.anim_guns.mixininterface;
 
 
-public interface IFPlayerWIthGun
+public interface IFPlayerWithGun
 {
     void startReload();
     void stopReload();

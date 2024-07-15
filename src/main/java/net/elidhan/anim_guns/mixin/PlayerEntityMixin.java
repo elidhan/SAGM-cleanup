@@ -3,7 +3,7 @@ package net.elidhan.anim_guns.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWIthGun;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -21,15 +21,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayerWIthGun
+public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayerWithGun
 {
     private static final TrackedData<Boolean> IS_AIMING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> PREVIOUS_AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> RELOAD_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> IS_RELOADING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private ItemStack currentGun;
-    private int meleeTick;
+    private ItemStack currentGun = ItemStack.EMPTY;
+    private int meleeTick = 0;
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
 
     //=====Tick=====//
@@ -97,7 +97,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=======Melee========//
     @Override
-    public void melee() {meleeTick = 10;}
+    public void melee()
+    {
+        toggleAim(false);
+        meleeTick = 10;
+    }
     @Override
     public int getMeleeProgress() {return meleeTick;}
 
@@ -115,9 +119,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
     //=======Aiming=======//
     @Override
-    public void toggleAim(boolean b) {
-        System.out.println("aim:"+b);
-        this.dataTracker.set(IS_AIMING, b);}
+    public void toggleAim(boolean b) {this.dataTracker.set(IS_AIMING, b);}
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
     @Override
