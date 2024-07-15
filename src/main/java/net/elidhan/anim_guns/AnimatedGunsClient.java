@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
@@ -21,10 +20,6 @@ public class AnimatedGunsClient implements ClientModInitializer
 {
 	public static KeyBinding reloadKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.anim_guns.reload", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, KeyBinding.GAMEPLAY_CATEGORY));
 	public static KeyBinding meleeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.anim_guns.melee", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, KeyBinding.GAMEPLAY_CATEGORY));
-
-	//Packets and stuff
-	public static final Identifier C2S_RELOAD = new Identifier(AnimatedGuns.MOD_ID, "c2s_reload");
-	public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
 
 	@Override
 	public void onInitializeClient()
@@ -43,7 +38,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		{
 			while (reloadKey.wasPressed())
 			{
-				ClientPlayNetworking.send(C2S_RELOAD, PacketByteBufs.empty());
+				ClientPlayNetworking.send(ModNetworking.C2S_RELOAD, PacketByteBufs.empty());
 			}
 			while (meleeKey.wasPressed())
 			{
@@ -51,7 +46,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 				{
 					client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
 				}
-				ClientPlayNetworking.send(C2S_MELEE, PacketByteBufs.empty());
+				ClientPlayNetworking.send(ModNetworking.C2S_MELEE, PacketByteBufs.empty());
 			}
 		});
 	}
