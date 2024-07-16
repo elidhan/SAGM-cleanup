@@ -3,9 +3,11 @@ package net.elidhan.anim_guns.network;
 import mod.azure.azurelib.core.animatable.GeoAnimatable;
 import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -35,7 +37,8 @@ public class ModNetworking
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_SHOOT, ((server, player, handler, buf, responseSender) ->
         {
-            ((GunItem)(player.getMainHandStack().getItem())).shoot(player, player.getMainHandStack());
+            GunItem gun = (GunItem)(player.getMainHandStack().getItem());
+            gun.shoot(player, player.getMainHandStack());
         }));
     }
     //Server-to-Client
@@ -47,7 +50,8 @@ public class ModNetworking
         {
             client.execute(() ->
             {
-
+                GunItem gun = (GunItem)(client.player.getMainHandStack().getItem());
+                RecoilHandler.getInstance().shot(gun.getRecoil());
             });
         }));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->

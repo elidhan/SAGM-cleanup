@@ -14,8 +14,11 @@ import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.network.ModNetworking;
 import net.elidhan.anim_guns.util.BulletUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -54,9 +57,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.damage = damage;
         this.fireRate = fireRate;
         this.reloadTime = reloadTime;
-        this.reloadStages = reloadStages;
-        this.spread = spread;
-        this.recoil = recoil;
+        this.reloadStages = reloadStages; //Reload stages exactly 4 values
+        this.spread = spread; //Spread array should contain exactly 2 values
+        this.recoil = recoil; //Recoil array should have exactly 2 values
     }
 
     @Override
@@ -94,6 +97,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
+        //Recoil
+        ServerPlayNetworking.send(player, ModNetworking.S2C_RECOIL, PacketByteBufs.empty());
     }
     public void tickReload(ItemStack gun, NbtCompound gunNbt) {}
     public void stopReload(ItemStack gun, NbtCompound gunNbt) {}
@@ -136,6 +141,10 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public int getReloadTime()
     {
         return reloadTime;
+    }
+    public float getRecoil()
+    {
+        return recoil[1];
     }
 
     //Stuff
