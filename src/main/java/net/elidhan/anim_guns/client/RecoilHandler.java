@@ -44,4 +44,9 @@ public class RecoilHandler
         player.setPitch(player.getPitch() - actualRecoil);
         player.prevPitch = player.getPitch();
     }
+
+    public float getRecoilAmount(float delta)
+    {
+        return MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick);
+    }
 }

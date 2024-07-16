@@ -5,12 +5,14 @@ import mod.azure.azurelib.renderer.GeoItemRenderer;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
+import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -22,6 +24,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
 
 public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer<GunItem>
 {
@@ -47,6 +50,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         MinecraftClient client = MinecraftClient.getInstance();
         float delta = client.getTickDelta();
+        ClientPlayerEntity player = client.player;
         VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
@@ -54,22 +58,16 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float posX = model.getTransformation().firstPersonRightHand.translation.x;
         float posY = model.getTransformation().firstPersonRightHand.translation.y;
 
-        GeoBone ironSightBone = getGeoModel().getBone("sight_default").orElse(null);
-        float ironSightAdjust = 0f;
-        if (ironSightBone != null)
-        {
-            ironSightAdjust = ironSightBone.getPivotY();
-        }
-        //Need to account for sight attachment heights in the future
+        /*
+        Need to account for sight attachment heights in the future
 
-        //DistanceX from 0 to center of in-game screen = -8.9675
-        //DistanceY from 0 to center of in-game screen = 0.50875
-        //Must take into account iron sight/sight attachment height values (taken from BlockBench's edit mode) and adjust accordingly
-        //Must also take into account the first person right-hand translation values
+        DistanceX from 0 to center of in-game screen = -8.9675
+        DistanceY from 0 to center of in-game screen = 0.50875
+        Must take into account iron sight/sight attachment height values (taken from BlockBench's edit mode) and adjust accordingly
+        Must also take into account the first person right-hand translation values
 
-        //centeredY = (Distance from Y-value 0 in Blockbench to y-center of screen in-game) - (FirstPersonRightHand Y value) - (Iron Sight bone positional Y-value)
-        float centeredX = ((-8.9675f)-(posX*16))/16f;
-        float centeredY = 0.50875f - posY - (ironSightAdjust/16f);
+        centeredY = (Distance from Y-value 0 in Blockbench to y-center of screen in-game) - (FirstPersonRightHand Y value) - (Iron Sight bone positional Y-value)
+         */
 
         poseStack.push();
         //Get Aim Progress
@@ -78,10 +76,15 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
         {
-            case "gunbody", "magazine2" -> poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+            case "gunbody", "magazine2" ->
+            {
+                //Apply Transforms
+                aimTransforms(poseStack, f, posX, posY);
+                recoilTransforms(poseStack, RecoilHandler.getInstance().getRecoilAmount(delta), Math.abs(2f-f));
+            }
             case "muzzleflash" ->
             {
-                poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+                aimTransforms(poseStack, f, posX, posY);
                 buffer1 = this.bufferSource.getBuffer(MuzzleFlashRenderType.getMuzzleFlash());
             }
             case "leftArm", "rightArm" ->
@@ -118,5 +121,26 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.pop();
+    }
+
+    private void aimTransforms(MatrixStack poseStack, float f, float posX, float posY)
+    {
+        GeoBone ironSightBone = getGeoModel().getBone("sight_default").orElse(null);
+        float ironSightAdjust = 0f;
+        if (ironSightBone != null)
+        {
+            ironSightAdjust = ironSightBone.getPivotY();
+        }
+
+        float centeredX = ((-8.9675f)-(posX*16))/16f;
+        float centeredY = 0.50875f - posY - (ironSightAdjust/16f);
+        poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+    }
+
+    private void recoilTransforms(MatrixStack poseStack, float recoil, float upMult)
+    {
+        //TODO: Easing functions
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*upMult));
+        poseStack.translate(0,0,(recoil)/32);
     }
 }

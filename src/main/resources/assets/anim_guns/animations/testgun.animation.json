@@ -163,37 +163,6 @@
     "firing": {
       "animation_length": 0.5,
       "bones": {
-        "gunbody": {
-          "rotation": {
-            "0.0": {
-              "vector": [-1.25, "h_recoil", 0],
-              "easing": "easeOutBack"
-            },
-            "0.0833": {
-              "vector": [-1, 0, 0],
-              "easing": "linear"
-            },
-            "0.3333": {
-              "vector": [0, 0, 0],
-              "easing": "easeOutBack",
-              "easingArgs": [1]
-            }
-          },
-          "position": {
-            "0.0": {
-              "vector": [0, 0, 1.125]
-            },
-            "0.0833": {
-              "vector": [0, 0, 0.5],
-              "easing": "linear"
-            },
-            "0.25": {
-              "vector": [0, 0, 0],
-              "easing": "easeOutBack",
-              "easingArgs": [0.25]
-            }
-          }
-        },
         "muzzleflash": {
           "rotation": {
             "vector": [0, 0, "Math.random(-45,45)"]
