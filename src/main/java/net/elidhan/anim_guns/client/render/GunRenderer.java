@@ -71,7 +71,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         poseStack.push();
         //Get Aim Progress
-        float f = MathHelper.lerp(delta, (float)((IFPlayerWithGun)client.player).getPreviousAimTick(), (float)((IFPlayerWithGun)client.player).getAimTick());
+        float f = MathHelper.clamp(((float)((IFPlayerWithGun)client.player).getPreviousAimTick() + ((float)((IFPlayerWithGun)client.player).getAimTick() - (float)((IFPlayerWithGun)client.player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
 
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
@@ -80,7 +80,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 //Apply Transforms
                 aimTransforms(poseStack, f, posX, posY);
-                recoilTransforms(poseStack, RecoilHandler.getInstance().getRecoilAmount(delta), Math.abs(2f-f));
+                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoil(delta) * 2f, Math.abs(1f-f));
             }
             case "muzzleflash" ->
             {
@@ -132,15 +132,15 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             ironSightAdjust = ironSightBone.getPivotY();
         }
 
-        float centeredX = ((-8.9675f)-(posX*16))/16f;
+        float centeredX = ((-8.96325f)-(posX*16))/16f;
         float centeredY = 0.50875f - posY - (ironSightAdjust/16f);
-        poseStack.translate(centeredX * f / 2, centeredY * f / 2, 0);
+        poseStack.translate(centeredX * f, centeredY * f, 0);
     }
 
     private void recoilTransforms(MatrixStack poseStack, float recoil, float upMult)
     {
         //TODO: Easing functions
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*upMult));
-        poseStack.translate(0,0,(recoil)/32);
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*0.25f*upMult));
+        poseStack.translate(0,0,(recoil)/64);
     }
 }
