@@ -39,6 +39,7 @@ import java.util.function.Supplier;
 
 public class GunItem extends Item implements FabricItem, GeoItem
 {
+    private final String id;
     private final float damage;
     private final int fireRate;
     private final int reloadTime;
@@ -49,11 +50,12 @@ public class GunItem extends Item implements FabricItem, GeoItem
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, float damage, int fireRate, int reloadTime, int[] reloadStages, float[] spread, float[] recoil)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int reloadTime, int[] reloadStages, float[] spread, float[] recoil)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
 
+        this.id = id;
         this.damage = damage;
         this.fireRate = fireRate;
         this.reloadTime = reloadTime;
@@ -121,6 +123,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     //=====Getters=====//
     public int getReloadTime() {return reloadTime;}
     public float getRecoil() {return recoil[1];}
+    public String getID() {return this.id;}
     //=================//
 
     //=====Stuff=====//
@@ -138,7 +141,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         consumer.accept(new RenderProvider()
         {
-            private final GunRenderer renderer = new GunRenderer(new Identifier(AnimatedGuns.MOD_ID, this.toString()));
+            private final GunRenderer renderer = new GunRenderer(new Identifier(AnimatedGuns.MOD_ID, id));
 
             @Override
             public BuiltinModelItemRenderer getCustomRenderer()

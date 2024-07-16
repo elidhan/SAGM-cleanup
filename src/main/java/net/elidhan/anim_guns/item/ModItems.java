@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 public class ModItems
 {
     public static final Item TESTGUN = registerItem("testgun", new GunItem(new Item.Settings(),
+            "testgun",
             6,
             2,
             20,
