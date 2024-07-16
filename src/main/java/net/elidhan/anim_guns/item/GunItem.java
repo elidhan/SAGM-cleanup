@@ -62,6 +62,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.recoil = recoil; //Recoil array should have exactly 2 values
     }
 
+    //=====Give ID=====//
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
@@ -69,8 +70,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         if(!stack.getOrCreateNbt().contains(ID_NBT_KEY, NbtElement.NUMBER_TYPE) && world instanceof ServerWorld)
             stack.getOrCreateNbt().putLong(ID_NBT_KEY, AnimatableIdCache.getFreeId((ServerWorld) world));
     }
+    //=================//
 
-    //Shooty Shooty
+    //=====Shooty Shooty=====//
     public void shoot(ServerPlayerEntity player, ItemStack stack)
     {
         if(player.getItemCooldownManager().isCoolingDown(this)) return;
@@ -92,7 +94,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
         bullet.setBaseVel(bullet.getVelocity());
         bullet.setOwner(player);
 
-
         player.getWorld().spawnEntity(bullet);
 
         //Animation
@@ -100,10 +101,12 @@ public class GunItem extends Item implements FabricItem, GeoItem
         //Recoil
         ServerPlayNetworking.send(player, ModNetworking.S2C_RECOIL, PacketByteBufs.empty());
     }
+    //======================//
+
     public void tickReload(ItemStack gun, NbtCompound gunNbt) {}
     public void stopReload(ItemStack gun, NbtCompound gunNbt) {}
 
-    //Aiming stuff
+    //=====Aiming stuff=====//
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
@@ -114,54 +117,28 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         return TypedActionResult.pass(user.getStackInHand(hand));
     }
-    /*
-    @Override
-    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
-    {
-        if (world.isClient()) return;
 
-        if(user instanceof IFPlayerWIthGun player && !player.isReloading())
-        {
-            player.startAim();
-        }
-    }
-    @Override
-    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks)
-    {
-        if (world.isClient()) return;
+    //=====Getters=====//
+    public int getReloadTime() {return reloadTime;}
+    public float getRecoil() {return recoil[1];}
+    //=================//
 
-        if(user instanceof IFPlayerWIthGun player)
-        {
-            player.stopAim();
-        }
-    }
-     */
-
-    //Getters
-    public int getReloadTime()
-    {
-        return reloadTime;
-    }
-    public float getRecoil()
-    {
-        return recoil[1];
-    }
-
-    //Stuff
+    //=====Stuff=====//
     @Override
     public boolean isUsedOnRelease(ItemStack stack) {return false;}
     @Override
     public int getMaxUseTime(ItemStack stack) {return 72000;}
     @Override
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {return false;}
+    //==============//
 
-    //AzureLib Stuff
+    //=====AzureLib Stuff=====//
     @Override
     public void createRenderer(Consumer<Object> consumer)
     {
         consumer.accept(new RenderProvider()
         {
-            private final GunRenderer renderer = new GunRenderer(new Identifier(AnimatedGuns.MOD_ID, "testgun"));
+            private final GunRenderer renderer = new GunRenderer(new Identifier(AnimatedGuns.MOD_ID, this.toString()));
 
             @Override
             public BuiltinModelItemRenderer getCustomRenderer()
@@ -190,4 +167,5 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return this.animationCache;}
+    //==========================//
 }

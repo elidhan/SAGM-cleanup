@@ -16,7 +16,7 @@ public class RecoilHandler
         return recoilHandler;
     }
 
-    private float recoilAmount;
+    private float recoilAmount = 0;
     private int recoilTick = 0;
     private int prevRecoilTick = 0;
 
@@ -42,6 +42,6 @@ public class RecoilHandler
         float actualRecoil = delta * recoilAmount * 1.5f * client.getLastFrameDuration();
 
         player.setPitch(player.getPitch() - actualRecoil);
-        player.prevPitch = player.getPitch();;
+        player.prevPitch = player.getPitch();
     }
 }
