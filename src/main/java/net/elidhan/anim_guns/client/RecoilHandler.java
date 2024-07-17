@@ -24,25 +24,19 @@ public class RecoilHandler
     private float recoilAmountY = 0;
     private int recoilTick = 0;
     private int prevRecoilTick = 0;
-    private int cameraRecoilTick = 0;
-    private int prevCameraRecoilTick = 0;
 
     public void shot(float recoilX, float recoilY)
     {
         recoilAmountX = recoilX * (random.nextBoolean() ? 1 : -1);
         recoilAmountY = recoilY;
-        recoilTick = (int)recoilY*4;
-
-        cameraRecoilTick = 2;
+        recoilTick = 2;
     }
 
     public void tick()
     {
         prevRecoilTick = recoilTick;
-        prevCameraRecoilTick = cameraRecoilTick;
 
         if (recoilTick > 0) recoilTick--;
-        if (cameraRecoilTick > 0) cameraRecoilTick--;
     }
 
     public void render(MinecraftClient client)
@@ -51,17 +45,28 @@ public class RecoilHandler
 
         if (player == null) return;
 
-        float delta = MathHelper.lerp(client.getTickDelta(), prevCameraRecoilTick, cameraRecoilTick);
-        float actualRecoilX = delta * recoilAmountX * 1.5f * client.getLastFrameDuration();
-        float actualRecoilY = delta * recoilAmountY * 1.5f * client.getLastFrameDuration();
+        if (recoilAmountX > 0)
+            recoilAmountX = MathHelper.clamp(recoilAmountX - Easings.easeOutCubic(recoilAmountX * client.getTickDelta() * client.getLastFrameDuration()), 0, recoilAmountX);
+        else
+            recoilAmountX = MathHelper.clamp(recoilAmountX - Easings.easeOutCubic(recoilAmountX * client.getTickDelta() * client.getLastFrameDuration()), recoilAmountX, 0);
 
-        player.setPitch(player.getPitch() - actualRecoilY);
-        player.setYaw(player.getYaw() - actualRecoilX);
+        //System.out.println(recoilAmountX);
+
+        if (recoilAmountY > 0) recoilAmountY = MathHelper.clamp(recoilAmountY - Easings.easeOutCubic(recoilAmountY * client.getTickDelta() * client.getLastFrameDuration()), 0, recoilAmountY);
+
+        float delta = MathHelper.lerp(client.getTickDelta(), prevRecoilTick, recoilTick);
+
+        player.setPitch(player.getPitch() - recoilAmountY);
+        player.setYaw(player.getYaw() - recoilAmountX*0.5f);
         player.prevPitch = player.getPitch();
     }
 
-    public float getViewmodelRecoil(float delta)
+    public float getViewmodelRecoilX(float delta)
     {
-        return Easings.easeOutCubic(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick));
+        return recoilAmountX;
+    }
+    public float getViewmodelRecoilY(float delta)
+    {
+        return recoilAmountY;
     }
 }

@@ -3,8 +3,8 @@ package net.elidhan.anim_guns.util;
 public class Easings
 {
     //TODO: Make this shit
-    public static float easeOutCubic(float x)
+    public static float easeOutCubic(float input)
     {
-        return (float) (1 - Math.pow(1 - x, 3));
+        return (float) (1 - Math.pow(1 - input, 2));
     }
 }

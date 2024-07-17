@@ -80,7 +80,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 //Apply Transforms
                 aimTransforms(poseStack, f, posX, posY);
-                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoil(delta)*0.25f, Math.abs(1f-f));
+                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoilX(delta),RecoilHandler.getInstance().getViewmodelRecoilY(delta), Math.abs(1f-f));
             }
             case "muzzleflash" ->
             {
@@ -137,10 +137,11 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.translate(centeredX * f, centeredY * f, 0);
     }
 
-    private void recoilTransforms(MatrixStack poseStack, float recoil, float upMult)
+    private void recoilTransforms(MatrixStack poseStack, float recoilX, float recoilY, float upMult)
     {
         //TODO: Easing functions
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*0.375f*upMult));
-        poseStack.translate(0,0,(recoil)/64);
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoilY*2f*upMult));
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(recoilX*upMult));
+        poseStack.translate(0,0,(recoilY)/32);
     }
 }
