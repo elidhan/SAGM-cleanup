@@ -42,15 +42,17 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final String id;
     private final float damage;
     private final int fireRate;
+    private final int magSize;
     private final int reloadTime;
     private final int[] reloadStages;
     private final float[] spread;
     private final float[] recoil;
+    private final float[] viewModelRecoil;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int fireRate, int reloadTime, int[] reloadStages, float[] spread, float[] recoil)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, float[] spread, float[] recoil, float[] viewModelRecoil)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -58,10 +60,12 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.id = id;
         this.damage = damage;
         this.fireRate = fireRate;
+        this.magSize = magSize;
         this.reloadTime = reloadTime;
         this.reloadStages = reloadStages; //Reload stages exactly 4 values
         this.spread = spread; //Spread array should contain exactly 2 values
-        this.recoil = recoil; //Recoil array should have exactly 2 values
+        this.recoil = recoil; //Recoil array should have exactly 3 values, 3rd value is aim recoil multiplier for view model
+        this.viewModelRecoil = viewModelRecoil; // Should contain 5 values: rotate up-down, rotate side, move up-down, move forward, and duration
     }
 
     //=====Give ID=====//
@@ -77,7 +81,11 @@ public class GunItem extends Item implements FabricItem, GeoItem
     //=====Shooty Shooty=====//
     public void shoot(ServerPlayerEntity player, ItemStack stack)
     {
+        if (!stack.getOrCreateNbt().contains("ammo")) stack.getOrCreateNbt().putInt("ammo", 0);
+
+        if (stack.getOrCreateNbt().getInt("ammo") <= 0) return;
         if(player.getItemCooldownManager().isCoolingDown(this)) return;
+
         player.getItemCooldownManager().set(this, this.fireRate);
 
         //Actually shoot
@@ -97,6 +105,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         bullet.setOwner(player);
 
         player.getWorld().spawnEntity(bullet);
+
+        //Bullet -1
+        if (!player.isCreative()) stack.getOrCreateNbt().putInt("ammo", stack.getOrCreateNbt().getInt("ammo")-1);
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
@@ -125,6 +136,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public float getRecoilX() {return recoil[0];}
     public float getRecoilY() {return recoil[1];}
     public String getID() {return this.id;}
+    public int getMagSize() {return magSize;}
+    public float getAimVMRecoilMult() {return this.recoil[2];}
+    public float[] getViewModelRecoil() {return this.viewModelRecoil;}
     //=================//
 
     //=====Stuff=====//
@@ -155,6 +169,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
     private PlayState predicate(AnimationState<GunItem> event)
     {
+        event.getController().setTransitionLength(0);
+
         if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
             event.getController().tryTriggerAnimation("idle");
 

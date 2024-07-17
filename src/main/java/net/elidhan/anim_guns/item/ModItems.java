@@ -12,10 +12,36 @@ public class ModItems
             "testgun",
             6,
             2,
+            30,
             20,
-            new int[] {1,1,1,1}, //Reload Stages
-            new float[] {1,1}, //Spread
-            new float[] {1,1} //Recoil
+            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
+            new float[] {1,1}, //Spread, must be 2 values exactly
+            new float[] {1,1.5f,0.1f}, //Recoil, must be 3 values exactly
+            new float[] {1.25f, 0.625f, 0.125f, 1f, 3} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new Item.Settings(),
+            "pistol_heavy",
+            8,
+            5,
+            7,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {2.5f,5f,1f}, //Recoil, must be 3 values exactly
+            new float[] {12.25f, 1.25f, 0.5f, 1f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item SNIPER_CLASSIC = registerItem("sniper_classic", new GunMagFedItem(new Item.Settings(),
+            "sniper_classic",
+            22,
+            20,
+            5,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {1.5f,5.25f,0f}, //Recoil, must be 3 values exactly
+            new float[] {4.25f, 0.75f, 0f, 3.75f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     private static Item registerItem(String name, Item item)

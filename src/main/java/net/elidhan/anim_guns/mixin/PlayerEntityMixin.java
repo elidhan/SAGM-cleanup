@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -15,21 +16,31 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayerWithGun
 {
+    @Unique
     private static final TrackedData<Boolean> IS_AIMING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    @Unique
     private static final TrackedData<Integer> AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    @Unique
     private static final TrackedData<Integer> PREVIOUS_AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    @Unique
     private static final TrackedData<Integer> RELOAD_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    @Unique
     private static final TrackedData<Boolean> IS_RELOADING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    @Unique
     private ItemStack currentGun = ItemStack.EMPTY;
+    @Unique
     private int meleeTick = 0;
+
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {super(entityType, world);}
 
     //=====Tick=====//
@@ -74,22 +85,22 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         setReloadProgressTick(0);
         setReloading(false);
     }
+    @Unique
     private void tickReload()
     {
         if (!(this.getWorld() instanceof ServerWorld)) return;
 
-        if (this.currentGun == ItemStack.EMPTY || !(this.currentGun.getItem() instanceof GunItem))
-        {
-            stopReload();
-            return;
-        }
         if (getReloadProgressTick() >= ((GunItem)(this.currentGun.getItem())).getReloadTime())
         {
+            this.currentGun.getOrCreateNbt().putInt("ammo", ((GunItem)this.currentGun.getItem()).getMagSize());
+
             stopReload();
             return;
         }
+
         setReloadProgressTick(getReloadProgressTick()+1);
     }
+    @Unique
     public void setReloadProgressTick(int reloadTick) {this.dataTracker.set(RELOAD_TICK, reloadTick);}
     @Override
     public int getReloadProgressTick() {return this.dataTracker.get(RELOAD_TICK);}
@@ -135,6 +146,18 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Override
     public int getPreviousAimTick() {return this.dataTracker.get(PREVIOUS_AIM_TICK);}
     //====================//
+
+    //=====Dropping Gun=====//
+    @Inject(method = "dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"))
+    public void dropGun(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir)
+    {
+        if (stack.getOrCreateNbt().getInt("AzureLibID") == this.currentGun.getOrCreateNbt().getInt("AzureLibID"))
+        {
+            this.currentGun = ItemStack.EMPTY;
+        }
+    }
+
+    //======================//
 
     //=====Data Track=====//
     @Inject(method = "initDataTracker", at = @At("HEAD"))

@@ -52,6 +52,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float delta = client.getTickDelta();
         ClientPlayerEntity player = client.player;
         VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
+        GunItem gun = (GunItem) getCurrentItemStack().getItem();
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
         BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), player.getWorld(), player, 0);
@@ -72,6 +73,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.push();
         //Get Aim Progress
         float f = MathHelper.clamp(((float)((IFPlayerWithGun)player).getPreviousAimTick() + ((float)((IFPlayerWithGun)player).getAimTick() - (float)((IFPlayerWithGun)player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
+        //Recoil duration
+        //float f1 = player.getItemCooldownManager().getCooldownProgress(gun, delta);
 
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
@@ -80,7 +83,13 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 //Apply Transforms
                 aimTransforms(poseStack, f, posX, posY);
-                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoilX(delta),RecoilHandler.getInstance().getViewmodelRecoilY(delta), Math.abs(1f-f));
+                recoilTransforms(
+                        poseStack,
+                        RecoilHandler.getInstance().getVMRotSide(delta),
+                        RecoilHandler.getInstance().getVMRotUp(delta),
+                        RecoilHandler.getInstance().getVMMoveUp(delta),
+                        RecoilHandler.getInstance().getVMMoveBack(delta),
+                        Math.abs(1f-f)+gun.getAimVMRecoilMult());
             }
             case "muzzleflash" ->
             {
@@ -137,11 +146,10 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.translate(centeredX * f, centeredY * f, 0);
     }
 
-    private void recoilTransforms(MatrixStack poseStack, float recoilX, float recoilY, float upMult)
+    private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ, float upMult)
     {
-        //TODO: Easing functions
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoilY*2f*upMult));
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(recoilX*upMult));
-        poseStack.translate(0,0,(recoilY)/32);
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
+        poseStack.translate(0,(moveY)/16*upMult,(moveZ)/16);
     }
 }
