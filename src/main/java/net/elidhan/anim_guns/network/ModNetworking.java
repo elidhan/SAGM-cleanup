@@ -7,7 +7,6 @@ import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -51,7 +50,7 @@ public class ModNetworking
             client.execute(() ->
             {
                 GunItem gun = (GunItem)(client.player.getMainHandStack().getItem());
-                RecoilHandler.getInstance().shot(gun.getRecoil());
+                RecoilHandler.getInstance().shot(gun.getRecoilX(),gun.getRecoilY());
             });
         }));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->

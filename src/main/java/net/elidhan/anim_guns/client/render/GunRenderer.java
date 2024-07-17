@@ -54,7 +54,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
-        BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), client.player.getWorld(), client.player, 0);
+        BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), player.getWorld(), player, 0);
         float posX = model.getTransformation().firstPersonRightHand.translation.x;
         float posY = model.getTransformation().firstPersonRightHand.translation.y;
 
@@ -71,7 +71,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         poseStack.push();
         //Get Aim Progress
-        float f = MathHelper.clamp(((float)((IFPlayerWithGun)client.player).getPreviousAimTick() + ((float)((IFPlayerWithGun)client.player).getAimTick() - (float)((IFPlayerWithGun)client.player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
+        float f = MathHelper.clamp(((float)((IFPlayerWithGun)player).getPreviousAimTick() + ((float)((IFPlayerWithGun)player).getAimTick() - (float)((IFPlayerWithGun)player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
 
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
@@ -80,7 +80,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 //Apply Transforms
                 aimTransforms(poseStack, f, posX, posY);
-                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoil(delta) * 2f, Math.abs(1f-f));
+                recoilTransforms(poseStack, RecoilHandler.getInstance().getViewmodelRecoil(delta)*0.25f, Math.abs(1f-f));
             }
             case "muzzleflash" ->
             {
@@ -92,7 +92,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 bone.setHidden(true);
                 bone.setChildrenHidden(false);
 
-                PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) client.getEntityRenderDispatcher().getRenderer(client.player);
+                PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) client.getEntityRenderDispatcher().getRenderer(player);
                 PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
                 ModelPart playerArm = bone.getName().equals("leftArm") ? playerEntityModel.leftArm : playerEntityModel.rightArm;
                 ModelPart playerSleeve = bone.getName().equals("leftArm") ? playerEntityModel.leftSleeve : playerEntityModel.rightSleeve;
@@ -103,7 +103,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 RenderUtils.scaleMatrixForBone(poseStack, bone);
                 RenderUtils.translateAwayFromPivotPoint(poseStack, bone);
 
-                Identifier playerSkin = client.player.getSkinTexture();
+                Identifier playerSkin = player.getSkinTexture();
                 VertexConsumer arm = this.bufferSource.getBuffer(RenderLayer.getEntitySolid(playerSkin));
                 VertexConsumer sleeve = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(playerSkin));
 
@@ -140,7 +140,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     private void recoilTransforms(MatrixStack poseStack, float recoil, float upMult)
     {
         //TODO: Easing functions
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*0.25f*upMult));
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(recoil*0.375f*upMult));
         poseStack.translate(0,0,(recoil)/64);
     }
 }

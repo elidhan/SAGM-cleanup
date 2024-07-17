@@ -122,7 +122,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
     //=====Getters=====//
     public int getReloadTime() {return reloadTime;}
-    public float getRecoil() {return recoil[1];}
+    public float getRecoilX() {return recoil[0];}
+    public float getRecoilY() {return recoil[1];}
     public String getID() {return this.id;}
     //=================//
 
