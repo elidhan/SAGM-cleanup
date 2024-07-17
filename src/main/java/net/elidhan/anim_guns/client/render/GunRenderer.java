@@ -40,7 +40,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) return;
+        //if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -118,6 +118,10 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
                 poseStack.scale(0.67f, 1.33f, 0.67f);
                 poseStack.translate(bone.getName().equals("leftArm") ? -0.25 : 0.25, -0.43625, 0.1625);
+                if(bone.getName().equals("leftArm"))
+                {
+                    leftArmAimTransforms(poseStack, f, delta);
+                }
                 playerArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerArm.setAngles(0, 0, 0);
                 playerArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, 1);
@@ -151,5 +155,12 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
         poseStack.translate(0,(moveY)/16*upMult,(moveZ)/16);
+    }
+
+    private void leftArmAimTransforms(MatrixStack poseStack, float f, float delta)
+    {
+        poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(22.5f * f));
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(2.25f * f));
+        poseStack.translate(0f/16f * f, -2.5f/16f * f,5f/16f * f);
     }
 }

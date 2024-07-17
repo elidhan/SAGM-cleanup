@@ -16,7 +16,7 @@ public class ModItems
             20,
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {1f,2f,0.1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {1.5f,2.5f,0.1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {1.75f, 0.5f, 0.125f, 1f, 3} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
