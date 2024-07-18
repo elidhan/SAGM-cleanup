@@ -112,7 +112,7 @@ public class InGameHudMixin
     @ModifyExpressionValue(method = "render", at = @At(value = "FIELD", target = "Lnet/minecraft/client/option/GameOptions;hudHidden:Z", opcode = Opcodes.GETFIELD))
     private boolean cancelRenderIfScopedIn(boolean original)
     {
-        if (this.client.player instanceof IFPlayerWithGun player && player.isAiming()) return true;
+        if (this.client.player instanceof IFPlayerWithGun player && player.isAiming() && this.client.player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped")) return true;
 
         return original;
     }
