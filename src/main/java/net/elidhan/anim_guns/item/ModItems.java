@@ -17,7 +17,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,2.5f,0.25f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.75f, 0.75f, 0.125f, 1f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.75f, 0.25f, 0.125f, 1f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new Item.Settings(),
@@ -28,8 +28,20 @@ public class ModItems
             20,
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {1.625f,3.25f,0.25f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {2.25f, 1f, 0.125f, 1.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.5f,3.25f,0.25f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {2.25f, 0.75f, 0.125f, 1.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item ASSAULTRIFLE_RUS = registerItem("assaultrifle_rus", new GunMagFedItem(new Item.Settings(),
+            "assaultrifle_rus",
+            7,
+            2,
+            30,
+            20,
+            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
+            new float[] {1,1}, //Spread, must be 2 values exactly
+            new float[] {2.5f,3.25f,0.25f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
+            new float[] {1.25f, 0.75f, 0.25f, 1.75f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new Item.Settings(),

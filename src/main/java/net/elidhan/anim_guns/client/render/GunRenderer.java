@@ -160,6 +160,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
+        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((rotX/4)*upMult));
         poseStack.translate(0,(moveY)*upMult,(moveZ)/16);
     }
 
