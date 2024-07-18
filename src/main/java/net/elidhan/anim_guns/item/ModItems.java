@@ -8,8 +8,8 @@ import net.minecraft.util.Identifier;
 
 public class ModItems
 {
-    public static final Item TESTGUN = registerItem("testgun", new GunMagFedItem(new Item.Settings(),
-            "testgun",
+    public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new Item.Settings(),
+            "assaultrifle_light",
             6,
             2,
             30,
