@@ -8,6 +8,30 @@ import net.minecraft.util.Identifier;
 
 public class ModItems
 {
+    public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new Item.Settings(),
+            "pistol_heavy",
+            8,
+            5,
+            7,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {2.5f,5f,2f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {18.75f, 0.75f, 5f, 3f, 5} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new Item.Settings(),
+            "pistol_light",
+            5,
+            4,
+            17,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {0.875f,2.5f,0.75f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {15f, 0.25f, 3f, 2.5f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new Item.Settings(),
             "assaultrifle_light",
             6,
@@ -42,18 +66,6 @@ public class ModItems
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {2.5f,3.25f,0.25f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
             new float[] {1.25f, 0.75f, 0.25f, 1.75f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
-    ));
-
-    public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new Item.Settings(),
-            "pistol_heavy",
-            8,
-            5,
-            7,
-            20,
-            new int[] {1,2,3,4},
-            new float[] {1,1},
-            new float[] {2.5f,5f,2f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {18.75f, 0.75f, 5f, 1.5f, 5} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item SNIPER_CLASSIC = registerItem("sniper_classic", new GunSingleLoaderItem(new Item.Settings(),
