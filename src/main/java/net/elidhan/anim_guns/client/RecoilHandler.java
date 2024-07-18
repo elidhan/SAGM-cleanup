@@ -70,18 +70,19 @@ public class RecoilHandler
 
     public float getVMRotUp(float delta)
     {
-        return viewModelRecoil[0] * MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration);
+
+        return viewModelRecoil[0] * Easings.easeOutBack(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration), viewModelRecoil[0]/64);
     }
     public float getVMRotSide(float delta)
     {
-        return viewModelRecoil[1] * MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration);
+        return viewModelRecoil[1] * Easings.easeOutBack(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration), viewModelRecoil[1]/64);
     }
     public float getVMMoveUp(float delta)
     {
-        return viewModelRecoil[2] * MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration);
+        return viewModelRecoil[2] * Easings.easeOutBack(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration), viewModelRecoil[2])/64;
     }
     public float getVMMoveBack(float delta)
     {
-        return viewModelRecoil[3] * MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration);
+        return viewModelRecoil[3] * Easings.easeOutBack(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration), viewModelRecoil[3]/64);
     }
 }

@@ -6,8 +6,8 @@ import mod.azure.azurelib.core.molang.MolangParser;
 import mod.azure.azurelib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.util.Identifier;
 
@@ -48,7 +48,9 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
     @Override
     public void handleAnimations(GunItem animatable, long instanceId, AnimationState<GunItem> animationState)
     {
-        Perspective perspective = MinecraftClient.getInstance().options.getPerspective();
+        MinecraftClient client = MinecraftClient.getInstance();
+        ClientPlayerEntity player = client.player;
+        Perspective perspective = client.options.getPerspective();
         AnimatableManager<GunItem> animatableManager = animatable.getAnimatableInstanceCache().getManagerForId(instanceId);
 
         if(!perspective.isFirstPerson())
@@ -60,12 +62,6 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
     @Override
     public void applyMolangQueries(GunItem animatable, double animTime)
     {
-        MinecraftClient client = MinecraftClient.getInstance();
-        MolangParser parser = MolangParser.INSTANCE;
-        //TODO: MoLang recoil value taken from player's randomized recoil value
-        if(client.player instanceof IFPlayerWithGun playerWithGun)
-            parser.setMemoizedValue("variable.recoil", () -> 0);
-
         super.applyMolangQueries(animatable, animTime);
     }
 }

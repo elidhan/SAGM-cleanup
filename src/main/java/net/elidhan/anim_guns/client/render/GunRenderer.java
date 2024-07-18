@@ -40,7 +40,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        //if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) return;
+        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -154,7 +154,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
-        poseStack.translate(0,(moveY)/16*upMult,(moveZ)/16);
+        poseStack.translate(0,(moveY)*upMult,(moveZ)/16);
     }
 
     private void leftArmAimTransforms(MatrixStack poseStack, float f, float delta)
