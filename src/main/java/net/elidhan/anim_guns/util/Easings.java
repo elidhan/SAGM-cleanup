@@ -5,9 +5,19 @@ import net.minecraft.util.math.MathHelper;
 public class Easings
 {
     //TODO: Make this shit
+    public static float easeInOutSine(float input)
+    {
+        return (float) -(Math.cos(Math.PI * input) - 1) / 2;
+    }
+
     public static float easeOutCubic(float input)
     {
         return (float) (1 - Math.pow(1 - input, 3));
+    }
+
+    public static float easeOutQuart(float input)
+    {
+        return (float) (1 - Math.pow(1 - input, 4));
     }
 
     public static float easeOutBack(float input, float overShootMult)

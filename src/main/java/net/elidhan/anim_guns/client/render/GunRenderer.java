@@ -9,6 +9,7 @@ import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.util.Easings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -72,7 +73,12 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         poseStack.push();
         //Get Aim Progress
-        float f = MathHelper.clamp(((float)((IFPlayerWithGun)player).getPreviousAimTick() + ((float)((IFPlayerWithGun)player).getAimTick() - (float)((IFPlayerWithGun)player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
+        //float f = MathHelper.clamp(((float)((IFPlayerWithGun)player).getPreviousAimTick() + ((float)((IFPlayerWithGun)player).getAimTick() - (float)((IFPlayerWithGun)player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
+
+        float prevAimTick = (float)((IFPlayerWithGun)player).getPreviousAimTick();
+        float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
+        float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
+
         //Recoil duration
         //float f1 = player.getItemCooldownManager().getCooldownProgress(gun, delta);
 
@@ -120,7 +126,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 poseStack.translate(bone.getName().equals("leftArm") ? -0.25 : 0.25, -0.43625, 0.1625);
                 if(bone.getName().equals("leftArm"))
                 {
-                    leftArmAimTransforms(poseStack, f, delta);
+                    leftArmAimTransforms(poseStack, f);
                 }
                 playerArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerArm.setAngles(0, 0, 0);
@@ -157,7 +163,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.translate(0,(moveY)*upMult,(moveZ)/16);
     }
 
-    private void leftArmAimTransforms(MatrixStack poseStack, float f, float delta)
+    private void leftArmAimTransforms(MatrixStack poseStack, float f)
     {
         poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(22.5f * f));
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(2.25f * f));

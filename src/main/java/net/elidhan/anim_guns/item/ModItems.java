@@ -53,7 +53,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1.5f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {8.75f, 0.5f, 0.25f, 2.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {12.5f, 1f, 0.375f, 4f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     private static Item registerItem(String name, Item item)

@@ -43,6 +43,14 @@ public class RecoilHandler
         duration = (int)viewModelRecoil[4];
     }
 
+    public void reset()
+    {
+        recoilTick = 0;
+        prevRecoilTick = 0;
+        duration = 0;
+        this.viewModelRecoil = new float[] {0,0,0,0,0};
+    }
+
     public void tick()
     {
         prevRecoilTick = recoilTick;
