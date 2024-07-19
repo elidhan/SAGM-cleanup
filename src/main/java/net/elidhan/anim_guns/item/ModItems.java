@@ -40,8 +40,8 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {0.625f,2f,0.625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {2.5f, 1.25f, 1f, 0.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1f,2.5f,0.625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {2.5f, 1f, 1f, 0.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new Item.Settings(),
