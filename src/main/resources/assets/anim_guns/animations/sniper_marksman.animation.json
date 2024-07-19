@@ -142,35 +142,6 @@
 							"vector": [0, 0, 0]
 						}
 					}
-				},
-				"gun": {
-					"rotation": {
-						"0.0": {
-							"vector": [2.5, "h_recoil", 0]
-						},
-						"0.0417": {
-							"vector": [-4.81, 0, 0]
-						},
-						"0.3333": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutBack",
-							"easingArgs": [1]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, 0, 3]
-						},
-						"0.0833": {
-							"vector": [0, 0.19531, 0.80813],
-							"easing": "linear"
-						},
-						"0.375": {
-							"vector": [0, 0, -0.15625],
-							"easing": "easeOutBack",
-							"easingArgs": [1]
-						}
-					}
 				}
 			}
 		},
