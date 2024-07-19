@@ -44,6 +44,18 @@ public class ModItems
             new float[] {2.5f, 1f, 1f, 0.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
+    public static final Item SMG_RAPID = registerItem("smg_rapid", new GunMagFedItem(new Item.Settings(),
+            "smg_rapid",
+            4,
+            1,
+            30,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {0.75f,0.5f,0.375f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {1f, 0.25f, 0.25f, 0.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new Item.Settings(),
             "assaultrifle_light",
             6,
