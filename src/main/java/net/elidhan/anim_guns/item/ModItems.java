@@ -52,7 +52,7 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {0.75f,0.5f,0.375f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {0.75f,0.5f,0.0625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {1f, 0.25f, 0.25f, 0.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
