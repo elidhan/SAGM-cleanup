@@ -9,7 +9,6 @@ import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
-import net.elidhan.anim_guns.util.Easings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -73,11 +72,10 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         poseStack.push();
         //Get Aim Progress
-        //float f = MathHelper.clamp(((float)((IFPlayerWithGun)player).getPreviousAimTick() + ((float)((IFPlayerWithGun)player).getAimTick() - (float)((IFPlayerWithGun)player).getPreviousAimTick()) * delta)/2f, 0f, 1f);
-
         float prevAimTick = (float)((IFPlayerWithGun)player).getPreviousAimTick();
         float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
-        float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
+        float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/2f, 0f, 1f);
+        //float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
 
         //Recoil duration
         //float f1 = player.getItemCooldownManager().getCooldownProgress(gun, delta);
@@ -87,6 +85,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         {
             case "gunbody", "magazine2" ->
             {
+
+
                 //Apply Transforms
                 aimTransforms(poseStack, f, posX, posY);
                 recoilTransforms(
@@ -160,8 +160,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((rotX/2)*upMult));
-        poseStack.translate(0,(moveY)*upMult,(moveZ*upMult)/16f);
+        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((rotX)*upMult));
+        poseStack.translate(0,(moveY)*upMult,(moveZ)/16f);
     }
 
     private void leftArmAimTransforms(MatrixStack poseStack, float f)

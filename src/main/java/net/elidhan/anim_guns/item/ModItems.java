@@ -16,13 +16,13 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {0.875f,2.5f,0.75f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {10f, 1f, 2f, 2f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {0.875f,2.5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {12.5f, 1f, 2.5f, 2f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new Item.Settings(),
             "pistol_heavy",
-            8,
+            10,
             5,
             7,
             20,
@@ -30,6 +30,18 @@ public class ModItems
             new float[] {1,1},
             new float[] {2.5f,5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {18.75f, 1.5f, 5f, 1f, 5} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item SMG_MP = registerItem("smg_machinepistol", new GunMagFedItem(new Item.Settings(),
+            "smg_machinepistol",
+            5,
+            1,
+            30,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {1,1},
+            new float[] {0.625f,2f,0.625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {2.5f, 1.25f, 1f, 0.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new Item.Settings(),
@@ -41,7 +53,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.25f, 0.375f, 0.125f, 1f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.25f, 0.375f, 0.125f, 0.75f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new Item.Settings(),
@@ -53,7 +65,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {2.25f, 0.75f, 0.125f, 1f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {2.25f, 0.75f, 0.125f, 1.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_RUS = registerItem("assaultrifle_rus", new GunMagFedItem(new Item.Settings(),
@@ -76,8 +88,8 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {1.5f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {12.5f, 1f, 0.375f, 4f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {8.75f, 1.5f, 2f, 3f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     private static Item registerItem(String name, Item item)

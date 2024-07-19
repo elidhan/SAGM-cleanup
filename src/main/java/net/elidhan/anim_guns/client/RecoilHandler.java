@@ -78,7 +78,6 @@ public class RecoilHandler
 
     public float getVMRotUp(float delta)
     {
-
         return viewModelRecoil[0] * Easings.easeOutBack(MathHelper.lerp(delta, (float)prevRecoilTick, (float)recoilTick)/(duration == 0 ? 1 : duration), viewModelRecoil[0]/64);
     }
     public float getVMRotSide(float delta)

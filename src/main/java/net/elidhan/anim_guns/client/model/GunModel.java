@@ -1,14 +1,8 @@
 package net.elidhan.anim_guns.client.model;
 
-import mod.azure.azurelib.core.animation.AnimatableManager;
-import mod.azure.azurelib.core.animation.AnimationState;
-import mod.azure.azurelib.core.molang.MolangParser;
 import mod.azure.azurelib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.item.GunItem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.option.Perspective;
 import net.minecraft.util.Identifier;
 
 public class GunModel extends DefaultedItemGeoModel<GunItem>
@@ -43,25 +37,5 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
     public Identifier getAnimationResource(GunItem animatable)
     {
         return new Identifier(AnimatedGuns.MOD_ID, "animations/"+animatable.getID()+".animation.json");
-    }
-
-    @Override
-    public void handleAnimations(GunItem animatable, long instanceId, AnimationState<GunItem> animationState)
-    {
-        MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = client.player;
-        Perspective perspective = client.options.getPerspective();
-        AnimatableManager<GunItem> animatableManager = animatable.getAnimatableInstanceCache().getManagerForId(instanceId);
-
-        if(!perspective.isFirstPerson())
-            animatableManager.tryTriggerAnimation("controller","idle");
-
-        super.handleAnimations(animatable, instanceId, animationState);
-    }
-
-    @Override
-    public void applyMolangQueries(GunItem animatable, double animTime)
-    {
-        super.applyMolangQueries(animatable, animTime);
     }
 }
