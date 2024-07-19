@@ -65,6 +65,8 @@ public class ModNetworking
 
                 AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
 
+                animationController.setTransitionLength(animation.equals("firing") ? 0 : 1);
+
                 if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
                 {
                     animationController.forceAnimationReset();

@@ -111,8 +111,8 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {0.875f,1.25f,0.025f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1f, 0.25f, 0.25f, 0.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.25f,1.875f,0.125f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {1.5f, 0.5f, 0.25f, 0.875f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -160,7 +160,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {8.75f, 1.5f, -1.875f, 2.5f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {8.75f, 1.5f, 2f, 3f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item SNIPER_MARKSMAN = registerItem("sniper_marksman", new GunMagFedItem(new Item.Settings().maxCount(1),
@@ -171,8 +171,8 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {2.5f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {8.75f, 2f, -1.875f, 2.5f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {2.5f,3.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {8.75f, 1.5f, -1.875f, 2.5f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     private static Item registerItem(String name, Item item)

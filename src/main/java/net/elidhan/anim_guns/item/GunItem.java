@@ -169,8 +169,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
     private PlayState predicate(AnimationState<GunItem> event)
     {
-        event.getController().setTransitionLength(0);
-
         if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
             event.getController().tryTriggerAnimation("idle");
 
