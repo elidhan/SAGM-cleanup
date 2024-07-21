@@ -67,6 +67,18 @@ public class ModItems
     public static final Item HEAVY_RIFLE_BULLET = registerItem("heavy_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item SHOTGUN_SHELL = registerItem("shotgun_shell", new Item(new FabricItemSettings().maxCount(64)));
 
+    public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "dev_assaultrifle",
+            6,
+            2,
+            30,
+            20,
+            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
+            new float[] {1,1}, //Spread, must be 2 values exactly
+            new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {1.25f, 0.375f, -0.25f, 1.25f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_light",
             5,

@@ -1,0 +1,58 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"bones": {
+				"gunbody": {
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [75.21571, -18.23931, -106.93137]
+					},
+					"position": {
+						"vector": [-3.39481, -7.55942, -8.36207]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [90, 0, -180]
+					},
+					"position": {
+						"vector": [5.25, -9.03125, 2.42969]
+					}
+				}
+			}
+		},
+		"firing": {
+			"loop": true,
+			"bones": {
+				"gunbody": {
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [75.21571, -18.23931, -106.93137]
+					},
+					"position": {
+						"vector": [-3.39481, -7.55942, -8.36207]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [90, 0, -180]
+					},
+					"position": {
+						"vector": [5.25, -9.03125, 2.42969]
+					}
+				}
+			}
+		}
+	},
+	"azurelib_format_version": 2
+}

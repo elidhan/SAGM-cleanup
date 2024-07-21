@@ -35,6 +35,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         super(new GunModel(identifier));
     }
 
+    private float sprintProgress = 0.0f;
+
     @Override
     public void render(ItemStack stack, ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
     {
@@ -77,6 +79,9 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/2f, 0f, 1f);
         //float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
 
+        //Get Sprint Progress
+        sprintProgress = MathHelper.lerp(delta / 8f, sprintProgress, player.isSprinting() ? 1 : 0);
+
         //Recoil duration
         //float f1 = player.getItemCooldownManager().getCooldownProgress(gun, delta);
 
@@ -85,9 +90,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         {
             case "gunbody", "magazine2" ->
             {
-
-
                 //Apply Transforms
+                sprintTransforms(poseStack, sprintProgress);
                 aimTransforms(poseStack, f, posX, posY);
                 recoilTransforms(
                         poseStack,
@@ -135,11 +139,20 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerSleeve.setAngles(0, 0, 0);
                 playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, 1);
+
             }
         }
 
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.pop();
+    }
+
+    private void sprintTransforms(MatrixStack poseStack, float f)
+    {
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-22.5f * f));
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(77.5f * f));
+        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(22.5f * f));
+        poseStack.translate(0,-0.5f / 16 * f,0);
     }
 
     private void aimTransforms(MatrixStack poseStack, float f, float posX, float posY)
