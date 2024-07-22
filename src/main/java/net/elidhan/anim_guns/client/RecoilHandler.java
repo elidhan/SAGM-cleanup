@@ -41,9 +41,6 @@ public class RecoilHandler
 
         recoilTick = (int)viewModelRecoil[4];
         duration = (int)viewModelRecoil[4];
-
-        duration = 8;
-        recoilTick = 8;
     }
 
     public void reset()

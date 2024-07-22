@@ -76,7 +76,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.25f, 0.375f, -0.25f, 1.25f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.25f, 0.375f, -0.25f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -88,7 +88,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {0.875f,2.5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {12.5f, 1f, 2.5f, 2f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {12.5f, 1f, 2.5f, 2f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -100,7 +100,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {2.5f,5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {18.75f, 1.5f, 5f, 1f, 5} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {18.75f, 1.5f, 5f, 1f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item SMG_MP = registerItem("smg_machinepistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -112,7 +112,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1f,2.5f,0.625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {2.5f, 1f, 1f, 0.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {2.5f, 1f, 1f, 0.25f, 7} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item SMG_RAPID = registerItem("smg_rapid", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -124,7 +124,7 @@ public class ModItems
             new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1.25f,1.875f,0.125f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.5f, 0.5f, 0.25f, 0.875f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.5f, 0.5f, 0.25f, 0.875f, 7} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -136,7 +136,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.25f, 0.375f, 0.125f, 0.75f, 4} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.25f, 0.375f, 0.125f, 0.75f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -148,7 +148,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {2.25f, 0.75f, 0.125f, 1.25f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {2.25f, 0.75f, 0.125f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item ASSAULTRIFLE_RUS = registerItem("assaultrifle_rus", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -160,7 +160,7 @@ public class ModItems
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {2.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
-            new float[] {1.5f, 0.75f, 0.25f, 1f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.5f, 0.75f, 0.25f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item SNIPER_CLASSIC = registerItem("sniper_classic", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
