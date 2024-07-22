@@ -79,6 +79,18 @@ public class ModItems
             new float[] {1.25f, 0.375f, -0.25f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
+    public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "dev_assaultrifle2",
+            7,
+            2,
+            30,
+            20,
+            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
+            new float[] {1,1}, //Spread, must be 2 values exactly
+            new float[] {2.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
+            new float[] {1.5f, 0.75f, 0.25f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_light",
             5,

@@ -1,0 +1,63 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"bones": {
+				"gunbody": {
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [75.21571, -18.23931, -106.93137]
+					},
+					"position": {
+						"vector": [-3.76981, -8.24692, -9.47457]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [90, 0, -180]
+					},
+					"position": {
+						"vector": [5.25, -9.03125, 2.42969]
+					}
+				}
+			}
+		},
+		"firing": {
+			"loop": true,
+			"animation_length": 0.025,
+			"bones": {
+				"leftArm": {
+					"rotation": {
+						"vector": [75.21571, -18.23931, -106.93137]
+					},
+					"position": {
+						"vector": [-3.76981, -8.24692, -9.47457]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [90, 0, -180]
+					},
+					"position": {
+						"vector": [5.25, -9.03125, 2.42969]
+					}
+				},
+				"muzzleflash": {
+					"scale": {
+						"0.0": {
+							"vector": [1000, 1000, 1]
+						},
+						"0.025": {
+							"vector": [1, 1, 1]
+						}
+					}
+				}
+			}
+		}
+	}
+}
