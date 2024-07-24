@@ -179,7 +179,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         AnimationController<GunItem> controller = new AnimationController<>(this, "controller", 1, this::predicate)
                 .triggerableAnim("idle", GunAnimations.IDLE)
-                .triggerableAnim("firing", GunAnimations.FIRING);
+                .triggerableAnim("firing", GunAnimations.FIRING)
+                .triggerableAnim("reloading", GunAnimations.RELOADING);
 
         controllers.add(controller);
     }

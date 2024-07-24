@@ -1,8 +1,10 @@
 package net.elidhan.anim_guns.network;
 
+import mod.azure.azurelib.animatable.GeoItem;
 import mod.azure.azurelib.core.animatable.GeoAnimatable;
 import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -16,7 +18,6 @@ public class ModNetworking
     //Client-to-Server
     public static final Identifier C2S_RELOAD = new Identifier(AnimatedGuns.MOD_ID, "c2s_reload");
     public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
-    public static final Identifier C2S_AIM = new Identifier(AnimatedGuns.MOD_ID, "c2s_aim");
     public static final Identifier C2S_SHOOT = new Identifier(AnimatedGuns.MOD_ID, "c2s_shoot");
     public static void registerC2SPackets()
     {
@@ -24,15 +25,13 @@ public class ModNetworking
         {
             if (!((IFPlayerWithGun) player).isReloading())
                 ((IFPlayerWithGun)player).startReload();
+
+            AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reloading");
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_MELEE, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
             if (player instanceof IFPlayerWithGun && ((IFPlayerWithGun) player).getMeleeProgress() <= 0)
                 ((IFPlayerWithGun) player).melee();
-        });
-        ServerPlayNetworking.registerGlobalReceiver(C2S_AIM, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
-        {
-
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_SHOOT, ((server, player, handler, buf, responseSender) ->
         {
@@ -74,7 +73,7 @@ public class ModNetworking
                 else
                 {
                     animationController.tryTriggerAnimation(animation);
-                }
+                };
             });
         }));
     }

@@ -99,7 +99,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                         RecoilHandler.getInstance().getVMRotUp(delta),
                         RecoilHandler.getInstance().getVMMoveUp(delta),
                         RecoilHandler.getInstance().getVMMoveBack(delta),
-                        Math.abs(1f-f)+gun.getAimVMRecoilMult());
+                        Math.abs(1f-f)+(gun.getAimVMRecoilMult()*f));
             }
             case "muzzleflash" ->
             {
@@ -149,10 +149,13 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
     private void sprintTransforms(MatrixStack poseStack, float f)
     {
+        //TODO: Make this shit
+        /*
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-22.5f * f));
         poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(77.5f * f));
         poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(22.5f * f));
         poseStack.translate(0,-0.5f / 16 * f,0);
+         */
     }
 
     private void aimTransforms(MatrixStack poseStack, float f, float posX, float posY)

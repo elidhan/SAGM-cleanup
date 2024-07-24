@@ -65,7 +65,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         if(!this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) > 0)
             this.dataTracker.set(AIM_TICK, Math.max(0, this.dataTracker.get(AIM_TICK)-1));
-        else if (this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) < 2)
+        else if (this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) < 3)
             this.dataTracker.set(AIM_TICK, Math.max(0, this.dataTracker.get(AIM_TICK)+1));
 
         if(isReloading())
@@ -89,6 +89,8 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     private void tickReload()
     {
         if (!(this.getWorld() instanceof ServerWorld)) return;
+
+
 
         if (getReloadProgressTick() >= ((GunItem)(this.currentGun.getItem())).getReloadTime())
         {
@@ -137,7 +139,13 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     public void toggleAim(boolean b)
     {
         this.dataTracker.set(IS_AIMING, b);
-        if (b) this.setSprinting(false);
+
+        if (b)
+        {
+            this.dataTracker.set(AIM_TICK, 1);
+            this.setSprinting(false);
+        }
+        else if (getAimTick() >= 3) this.dataTracker.set(AIM_TICK, 2);
     }
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}

@@ -33,8 +33,7 @@ public class GameRendererMixin
     {
         if (this.client.player instanceof IFPlayerWithGun playerWIthGun
                 && ((ClientPlayerEntity)playerWIthGun).getMainHandStack().getItem() instanceof GunItem
-                && !playerWIthGun.isAiming()
-                && !((ClientPlayerEntity) playerWIthGun).isSprinting())
+                && !playerWIthGun.isAiming())
         {
             gunBobView(matrices, tickDelta);
         }

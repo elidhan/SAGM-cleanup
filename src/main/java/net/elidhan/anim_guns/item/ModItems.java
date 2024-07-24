@@ -75,8 +75,8 @@ public class ModItems
             20,
             new int[] {1,2,3,4},
             new float[] {1,1},
-            new float[] {2.5f,5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {18.75f, 1.5f, 5f, 1f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {1.25f,3.75f,1f}, //Camera Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {25f, 1.5f, 1.25f, 1.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -87,8 +87,8 @@ public class ModItems
             20,
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.25f, 0.375f, -0.25f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {0.625f,1.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {1.5f, 0.375f, -0.0625f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -96,11 +96,11 @@ public class ModItems
             7,
             2,
             30,
-            20,
+            50,
             new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {2.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
-            new float[] {1.5f, 0.75f, 0.25f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {0.875f,2f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
+            new float[] {2f, 0.75f, 0.0625f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -224,36 +224,36 @@ public class ModItems
     public static void registerModItemGroups()
     {
         //TODO: Add items and item groups
-        final ItemGroup GUNS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.PISTOL_HEAVY)).entries((displayContext, entries) -> {
+        final ItemGroup GUNS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.STANDARD_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.STANDARD_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.SHOTGUN_SHELL));
-            entries.add(new ItemStack(ModItems.PISTOL_LIGHT));
-            entries.add(new ItemStack(ModItems.PISTOL_HEAVY));
+            //entries.add(new ItemStack(ModItems.PISTOL_LIGHT));
+            //entries.add(new ItemStack(ModItems.PISTOL_HEAVY));
             //entries.add(new ItemStack(ModItems.SERVICE_PISTOL));
             //entries.add(new ItemStack(ModItems.MAGNUM_REVOLVER));
             //entries.add(new ItemStack(ModItems.OLD_ARMY_REVOLVER));
-            entries.add(new ItemStack(ModItems.SMG_MP));
+            //entries.add(new ItemStack(ModItems.SMG_MP));
             //entries.add(new ItemStack(ModItems.HEAVY_SMG));
-            entries.add(new ItemStack(ModItems.SMG_RAPID));
-            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
-            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
-            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_RUS));
+            //entries.add(new ItemStack(ModItems.SMG_RAPID));
+            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
+            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
+            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_RUS));
             //entries.add(new ItemStack(ModItems.DOUBLE_BARRELED_SHOTGUN));
             //entries.add(new ItemStack(ModItems.COMBAT_SHOTGUN));
             //entries.add(new ItemStack(ModItems.RIOT_SHOTGUN));
-            entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
+            //entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
             //entries.add(new ItemStack(ModItems.ARCTIC_SNIPER_RIFLE));
             //entries.add(new ItemStack(ModItems.BRUSH_GUN));
-            entries.add(new ItemStack(ModItems.SNIPER_MARKSMAN));
+            //entries.add(new ItemStack(ModItems.SNIPER_MARKSMAN));
             //entries.add(new ItemStack(ModItems.MOTHERLAND_MARKSMAN_RIFLE));
             //entries.add(new ItemStack(ModItems.LMG));
             //entries.add(new ItemStack(ModItems.ANTI_MATERIEL_RIFLE));
             //entries.add(new ItemStack(ModItems.MINIGUN));
         }).displayName(Text.translatable("guns")).build();
-        final ItemGroup CRAFTING = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.PISTOL_HEAVY)).entries((displayContext, entries) -> {
+        final ItemGroup CRAFTING = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.HARDENED_IRON_INGOT));
             entries.add(new ItemStack(ModItems.HARDENED_IRON_NUGGET));
             entries.add(new ItemStack(ModItems.PLASTIC));
@@ -300,14 +300,8 @@ public class ModItems
             entries.add(new ItemStack(ModItems.ANTI_MATERIEL_RIFLE_BLUEPRINT));
              */
         }).displayName(Text.translatable("crafting")).build();
-        final ItemGroup ATTACHMENTS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.PISTOL_HEAVY)).entries((displayContext, entries) -> {
-            //entries.add(new ItemStack(ModItems.SIGHT_HOLO));
-            //entries.add(new ItemStack(ModItems.GRIP_FOREGRIP));
-            //entries.add(new ItemStack(ModItems.MUZZLE_MBRAKE));
-        }).displayName(Text.translatable("attachments")).build();
 
         Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.guns"), GUNS);
         Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.crafting"), CRAFTING);
-        Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.attachments"), ATTACHMENTS);
     }
 }
