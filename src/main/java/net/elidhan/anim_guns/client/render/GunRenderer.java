@@ -42,7 +42,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
+        //if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -76,7 +76,9 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         //Get Aim Progress
         float prevAimTick = (float)((IFPlayerWithGun)player).getPreviousAimTick();
         float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
-        float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/2f, 0f, 1f);
+        boolean hasScope = getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped");
+        float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
+        float f1 = MathHelper.clamp(hasScope ? f : 0,0f,0.8f);
         //float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
 
         //Get Sprint Progress
@@ -92,7 +94,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 //Apply Transforms
                 sprintTransforms(poseStack, sprintProgress);
-                aimTransforms(poseStack, f, posX, posY);
+                aimTransforms(poseStack, f, f1, posX, posY);
                 recoilTransforms(
                         poseStack,
                         RecoilHandler.getInstance().getVMRotSide(delta),
@@ -103,7 +105,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "muzzleflash" ->
             {
-                aimTransforms(poseStack, f, posX, posY);
+                aimTransforms(poseStack, f, f1, posX, posY);
                 buffer1 = this.bufferSource.getBuffer(MuzzleFlashRenderType.getMuzzleFlash());
             }
             case "leftArm", "rightArm" ->
@@ -158,7 +160,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
          */
     }
 
-    private void aimTransforms(MatrixStack poseStack, float f, float posX, float posY)
+    private void aimTransforms(MatrixStack poseStack, float f, float f1, float posX, float posY)
     {
         GeoBone ironSightBone = getGeoModel().getBone("sight_default").orElse(null);
         float ironSightAdjust = 0f;
@@ -169,7 +171,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         float centeredX = ((-8.96325f)-(posX*16))/16f;
         float centeredY = 0.50875f - posY - (ironSightAdjust/16f);
-        poseStack.translate(centeredX * f, centeredY * f, 0);
+        poseStack.scale(1,1,1f - f1);
+        poseStack.translate(centeredX * f, centeredY * f, f1);
     }
 
     private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ, float upMult)

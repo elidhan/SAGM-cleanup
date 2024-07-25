@@ -103,6 +103,18 @@ public class ModItems
             new float[] {2f, 0.75f, 0.0625f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
+    public static final Item DEV_SNIPER = registerItem("dev_sniper", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "dev_sniper",
+            22,
+            20,
+            5,
+            20,
+            new int[] {1,2,3,4},
+            new float[] {0,0},
+            new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {12.5f, 1.5f, 0.5f, 3.75f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_light",
             5,
