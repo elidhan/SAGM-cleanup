@@ -1,5 +1,6 @@
 package net.elidhan.anim_guns.client.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import mod.azure.azurelib.cache.AzureLibCache;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
@@ -17,6 +18,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -29,6 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
+import org.joml.Vector3f;
 
 public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer<GunItem>
 {
@@ -48,7 +51,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        //if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
+        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -153,30 +156,39 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "leftArm", "rightArm" ->
             {
-                bone.setHidden(true);
-                bone.setChildrenHidden(false);
+                //RenderSystem.setShaderLights(new Vector3f(0,10,0), new Vector3f(0,10,-10));
 
                 PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) client.getEntityRenderDispatcher().getRenderer(player);
                 PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
                 ModelPart playerArm = bone.getName().equals("leftArm") ? playerEntityModel.leftArm : playerEntityModel.rightArm;
                 ModelPart playerSleeve = bone.getName().equals("leftArm") ? playerEntityModel.leftSleeve : playerEntityModel.rightSleeve;
-
+/*
                 RenderUtils.translateMatrixToBone(poseStack, bone);
                 RenderUtils.translateToPivotPoint(poseStack, bone);
                 RenderUtils.rotateMatrixAroundBone(poseStack, bone);
                 RenderUtils.scaleMatrixForBone(poseStack, bone);
                 RenderUtils.translateAwayFromPivotPoint(poseStack, bone);
-
+ */
                 Identifier playerSkin = player.getSkinTexture();
-                VertexConsumer arm = this.bufferSource.getBuffer(RenderLayer.getEntitySolid(playerSkin));
-                VertexConsumer sleeve = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(playerSkin));
+                buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntitySolid(playerSkin));
 
-                poseStack.scale(0.67f, 1.33f, 0.67f);
-                poseStack.translate(bone.getName().equals("leftArm") ? -0.25 : 0.25, -0.43625, 0.1625);
+                RenderSystem.setShaderLights(new Vector3f(-0.2f, 1.0f, 1.0f).normalize(), new Vector3f(0.2f, 1.0f, 0.0f).normalize());
+
                 if(bone.getName().equals("leftArm"))
                 {
                     leftArmAimTransforms(poseStack, f);
+
+                    RenderSystem.setShaderLights(new Vector3f(0.2f, -1.0f, -1.0f).normalize(), new Vector3f(-0.2f, -1.0f, 0.0f).normalize());
                 }
+
+                //VertexConsumer arm = this.bufferSource.getBuffer(RenderLayer.getEntitySolid(playerSkin));
+                //VertexConsumer sleeve = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(playerSkin));
+
+                //poseStack.scale(0.67f, 1.33f, 0.67f);
+                //poseStack.translate(bone.getName().equals("leftArm") ? -0.25 : 0.25, -0.43625, 0.1625);
+                /*
+
+
                 playerArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerArm.setAngles(0, 0, 0);
                 playerArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, 1);
@@ -184,6 +196,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerSleeve.setAngles(0, 0, 0);
                 playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, 1);
+                 */
 
             }
         }
@@ -220,9 +233,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     }
     private void leftArmAimTransforms(MatrixStack poseStack, float f)
     {
-        poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(22.5f * f));
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(2.25f * f));
-        poseStack.translate(0f/16f * f, -2.5f/16f * f,5f/16f * f);
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(12.5f * f));
+        poseStack.translate(1f/16f * f,0,0);
     }
     //====================//
 }
