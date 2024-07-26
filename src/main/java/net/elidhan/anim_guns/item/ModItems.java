@@ -73,7 +73,6 @@ public class ModItems
             5,
             7,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1.25f,3.75f,1f}, //Camera Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {25f, 1.5f, 1.25f, 1.5f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -85,7 +84,6 @@ public class ModItems
             2,
             30,
             20,
-            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {0.625f,1.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {1.5f, 0.375f, -0.0625f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -97,7 +95,6 @@ public class ModItems
             2,
             30,
             50,
-            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {0.875f,2f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
             new float[] {2f, 0.75f, 0.0625f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -108,9 +105,9 @@ public class ModItems
             22,
             20,
             5,
-            20,
-            new int[] {1,2,3,4},
-            new float[] {0,0},
+            45,
+            new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
+            new float[] {0,0}, //Spread
             new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {12.5f, 1.5f, 0.5f, 3.75f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
@@ -121,7 +118,6 @@ public class ModItems
             4,
             17,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {0.875f,2.5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {12.5f, 1f, 2.5f, 2f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -133,7 +129,6 @@ public class ModItems
             5,
             7,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {2.5f,5f,1f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {18.75f, 1.5f, 5f, 1f, 6} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -145,7 +140,6 @@ public class ModItems
             1,
             30,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1f,2.5f,0.625f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {2.5f, 1f, 1f, 0.25f, 7} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -157,7 +151,6 @@ public class ModItems
             1,
             30,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {1.25f,1.875f,0.125f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {1.5f, 0.5f, 0.25f, 0.875f, 7} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -169,7 +162,6 @@ public class ModItems
             2,
             30,
             20,
-            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {1.25f, 0.375f, 0.125f, 0.75f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -181,7 +173,6 @@ public class ModItems
             3,
             20,
             20,
-            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {1.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {2.25f, 0.75f, 0.125f, 1.25f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -193,7 +184,6 @@ public class ModItems
             2,
             30,
             20,
-            new int[] {1,1,1,1}, //Reload Stages, must be 4 values exactly
             new float[] {1,1}, //Spread, must be 2 values exactly
             new float[] {2.5f,3.25f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
             new float[] {1.5f, 0.75f, 0.25f, 1f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -217,7 +207,6 @@ public class ModItems
             5,
             20,
             20,
-            new int[] {1,2,3,4},
             new float[] {1,1},
             new float[] {2.5f,3.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new float[] {8.75f, 1.5f, -1.875f, 2.5f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration

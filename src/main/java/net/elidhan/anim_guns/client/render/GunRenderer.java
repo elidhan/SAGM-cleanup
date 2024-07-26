@@ -1,9 +1,13 @@
 package net.elidhan.anim_guns.client.render;
 
+import mod.azure.azurelib.cache.AzureLibCache;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.renderer.GeoItemRenderer;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
+import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
@@ -36,6 +40,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     }
 
     private float sprintProgress = 0.0f;
+    private float sightAdjust = 0.0f;
+    private float sightDefaultHeight = 0.0f;
 
     @Override
     public void render(ItemStack stack, ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
@@ -55,6 +61,14 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         ClientPlayerEntity player = client.player;
         VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
         GunItem gun = (GunItem) getCurrentItemStack().getItem();
+
+        //Attachments test
+        int sightID = this.getAnimatable().getSightID(this.getCurrentItemStack());
+        int gripID = this.getAnimatable().getGripID(this.getCurrentItemStack());
+        int muzzleID = this.getAnimatable().getMuzzleID(this.getCurrentItemStack());
+
+        BakedGeoModel attachmentModel;
+        GeoBone attachmentBone;
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
         BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), player.getWorld(), player, 0);
@@ -78,14 +92,10 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
         boolean hasScope = getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped");
         float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
-        float f1 = MathHelper.clamp(hasScope ? f : 0,0f,0.8f);
-        //float f = MathHelper.clamp(Easings.easeOutQuart(MathHelper.lerp(delta,prevAimTick,aimTick)/2f),0f,1f);
+        float f1 = MathHelper.clamp(hasScope ? f : 0,0f,0.625f);
 
         //Get Sprint Progress
         sprintProgress = MathHelper.lerp(delta / 8f, sprintProgress, player.isSprinting() ? 1 : 0);
-
-        //Recoil duration
-        //float f1 = player.getItemCooldownManager().getCooldownProgress(gun, delta);
 
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
@@ -107,6 +117,39 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 aimTransforms(poseStack, f, f1, posX, posY);
                 buffer1 = this.bufferSource.getBuffer(MuzzleFlashRenderType.getMuzzleFlash());
+            }
+            case "sight_mount" ->
+            {
+                bone.setHidden(!getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped"));
+            }
+            case "sightPos" ->
+            {
+                if (sightID > 0)
+                {
+                    attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID, "geo/attach_si_"+sightID+".geo.json"));
+
+                    attachmentBone = attachmentModel.getBone("sight").orElse(null);
+                    GeoBone reticle = attachmentModel.getBone("reticlePos").orElse(null);
+
+                    if(attachmentBone != null)
+                    {
+                        sightAdjust = sightDefaultHeight - bone.getPivotY() - attachmentModel.getBone("reticlePos").get().getPivotY();
+
+                        poseStack.translate(bone.getPivotX()/16, bone.getPivotY()/16, bone.getPivotZ()/16);
+                        super.renderCubesOfBone(poseStack, attachmentBone, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+
+                        if (reticle != null)
+                            super.renderCubesOfBone(poseStack, reticle, this.bufferSource.getBuffer(AttachmentRenderType.getReticle()), packedLight, packedOverlay, red, green, blue, alpha);
+                    }
+                }
+            }
+            case "muzzlePos" ->
+            {
+
+            }
+            case "gripPos" ->
+            {
+
             }
             case "leftArm", "rightArm" ->
             {
@@ -149,17 +192,11 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.pop();
     }
 
+    //=====Transforms=====//
     private void sprintTransforms(MatrixStack poseStack, float f)
     {
         //TODO: Make this shit
-        /*
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-22.5f * f));
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(77.5f * f));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(22.5f * f));
-        poseStack.translate(0,-0.5f / 16 * f,0);
-         */
     }
-
     private void aimTransforms(MatrixStack poseStack, float f, float f1, float posX, float posY)
     {
         GeoBone ironSightBone = getGeoModel().getBone("sight_default").orElse(null);
@@ -174,7 +211,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.scale(1,1,1f - f1);
         poseStack.translate(centeredX * f, centeredY * f, f1);
     }
-
     private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ, float upMult)
     {
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
@@ -182,11 +218,11 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((rotX)*upMult));
         poseStack.translate(0,(moveY)*upMult,(moveZ)/16f);
     }
-
     private void leftArmAimTransforms(MatrixStack poseStack, float f)
     {
         poseStack.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(22.5f * f));
         poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(2.25f * f));
         poseStack.translate(0f/16f * f, -2.5f/16f * f,5f/16f * f);
     }
+    //====================//
 }

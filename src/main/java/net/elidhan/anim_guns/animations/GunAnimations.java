@@ -8,6 +8,9 @@ public final class GunAnimations
     public static final RawAnimation IDLE = RawAnimation.begin().thenPlay("idle");
     public static final RawAnimation FIRING = RawAnimation.begin().then("firing", Animation.LoopType.HOLD_ON_LAST_FRAME);//.thenLoop("idle");
     public static final RawAnimation RELOADING = RawAnimation.begin().then("reloading", Animation.LoopType.HOLD_ON_LAST_FRAME);
+    public static final RawAnimation RELOAD_0 = RawAnimation.begin().then("reload_0", Animation.LoopType.PLAY_ONCE);
+    public static final RawAnimation RELOAD_1 = RawAnimation.begin().then("reload_1", Animation.LoopType.PLAY_ONCE);
+    public static final RawAnimation RELOAD_2 = RawAnimation.begin().then("reload_2", Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation RELOAD_START = RawAnimation.begin().then("reload_start", Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation RELOAD_MAGOUT = RawAnimation.begin().then("reload_magout", Animation.LoopType.PLAY_ONCE);
     public static final RawAnimation RELOAD_MAGIN = RawAnimation.begin().then("reload_magin", Animation.LoopType.PLAY_ONCE);

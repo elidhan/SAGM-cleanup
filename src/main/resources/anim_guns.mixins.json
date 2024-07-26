@@ -10,9 +10,11 @@
     "defaultRequire": 1
   },
   "client": [
+    "client.AbstractClientPlayerEntityMixin",
     "client.GameRendererMixin",
     "client.HeldItemRendererMixin",
     "client.InGameHudMixin",
-    "client.MinecraftClientMixin"
+    "client.MinecraftClientMixin",
+    "client.MouseMixin"
   ]
 }

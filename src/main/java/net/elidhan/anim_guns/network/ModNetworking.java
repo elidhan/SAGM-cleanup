@@ -7,6 +7,8 @@ import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.item.GunMagFedItem;
+import net.elidhan.anim_guns.item.GunSingleLoaderItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -23,10 +25,15 @@ public class ModNetworking
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-            if (!((IFPlayerWithGun) player).isReloading())
-                ((IFPlayerWithGun)player).startReload();
+            if (player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize() && !((IFPlayerWithGun) player).isReloading())
+            {
+                ((IFPlayerWithGun) player).startReload();
 
-            AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reloading");
+                if (player.getMainHandStack().getItem() instanceof GunMagFedItem)
+                    AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reloading");
+                else if (player.getMainHandStack().getItem() instanceof GunSingleLoaderItem)
+                    AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reload_0");
+            }
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_MELEE, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
@@ -73,7 +80,7 @@ public class ModNetworking
                 else
                 {
                     animationController.tryTriggerAnimation(animation);
-                };
+                }
             });
         }));
     }

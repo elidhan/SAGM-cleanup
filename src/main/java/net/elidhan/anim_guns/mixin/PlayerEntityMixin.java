@@ -2,7 +2,9 @@ package net.elidhan.anim_guns.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.item.GunSingleLoaderItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -13,6 +15,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -90,7 +93,27 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     {
         if (!(this.getWorld() instanceof ServerWorld)) return;
 
+        GunItem gun = (GunItem)this.currentGun.getItem();
 
+        if (gun instanceof GunSingleLoaderItem singleLoader)
+        {
+            if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(0))
+                AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_1");
+            if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(1))
+            {
+                this.currentGun.getOrCreateNbt().putInt("ammo", this.currentGun.getOrCreateNbt().getInt("ammo") + 1);
+
+                if (this.currentGun.getOrCreateNbt().getInt("ammo") < gun.getMagSize())
+                {
+                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_1");
+                    setReloadProgressTick(singleLoader.getReloadStageTick(0));
+                }
+                else
+                {
+                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_2");
+                }
+            }
+        }
 
         if (getReloadProgressTick() >= ((GunItem)(this.currentGun.getItem())).getReloadTime())
         {

@@ -10,7 +10,6 @@ import mod.azure.azurelib.core.object.PlayState;
 import mod.azure.azurelib.util.AzureLibUtil;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
-import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -24,7 +23,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -44,7 +42,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final int fireRate;
     private final int magSize;
     private final int reloadTime;
-    private final int[] reloadStages;
     private final float[] spread;
     private final float[] recoil;
     private final float[] viewModelRecoil;
@@ -52,7 +49,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, float[] spread, float[] recoil, float[] viewModelRecoil)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -62,7 +59,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.fireRate = fireRate;
         this.magSize = magSize;
         this.reloadTime = reloadTime;
-        this.reloadStages = reloadStages; //Reload stages exactly 4 values
         this.spread = spread; //Spread array should contain exactly 2 values
         this.recoil = recoil; //Recoil array should have exactly 3 values, 3rd value is aim recoil multiplier for view model
         this.viewModelRecoil = viewModelRecoil; // Should contain 5 values: rotate up-down, rotate side, move up-down, move forward, and duration
@@ -108,6 +104,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         //Bullet -1
         if (!player.isCreative()) stack.getOrCreateNbt().putInt("ammo", stack.getOrCreateNbt().getInt("ammo")-1);
+        if (player instanceof IFPlayerWithGun player1) player1.stopReload();
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
@@ -116,8 +113,20 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
     //======================//
 
-    public void tickReload(ItemStack gun, NbtCompound gunNbt) {}
-    public void stopReload(ItemStack gun, NbtCompound gunNbt) {}
+    //=====Attachments Stuff=====//
+    public int getSightID(ItemStack currentItemStack)
+    {
+        return 0;
+    }
+    public int getGripID(ItemStack currentItemStack)
+    {
+        return 0;
+    }
+    public int getMuzzleID(ItemStack currentItemStack)
+    {
+        return 0;
+    }
+    //===========================//
 
     //=====Aiming stuff=====//
     @Override
@@ -167,7 +176,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
     @Override
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
-    private PlayState predicate(AnimationState<GunItem> event)
+    protected PlayState predicate(AnimationState<GunItem> event)
     {
         if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
             event.getController().tryTriggerAnimation("idle");
@@ -177,12 +186,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        AnimationController<GunItem> controller = new AnimationController<>(this, "controller", 1, this::predicate)
-                .triggerableAnim("idle", GunAnimations.IDLE)
-                .triggerableAnim("firing", GunAnimations.FIRING)
-                .triggerableAnim("reloading", GunAnimations.RELOADING);
 
-        controllers.add(controller);
     }
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return this.animationCache;}
