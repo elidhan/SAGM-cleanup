@@ -109,7 +109,19 @@ public class ModItems
             new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
             new float[] {0,0}, //Spread
             new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {12.5f, 1.5f, 0.5f, 3.75f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new float[] {7.5f, 1.5f, 1f, 2f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+    ));
+
+    public static final Item DEV_SNIPER_2 = registerItem("dev_sniper2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "dev_sniper2",
+            22,
+            20,
+            5,
+            45,
+            new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
+            new float[] {0,0}, //Spread
+            new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new float[] {7.5f, 1.5f, 1f, 2f, 8} // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
     ));
 
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),

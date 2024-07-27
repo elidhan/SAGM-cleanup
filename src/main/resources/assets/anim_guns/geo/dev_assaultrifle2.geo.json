@@ -852,9 +852,14 @@
 					]
 				},
 				{
+					"name": "ads_node",
+					"parent": "gunbody",
+					"pivot": [0, 1.55212, 4.43835]
+				},
+				{
 					"name": "sight_default",
 					"parent": "gunbody",
-					"pivot": [0, 1.55212, 4.76335]
+					"pivot": [0, 1.55212, -4.23665]
 				},
 				{
 					"name": "bolt",

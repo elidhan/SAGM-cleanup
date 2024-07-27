@@ -980,7 +980,7 @@
 				{
 					"name": "sight_default",
 					"parent": "gunbody",
-					"pivot": [0, 3.2645, 7.13672],
+					"pivot": [0, 3.2645, 2.74922],
 					"cubes": [
 						{
 							"origin": [-0.40625, 1.57537, -13.74219],
@@ -1167,6 +1167,11 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "ads_node",
+					"parent": "gunbody",
+					"pivot": [0, 3.2645, 8.16172]
 				},
 				{
 					"name": "muzzleflash",
