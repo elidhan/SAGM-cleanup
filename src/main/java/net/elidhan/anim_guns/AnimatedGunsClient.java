@@ -20,6 +20,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 {
 	public static KeyBinding reloadKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.anim_guns.reload", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R, KeyBinding.GAMEPLAY_CATEGORY));
 	public static KeyBinding meleeKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.anim_guns.melee", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_V, KeyBinding.GAMEPLAY_CATEGORY));
+	public static KeyBinding attachmentKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.anim_guns.attachments", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Y, KeyBinding.GAMEPLAY_CATEGORY));
 
 	@Override
 	public void onInitializeClient()
@@ -47,6 +48,10 @@ public class AnimatedGunsClient implements ClientModInitializer
 					client.interactionManager.attackEntity(client.player, ((EntityHitResult)client.crosshairTarget).getEntity());
 				}
 				ClientPlayNetworking.send(ModNetworking.C2S_MELEE, PacketByteBufs.empty());
+			}
+			while (attachmentKey.wasPressed())
+			{
+				ClientPlayNetworking.send(ModNetworking.C2S_ATTACHMENT, PacketByteBufs.empty());
 			}
 		});
 	}

@@ -8,9 +8,9 @@ public class GunSingleLoaderItem extends GunItem
 {
     private final int[] reloadStages;
 
-    public GunSingleLoaderItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, float[] spread, float[] recoil, float[] viewModelRecoil)
+    public GunSingleLoaderItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, float[] spread, float[] recoil, float[] viewModelRecoil, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
-        super(settings, id, damage, fireRate, magSize, reloadTime, spread, recoil, viewModelRecoil);
+        super(settings, id, damage, fireRate, magSize, reloadTime, spread, recoil, viewModelRecoil, acceptedAttachmentTypes);
         this.reloadStages = reloadStages; //Reload stages exactly 4 values
     }
 

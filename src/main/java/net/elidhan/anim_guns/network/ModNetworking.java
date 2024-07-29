@@ -21,6 +21,7 @@ public class ModNetworking
     public static final Identifier C2S_RELOAD = new Identifier(AnimatedGuns.MOD_ID, "c2s_reload");
     public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
     public static final Identifier C2S_SHOOT = new Identifier(AnimatedGuns.MOD_ID, "c2s_shoot");
+    public static final Identifier C2S_ATTACHMENT = new Identifier(AnimatedGuns.MOD_ID, "c2s_shoot");
     public static void registerC2SPackets()
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
@@ -45,6 +46,10 @@ public class ModNetworking
             GunItem gun = (GunItem)(player.getMainHandStack().getItem());
             gun.shoot(player, player.getMainHandStack());
         }));
+        ServerPlayNetworking.registerGlobalReceiver(C2S_ATTACHMENT, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
+        {
+
+        });
     }
     //Server-to-Client
     public static final Identifier S2C_RECOIL = new Identifier(AnimatedGuns.MOD_ID, "s2c_recoil");

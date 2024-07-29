@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,7 +29,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity
     public void zoomLevel(CallbackInfoReturnable<Float> ci){
         ItemStack gun = this.getMainHandStack();
 
-        if(this instanceof IFPlayerWithGun player && player.isAiming())
+        if(this instanceof IFPlayerWithGun player && player.isAiming() && MinecraftClient.getInstance().options.getPerspective().isFirstPerson())
         {
             NbtCompound nbtCompound = gun.getOrCreateNbt();
             if(nbtCompound.getBoolean("isScoped"))

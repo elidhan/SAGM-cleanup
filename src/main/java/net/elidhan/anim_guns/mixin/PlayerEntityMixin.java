@@ -168,8 +168,10 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
             this.dataTracker.set(AIM_TICK, 1);
             this.setSprinting(false);
         }
-        else if (getAimTick() >= 4) this.dataTracker.set(AIM_TICK, 3);
-
+        else if (getAimTick() >= 4)
+        {
+            this.dataTracker.set(AIM_TICK, 3);
+        }
     }
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}

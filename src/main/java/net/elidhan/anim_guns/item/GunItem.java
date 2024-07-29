@@ -21,19 +21,28 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class GunItem extends Item implements FabricItem, GeoItem
 {
@@ -45,11 +54,12 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final float[] spread;
     private final float[] recoil;
     private final float[] viewModelRecoil;
+    private final AttachmentItem.AttachType[] acceptedAttachmentTypes;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -62,6 +72,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.spread = spread; //Spread array should contain exactly 2 values
         this.recoil = recoil; //Recoil array should have exactly 3 values, 3rd value is aim recoil multiplier for view model
         this.viewModelRecoil = viewModelRecoil; // Should contain 5 values: rotate up-down, rotate side, move up-down, move forward, and duration
+        this.acceptedAttachmentTypes = acceptedAttachmentTypes;
     }
 
     //=====Give ID=====//
@@ -104,7 +115,10 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         //Bullet -1
         if (!player.isCreative()) stack.getOrCreateNbt().putInt("ammo", stack.getOrCreateNbt().getInt("ammo")-1);
-        if (player instanceof IFPlayerWithGun player1) player1.stopReload();
+        if (player instanceof IFPlayerWithGun player1)
+        {
+            player1.stopReload();
+        }
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
@@ -126,6 +140,141 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         return 0;
     }
+
+    @Override
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
+    {
+        if (clickType != ClickType.RIGHT) return false;
+
+        if (otherStack.isEmpty())
+        {
+            removeFirstStack(stack).ifPresent(itemStack ->
+            {
+                player.playSound(SoundEvents.ITEM_BUNDLE_REMOVE_ONE, 0.8f, 0.8f + player.getWorld().getRandom().nextFloat() * 0.4f);
+                cursorStackReference.set(itemStack);
+            });
+        }
+        else
+        {
+            int i = addAttachment(stack, otherStack);
+
+            if (i > 0)
+            {
+                otherStack.decrement(i);
+                player.playSound(SoundEvents.ITEM_BUNDLE_INSERT, 0.8f, 0.8f + player.getWorld().getRandom().nextFloat() * 0.4f);
+            }
+
+        }
+
+        return true;
+    }
+
+    private int addAttachment(ItemStack gun, ItemStack attachment)
+    {
+        if (attachment.isEmpty() || !(attachment.getItem() instanceof AttachmentItem)) return 0;
+
+        NbtCompound nbtCompound = gun.getOrCreateNbt();
+
+        if (!nbtCompound.contains("Items")) nbtCompound.put("Items", new NbtList());
+
+        int i = getExistingAttachments(gun);int k = Math.min(attachment.getCount(), (3 - i));
+
+        if (k == 0) return 0;
+
+        NbtList nbtList = nbtCompound.getList("Items", NbtElement.COMPOUND_TYPE);
+        Optional<NbtCompound> existingAttach = checkExistingAttachType(attachment, nbtList);
+
+        if (existingAttach.isPresent() || !acceptedAttachment(((AttachmentItem)attachment.getItem()).getAttachType()))
+        {
+            return 0;
+        }
+        else
+        {
+            int attachID = ((AttachmentItem)attachment.getItem()).getId();
+            AttachmentItem.AttachType attachType = ((AttachmentItem) attachment.getItem()).getAttachType();
+
+            switch(attachType)
+            {
+                case SIGHT -> nbtCompound.putInt("sightID", attachID);
+                case GRIP -> nbtCompound.putInt("gripID", attachID);
+                case MUZZLE -> nbtCompound.putInt("muzzleID", attachID);
+            }
+
+            ItemStack itemStack2 = attachment.copyWithCount(k);
+            NbtCompound nbtCompound3 = new NbtCompound();
+            itemStack2.writeNbt(nbtCompound3);
+            nbtList.add(0, nbtCompound3);
+        }
+
+        return 1;
+    }
+
+    private Optional<ItemStack> removeFirstStack(ItemStack gun)
+    {
+        NbtCompound nbtCompound = gun.getOrCreateNbt();
+
+        if (!nbtCompound.contains("Items")) return Optional.empty();
+
+        NbtList nbtList = nbtCompound.getList("Items", NbtElement.COMPOUND_TYPE);
+
+        if (nbtList.isEmpty()) return Optional.empty();
+
+        NbtCompound nbtCompound2 = nbtList.getCompound(0);
+        ItemStack attachment = ItemStack.fromNbt(nbtCompound2);
+        nbtList.remove(0);
+
+        AttachmentItem.AttachType attachType = ((AttachmentItem) attachment.getItem()).getAttachType();
+
+        switch(attachType)
+        {
+            case SIGHT -> nbtCompound.putInt("sightID", 0);
+            case GRIP -> nbtCompound.putInt("gripID", 0);
+            case MUZZLE -> nbtCompound.putInt("muzzleID", 0);
+        }
+
+        if (nbtList.isEmpty()) gun.removeSubNbt("Items");
+
+        return Optional.of(attachment);
+    }
+
+    private int getExistingAttachments(ItemStack gun)
+    {
+        return getAttachments(gun).mapToInt(ItemStack::getCount).sum();
+    }
+
+    private Stream<ItemStack> getAttachments(ItemStack gun)
+    {
+        NbtCompound nbtCompound = gun.getNbt();
+        if (nbtCompound == null)
+        {
+            return Stream.empty();
+        }
+        NbtList nbtList = nbtCompound.getList("Items", NbtElement.COMPOUND_TYPE);
+        return nbtList.stream().map(NbtCompound.class::cast).map(ItemStack::fromNbt);
+    }
+
+    private Optional<NbtCompound> checkExistingAttachType(ItemStack attachment, NbtList items)
+    {
+        if (attachment.isOf(Items.BUNDLE)) {
+            return Optional.empty();
+        }
+
+        //items.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).filter(item -> ItemStack.canCombine(ItemStack.fromNbt(item), stack)).findFirst();
+        return items.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).filter(item ->
+                        (ItemStack.fromNbt(item).getItem() instanceof AttachmentItem)
+                                && (((AttachmentItem)ItemStack.fromNbt(item).getItem()).getAttachType() == ((AttachmentItem)attachment.getItem()).getAttachType()))
+                .findFirst();
+    }
+
+    private boolean acceptedAttachment(AttachmentItem.AttachType attachType)
+    {
+        for (AttachmentItem.AttachType attachType2 : acceptedAttachmentTypes)
+        {
+            if (attachType == attachType2) return true;
+        }
+        return false;
+    }
+
     //===========================//
 
     //=====Aiming stuff=====//

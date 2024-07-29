@@ -1,13 +1,10 @@
 package net.elidhan.anim_guns.client.render;
 
-import mod.azure.azurelib.cache.AzureLibCache;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.renderer.GeoItemRenderer;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
-import net.elidhan.anim_guns.AnimatedGuns;
-import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
@@ -17,9 +14,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.model.BakedModel;
@@ -49,7 +44,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
 
-        //if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND || (((IFPlayerWithGun)MinecraftClient.getInstance().player).isAiming() && MinecraftClient.getInstance().player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped"))) return;
+        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
+            return;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -60,7 +56,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         MinecraftClient client = MinecraftClient.getInstance();
         float delta = client.getTickDelta();
         ClientPlayerEntity player = client.player;
-        VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
+        VertexConsumer buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(getGeoModel().getTextureResource(animatable)));
         GunItem gun = (GunItem) getCurrentItemStack().getItem();
 
         //Attachments test
@@ -93,6 +89,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
 
         float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
+        alpha = getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped") && ((IFPlayerWithGun)player).isAiming() ? MathHelper.clamp(1-(f*4), 0 ,1) : 1;
 
         //Get Sprint Progress
         sprintProgress = MathHelper.lerp(delta / 8f, sprintProgress, player.isSprinting() ? 1 : 0);
@@ -117,39 +114,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 aimTransforms(poseStack, f, posX, posY);
                 buffer1 = this.bufferSource.getBuffer(MuzzleFlashRenderType.getMuzzleFlash());
-            }
-            case "sight_mount" ->
-            {
-                bone.setHidden(!getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped"));
-            }
-            case "sightPos" ->
-            {
-                if (sightID > 0)
-                {
-                    attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID, "geo/attach_si_"+sightID+".geo.json"));
-
-                    attachmentBone = attachmentModel.getBone("sight").orElse(null);
-                    GeoBone reticle = attachmentModel.getBone("reticlePos").orElse(null);
-
-                    if(attachmentBone != null)
-                    {
-                        sightAdjust = sightDefaultHeight - bone.getPivotY() - attachmentModel.getBone("reticlePos").get().getPivotY();
-
-                        poseStack.translate(bone.getPivotX()/16, bone.getPivotY()/16, bone.getPivotZ()/16);
-                        super.renderCubesOfBone(poseStack, attachmentBone, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-
-                        if (reticle != null)
-                            super.renderCubesOfBone(poseStack, reticle, this.bufferSource.getBuffer(AttachmentRenderType.getReticle()), packedLight, packedOverlay, red, green, blue, alpha);
-                    }
-                }
-            }
-            case "muzzlePos" ->
-            {
-
-            }
-            case "gripPos" ->
-            {
-
             }
             case "leftArm", "rightArm" ->
             {
@@ -178,11 +142,11 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
                 playerArm.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerArm.setAngles(0, 0, 0);
-                playerArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, 1);
+                playerArm.render(poseStack, arm, packedLight, packedOverlay, 1, 1, 1, alpha);
 
                 playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerSleeve.setAngles(0, 0, 0);
-                playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, 1);
+                playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, alpha);
 
             }
         }

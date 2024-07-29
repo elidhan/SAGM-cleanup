@@ -6,9 +6,9 @@ import net.elidhan.anim_guns.animations.GunAnimations;
 
 public class GunMagFedItem extends GunItem
 {
-    public GunMagFedItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil)
+    public GunMagFedItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
-        super(settings, id, damage, fireRate, magSize, reloadTime, spread, recoil, viewModelRecoil);
+        super(settings, id, damage, fireRate, magSize, reloadTime, spread, recoil, viewModelRecoil, acceptedAttachmentTypes);
     }
 
     @Override
