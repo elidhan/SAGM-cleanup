@@ -10,6 +10,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class ModItems
 {
@@ -72,10 +75,12 @@ public class ModItems
             10,
             5,
             7,
-            20,
-            new float[] {1,1},
-            new float[] {1.25f,3.75f,1f}, //Camera Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {25f, 1.5f, 1.25f, 1.5f, 6},// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            40,
+            new Vector2f(1f,1f),
+            new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector4f(1.5f,25f,1.5f,1.25f),
+            new Vector3f(0.5f, 1f,1f),
+            8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -85,9 +90,11 @@ public class ModItems
             2,
             30,
             20,
-            new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {0.625f,1.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {1.5f, 0.375f, -0.0625f, 1.25f, 8},// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new Vector2f(1f,1f),
+            new Vector2f(0.625f,1.5f),
+            new Vector4f(0.375f,1.5f, 1.25f, -0.0625f),
+            new Vector3f(0f, 0.125f, 0.75f),
+            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -97,9 +104,11 @@ public class ModItems
             2,
             30,
             50,
-            new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {0.875f,2f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
-            new float[] {2f, 0.75f, 0.0625f, 1f, 8},// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new Vector2f(1f,1f),
+            new Vector2f(0.875f,2f),
+            new Vector4f(0.75f,2f,1f,0.0625f),
+            new Vector3f( 0f, 0.375f, 0.75f),
+            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -109,9 +118,11 @@ public class ModItems
             3,
             20,
             50,
-            new float[] {1,1}, //Spread, must be 2 values exactly
-            new float[] {0.875f,2.5f,0.5f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for viewmodel up kick
-            new float[] {2.5f, 0.75f, 0.125f, 1.25f, 8},// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new Vector2f(1f,1f),
+            new Vector2f(0.875f,2.5f),
+            new Vector4f(0.75f, 2.5f, 1.25f, 0.125f),
+            new Vector3f(0f,0.0625f,0.5f),
+            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -121,10 +132,12 @@ public class ModItems
             20,
             5,
             45,
-            new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
-            new float[] {0,0}, //Spread
-            new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {7.5f, 1.5f, 1f, 2f, 8}, // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new int[] {20,30},
+            new Vector2f(1f,1f), //Spread
+            new Vector2f(2f,5.25f),
+            new Vector4f(1.5f,7.5f,3f,0.5f),
+            new Vector3f(0f,0.125f,0.625f),
+            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
     ));
 
@@ -135,9 +148,11 @@ public class ModItems
             5,
             45,
             new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
-            new float[] {0,0}, //Spread
-            new float[] {2f,5.25f,0f}, //Recoil, must be 3 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new float[] {7.5f, 1.5f, 0.5f, 3f, 8}, // Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new Vector2f(1f,1f), //Spread
+            new Vector2f(2f,5.25f), //Camera Recoil
+            new Vector4f(1.5f,7.5f,3f,0.5f), //ViewModel Recoil
+            new Vector3f(0f,0.125f,0.625f), //ViewModel Recoil Multiplier
+            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
     ));
 

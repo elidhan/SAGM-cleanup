@@ -38,6 +38,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -51,15 +54,19 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final int fireRate;
     private final int magSize;
     private final int reloadTime;
-    private final float[] spread;
-    private final float[] recoil;
-    private final float[] viewModelRecoil;
+
+    private final Vector2f spread;
+    private final Vector2f cameraRecoil;
+    private final Vector4f viewModelRecoil;
+    private final Vector3f viewModelRecoilMult;
+    private final int viewModelRecoilDuration;
+
     private final AttachmentItem.AttachType[] acceptedAttachmentTypes;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, float[] spread, float[] recoil, float[] viewModelRecoil, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -70,8 +77,10 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.magSize = magSize;
         this.reloadTime = reloadTime;
         this.spread = spread; //Spread array should contain exactly 2 values
-        this.recoil = recoil; //Recoil array should have exactly 3 values, 3rd value is aim recoil multiplier for view model
+        this.cameraRecoil = cameraRecoil; //Recoil array should have exactly 2 values
         this.viewModelRecoil = viewModelRecoil; // Should contain 5 values: rotate up-down, rotate side, move up-down, move forward, and duration
+        this.viewModelRecoilMult = viewModelRecoilMult; //Viewmodel recoil multiplier when aiming
+        this.viewModelRecoilDuration = viewModelRecoilDuration;
         this.acceptedAttachmentTypes = acceptedAttachmentTypes;
     }
 
@@ -99,8 +108,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
         BulletProjectileEntity bullet = new BulletProjectileEntity(player, player.getWorld(), this.damage, 1);
         bullet.setPosition(player.getX(), player.getEyeY(), player.getZ());
 
-        double spreadX = -spread[0] + Math.random() * (spread[0] - (-spread[0]));
-        double spreadY = -spread[1] + Math.random() * (spread[1] - (-spread[1]));
+        double spreadX = -spread.x + Math.random() * (spread.x - (-spread.x));
+        double spreadY = -spread.y + Math.random() * (spread.y - (-spread.y));
 
         Vec3d vertiSpread = BulletUtil.vertiSpread(player, spreadX);
         Vec3d horiSpread = BulletUtil.horiSpread(player, spreadY);
@@ -291,12 +300,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
     //=====Getters=====//
     public int getReloadTime() {return reloadTime;}
-    public float getRecoilX() {return recoil[0];}
-    public float getRecoilY() {return recoil[1];}
     public String getID() {return this.id;}
     public int getMagSize() {return magSize;}
-    public float getAimVMRecoilMult() {return this.recoil[2];}
-    public float[] getViewModelRecoil() {return this.viewModelRecoil;}
+
+    public float getRecoilX() {return cameraRecoil.x;}
+    public float getRecoilY() {return cameraRecoil.y;}
+    public Vector3f getAimVMRecoilMult() {return this.viewModelRecoilMult;}
+    public Vector4f getViewModelRecoil() {return this.viewModelRecoil;}
+    public int getViewModelRecoilDuration() {return this.viewModelRecoilDuration;}
     //=================//
 
     //=====Stuff=====//
@@ -333,10 +344,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         return PlayState.CONTINUE;
     }
     @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
-    {
-
-    }
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {}
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return this.animationCache;}
     //==========================//

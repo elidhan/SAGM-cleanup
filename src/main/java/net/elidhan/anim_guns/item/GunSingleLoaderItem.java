@@ -3,15 +3,18 @@ package net.elidhan.anim_guns.item;
 import mod.azure.azurelib.core.animation.AnimatableManager;
 import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.animations.GunAnimations;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class GunSingleLoaderItem extends GunItem
 {
     private final int[] reloadStages;
 
-    public GunSingleLoaderItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, float[] spread, float[] recoil, float[] viewModelRecoil, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunSingleLoaderItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
-        super(settings, id, damage, fireRate, magSize, reloadTime, spread, recoil, viewModelRecoil, acceptedAttachmentTypes);
-        this.reloadStages = reloadStages; //Reload stages exactly 4 values
+        super(settings, id, damage, fireRate, magSize, reloadTime, spread, cameraRecoil, viewModelRecoil, viewModelRecoilMult, viewModelRecoilDuration, acceptedAttachmentTypes);
+        this.reloadStages = reloadStages;
     }
 
     public int getReloadStageTick(int stage)

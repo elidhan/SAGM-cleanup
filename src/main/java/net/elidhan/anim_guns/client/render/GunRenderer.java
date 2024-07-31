@@ -1,10 +1,13 @@
 package net.elidhan.anim_guns.client.render;
 
+import mod.azure.azurelib.cache.AzureLibCache;
 import mod.azure.azurelib.cache.object.BakedGeoModel;
 import mod.azure.azurelib.cache.object.GeoBone;
 import mod.azure.azurelib.renderer.GeoItemRenderer;
 import mod.azure.azurelib.renderer.GeoRenderer;
 import mod.azure.azurelib.util.RenderUtils;
+import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
@@ -104,11 +107,30 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 aimTransforms(poseStack, f, posX, posY);
                 recoilTransforms(
                         poseStack,
-                        RecoilHandler.getInstance().getVMRotSide(delta),
-                        RecoilHandler.getInstance().getVMRotUp(delta),
-                        RecoilHandler.getInstance().getVMMoveUp(delta),
-                        RecoilHandler.getInstance().getVMMoveBack(delta),
-                        Math.abs(1f-f)+(gun.getAimVMRecoilMult()*f));
+                        RecoilHandler.getInstance().getVMRotSide(delta, f),
+                        RecoilHandler.getInstance().getVMRotUp(delta, f),
+                        RecoilHandler.getInstance().getVMMoveUp(delta, f),
+                        RecoilHandler.getInstance().getVMMoveBack(delta, f));
+            }
+            case "sightPos" ->
+            {
+                attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/attach_si_"+sightID+".geo.json"));
+                attachmentBone = attachmentModel.getBone("sight").orElse(null);
+                GeoBone reticle = attachmentModel.getBone("reticlePos").orElse(null);
+
+                if(attachmentBone != null)
+                {
+                    //position the attachment to where  attachment bone is on model file
+                    //bone doesn't have any cubes = no positional values
+                    //luckily, pivot values still exist
+                    sightAdjust = getGeoModel().getBone("ads_node").orElse(null).getPivotY() - bone.getPivotY() - attachmentModel.getBone("reticlePos").get().getPivotY();
+
+                    poseStack.translate(bone.getPivotX()/16, bone.getPivotY()/16, bone.getPivotZ()/16);
+                    super.renderCubesOfBone(poseStack, attachmentBone, this.bufferSource.getBuffer(AttachmentRenderType.getAttachment(1, sightID)), packedLight, packedOverlay, red, green, blue, alpha);
+
+                    if (reticle != null)
+                        super.renderCubesOfBone(poseStack, reticle, this.bufferSource.getBuffer(AttachmentRenderType.getReticle()), packedLight, packedOverlay, red, green, blue, alpha);
+                }
             }
             case "muzzleflash" ->
             {
@@ -147,7 +169,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerSleeve.setAngles(0, 0, 0);
                 playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, alpha);
-
             }
         }
 
@@ -179,12 +200,12 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         poseStack.translate(centeredX * f, centeredY * f, adjustZ * f);
         //poseStack.scale(1,1,1f - f1);
     }
-    private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ, float upMult)
+    private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ)
     {
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY*upMult));
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX*upMult));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((rotX)*upMult));
-        poseStack.translate(0,(moveY)*upMult,(moveZ)/16f);
+        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY));
+        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX));
+        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(rotX));
+        poseStack.translate(0,moveY,(moveZ/16f));
     }
     private void leftArmAimTransforms(MatrixStack poseStack, float f, Vector3f axis)
     {

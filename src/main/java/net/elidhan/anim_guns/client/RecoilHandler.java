@@ -4,6 +4,8 @@ import net.elidhan.anim_guns.util.Easings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.MathHelper;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import java.util.Random;
 
@@ -28,12 +30,13 @@ public class RecoilHandler
     private int prevCameraRecoilTick = 0;
 
     //Gun viewmodel recoil
-    private float[] viewModelRecoil = {0,0,0,0,0};
+    private Vector4f viewModelRecoil = new Vector4f(0,0,0,0);
+    private Vector3f viewModelRecoilMult = new Vector3f(0,0,0);
     private int viewModelRecoilTick = 0;
     private int prevViewModelRecoilTick = 0;
     private int viewModelRecoilDuration = 0;
 
-    public void shot(float recoilX, float recoilY, float[] viewModelRecoil)
+    public void shot(float recoilX, float recoilY, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration)
     {
         int leftOrRight = random.nextBoolean() ? 1 : -1;
         cameraRecoilX = recoilX * leftOrRight;
@@ -41,17 +44,9 @@ public class RecoilHandler
         cameraRecoilTick = 3;
 
         this.viewModelRecoil = viewModelRecoil;
-        this.viewModelRecoil[1] *= leftOrRight;
-        viewModelRecoilTick = (int)viewModelRecoil[4];
-        viewModelRecoilDuration = (int)viewModelRecoil[4];
-    }
-
-    public void reset()
-    {
-        viewModelRecoilTick = 0;
-        prevViewModelRecoilTick = 0;
-        viewModelRecoilDuration = 0;
-        this.viewModelRecoil = new float[] {0,0,0,0,0};
+        this.viewModelRecoilMult = viewModelRecoilMult;
+        this.viewModelRecoil.x *= leftOrRight;
+        this.viewModelRecoilTick = this.viewModelRecoilDuration = viewModelRecoilDuration;
     }
 
     public void tick()
@@ -82,20 +77,20 @@ public class RecoilHandler
         player.prevPitch = player.getPitch();
     }
 
-    public float getVMRotUp(float delta)
+    public float getVMMoveUp(float delta, float aimProgress)
     {
-        return viewModelRecoil[0] * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
+        return viewModelRecoil.w * (1 + (this.viewModelRecoilMult.y - 1) * aimProgress) * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f) / 16;
     }
-    public float getVMRotSide(float delta)
+    public float getVMRotSide(float delta, float aimProgress)
     {
-        return viewModelRecoil[1] * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
+        return viewModelRecoil.x * (1 + (this.viewModelRecoilMult.x - 1) * aimProgress) * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
     }
-    public float getVMMoveUp(float delta)
+    public float getVMRotUp(float delta, float aimProgress)
     {
-        return viewModelRecoil[2] * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f) / 16;
+        return viewModelRecoil.y * (1 + (this.viewModelRecoilMult.y - 1) * aimProgress) * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
     }
-    public float getVMMoveBack(float delta)
+    public float getVMMoveBack(float delta, float aimProgress)
     {
-        return viewModelRecoil[3] * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
+        return viewModelRecoil.z * (1 + (this.viewModelRecoilMult.z - 1) * aimProgress) * Easings.easeOutBack(MathHelper.lerp(delta, (float) prevViewModelRecoilTick, (float) viewModelRecoilTick)/(viewModelRecoilDuration == 0 ? 1 : viewModelRecoilDuration), 1.7f);
     }
 }

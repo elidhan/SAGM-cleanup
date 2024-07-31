@@ -61,7 +61,12 @@ public class ModNetworking
             client.execute(() ->
             {
                 GunItem gun = (GunItem)(client.player.getMainHandStack().getItem());
-                RecoilHandler.getInstance().shot(gun.getRecoilX(),gun.getRecoilY(),gun.getViewModelRecoil());
+                RecoilHandler.getInstance().shot(
+                        gun.getRecoilX() * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
+                        gun.getRecoilY() * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
+                        gun.getViewModelRecoil(),
+                        gun.getAimVMRecoilMult(),
+                        gun.getViewModelRecoilDuration());
             });
         }));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->
