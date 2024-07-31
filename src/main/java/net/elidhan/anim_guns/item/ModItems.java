@@ -70,6 +70,20 @@ public class ModItems
     public static final Item HEAVY_RIFLE_BULLET = registerItem("heavy_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item SHOTGUN_SHELL = registerItem("shotgun_shell", new Item(new FabricItemSettings().maxCount(64)));
 
+    public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "dev_revolver",
+            10,
+            10,
+            8,
+            40,
+            new Vector2f(1f,1f),
+            new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector4f(1.5f,25f,1.5f,1.25f),
+            new Vector3f(0.5f, 1f,1f),
+            8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
+            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.MUZZLE}
+    ));
+
     public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol2",
             10,
@@ -81,7 +95,7 @@ public class ModItems
             new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
             8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
-            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
+            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
     ));
 
     public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),

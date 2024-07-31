@@ -198,7 +198,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float adjustZ = 10.6f/16f - adsAdjustForward/16f;
 
         poseStack.translate(centeredX * f, centeredY * f, adjustZ * f);
-        //poseStack.scale(1,1,1f - f1);
     }
     private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ)
     {

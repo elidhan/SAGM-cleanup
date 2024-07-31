@@ -2,6 +2,7 @@ package net.elidhan.anim_guns.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import mod.azure.azurelib.animatable.GeoItem;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.item.GunSingleLoaderItem;
@@ -98,19 +99,19 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         if (gun instanceof GunSingleLoaderItem singleLoader)
         {
             if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(0))
-                AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_1");
+                AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_1");
             if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(1))
             {
                 this.currentGun.getOrCreateNbt().putInt("ammo", this.currentGun.getOrCreateNbt().getInt("ammo") + 1);
 
                 if (this.currentGun.getOrCreateNbt().getInt("ammo") < gun.getMagSize())
                 {
-                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_1");
+                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_1");
                     setReloadProgressTick(singleLoader.getReloadStageTick(0));
                 }
                 else
                 {
-                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, this.currentGun.getOrCreateNbt().getLong("AzureLibID"), "reload_2");
+                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_2");
                 }
             }
         }
