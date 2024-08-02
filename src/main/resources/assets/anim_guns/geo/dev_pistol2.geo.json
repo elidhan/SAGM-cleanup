@@ -12,7 +12,12 @@
 			},
 			"bones": [
 				{
+					"name": "gun",
+					"pivot": [0, 0, 0]
+				},
+				{
 					"name": "gunbody",
+					"parent": "gun",
 					"pivot": [0, -0.96616, 3.55059],
 					"cubes": [
 						{
@@ -626,12 +631,22 @@
 				{
 					"name": "ads_node",
 					"parent": "gunbody",
-					"pivot": [0, 2.67831, 11.75271]
+					"pivot": [0, 2.67831, 9.32146]
 				},
 				{
 					"name": "sight_default",
 					"parent": "gunbody",
 					"pivot": [0, 2.67831, 4.29021]
+				},
+				{
+					"name": "sightPos",
+					"parent": "gunbody",
+					"pivot": [0, 2.31581, -2.20354]
+				},
+				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 1.56581, -5.63479]
 				},
 				{
 					"name": "slide",
@@ -933,6 +948,24 @@
 								"west": {"uv": [0, 53], "uv_size": [2, 4]},
 								"up": {"uv": [3.5, 53.5], "uv_size": [-0.5, -0.5]},
 								"down": {"uv": [3.5, 54], "uv_size": [-0.5, -0.5]}
+							}
+						}
+					]
+				},
+				{
+					"name": "muzzleflash",
+					"pivot": [0, 1.56581, -5.64104],
+					"cubes": [
+						{
+							"origin": [-0.00625, 1.55956, -5.64104],
+							"size": [0.0125, 0.0125, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [64, 64]},
+								"east": {"uv": [0, 0], "uv_size": [64, 64]},
+								"south": {"uv": [0, 0], "uv_size": [64, 64]},
+								"west": {"uv": [0, 0], "uv_size": [64, 64]},
+								"up": {"uv": [64, 64], "uv_size": [-64, -64]},
+								"down": {"uv": [64, 64], "uv_size": [-64, -64]}
 							}
 						}
 					]

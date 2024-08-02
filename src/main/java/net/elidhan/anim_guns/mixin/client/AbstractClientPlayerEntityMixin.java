@@ -34,7 +34,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity
             NbtCompound nbtCompound = gun.getOrCreateNbt();
             if(nbtCompound.getBoolean("isScoped"))
             {
-                ci.setReturnValue(0.125f);
+                ci.setReturnValue(0.0625f);
             }
             else{
                 ci.setReturnValue(0.75f);

@@ -854,7 +854,7 @@
 				{
 					"name": "ads_node",
 					"parent": "gunbody",
-					"pivot": [0, 1.55212, 4.43835]
+					"pivot": [0, 1.55212, 7.2196]
 				},
 				{
 					"name": "sight_default",

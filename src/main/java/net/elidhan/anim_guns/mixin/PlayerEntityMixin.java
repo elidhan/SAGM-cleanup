@@ -86,6 +86,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Override
     public void stopReload()
     {
+        if (this.currentGun.getItem() instanceof GunItem) AnimationHandler.stopAnim((ServerPlayerEntity)(Object)this, this.currentGun, GeoItem.getId(this.currentGun));
         setReloadProgressTick(0);
         setReloading(false);
     }

@@ -12,18 +12,18 @@
 				},
 				"rightArm": {
 					"rotation": {
-						"vector": [90, 0, -180]
+						"vector": [90, 3.70209, -180]
 					},
 					"position": {
-						"vector": [5.75, -7.33125, 2.42969]
+						"vector": [5.5375, -7.33, 2.43]
 					}
 				},
 				"leftArm": {
 					"rotation": {
-						"vector": [90, -20, -180]
+						"vector": [90, -11.79458, -180]
 					},
 					"position": {
-						"vector": [-4.02436, -7.74, 2.04675]
+						"vector": [-4.68875, -7.74, 1.65]
 					}
 				}
 			}
@@ -34,18 +34,18 @@
 			"bones": {
 				"rightArm": {
 					"rotation": {
-						"vector": [90, 0, -180]
+						"vector": [90, 3.70209, -180]
 					},
 					"position": {
-						"vector": [5.75, -7.33125, 2.42969]
+						"vector": [5.5375, -7.33, 2.43]
 					}
 				},
 				"leftArm": {
 					"rotation": {
-						"vector": [90, -20, -180]
+						"vector": [90, -11.79458, -180]
 					},
 					"position": {
-						"vector": [-4.02436, -7.74, 2.04675]
+						"vector": [-4.68875, -7.74, 1.65]
 					}
 				},
 				"muzzleflash": {

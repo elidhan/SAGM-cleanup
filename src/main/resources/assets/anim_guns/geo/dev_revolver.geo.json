@@ -12,7 +12,12 @@
 			},
 			"bones": [
 				{
+					"name": "gun",
+					"pivot": [0, 0, 0]
+				},
+				{
 					"name": "gunbody",
+					"parent": "gun",
 					"pivot": [0, 0.25848, 5.34684],
 					"cubes": [
 						{
@@ -872,6 +877,11 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 1.5875, -4.09375]
 				},
 				{
 					"name": "hammer",

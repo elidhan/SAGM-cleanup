@@ -54,6 +54,7 @@ public class ModNetworking
     //Server-to-Client
     public static final Identifier S2C_RECOIL = new Identifier(AnimatedGuns.MOD_ID, "s2c_recoil");
     public static final Identifier S2C_PLAYANIM = new Identifier(AnimatedGuns.MOD_ID, "s2c_playanim");
+    public static final Identifier S2C_STOPANIM = new Identifier(AnimatedGuns.MOD_ID, "s2c_stopanim");
     public static void registerS2CPackets()
     {
         ClientPlayNetworking.registerGlobalReceiver(S2C_RECOIL, ((client, handler, buf, responseSender) ->
@@ -62,8 +63,8 @@ public class ModNetworking
             {
                 GunItem gun = (GunItem)(client.player.getMainHandStack().getItem());
                 RecoilHandler.getInstance().shot(
-                        gun.getRecoilX() * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
-                        gun.getRecoilY() * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
+                        gun.getRecoilX() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
+                        gun.getRecoilY() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
                         gun.getViewModelRecoil(),
                         gun.getAimVMRecoilMult(),
                         gun.getViewModelRecoilDuration());
@@ -91,6 +92,20 @@ public class ModNetworking
                 {
                     animationController.tryTriggerAnimation(animation);
                 }
+            });
+        }));
+        ClientPlayNetworking.registerGlobalReceiver(S2C_STOPANIM, ((client, handler, buf, responseSender) ->
+        {
+            long id = buf.readLong();
+            ItemStack stack = buf.readItemStack();
+
+            client.execute(() ->
+            {
+                GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
+
+                AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
+
+                animationController.stop();
             });
         }));
     }

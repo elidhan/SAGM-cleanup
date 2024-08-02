@@ -22,7 +22,6 @@ public class ModItems
     public static final Item ENRICHED_IRON = registerItem("enriched_iron", new Item(new FabricItemSettings().maxCount(64)));
 
     public static final Item PISTOL_GRIP = registerItem("pistol_grip", new Item(new FabricItemSettings().maxCount(64)));
-    public static final Item GUN_SCOPE = registerItem("gun_scope", new Item(new FabricItemSettings().maxCount(64)));
 
     public static final Item LONG_BARREL = registerItem("long_barrel", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item SHORT_BARREL = registerItem("short_barrel", new Item(new FabricItemSettings().maxCount(64)));
@@ -70,13 +69,42 @@ public class ModItems
     public static final Item HEAVY_RIFLE_BULLET = registerItem("heavy_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item SHOTGUN_SHELL = registerItem("shotgun_shell", new Item(new FabricItemSettings().maxCount(64)));
 
+    public static final Item GRIP_FOREGRIP = registerItem("grip_foregrip", new AttachmentItem(new FabricItemSettings().maxCount(1),
+            "grip_foregrip",
+            0.8f,
+            0.8f,
+            AttachmentItem.AttachType.GRIP,
+            false
+    ));
+    public static final Item SIGHT_HOLO = registerItem("sight_holo", new AttachmentItem(new FabricItemSettings().maxCount(1),
+            "sight_holo",
+            1,
+            0.85f,
+            AttachmentItem.AttachType.SIGHT,
+            false
+    ));
+    public static final Item SIGHT_8XSCOPE = registerItem("sight_8x_scope", new AttachmentItem(new FabricItemSettings().maxCount(1),
+            "sight_8x_scope",
+            0.75f,
+            1f,
+            AttachmentItem.AttachType.SCOPE,
+            false
+    ));
+    public static final Item MUZZLE_MBRAKE = registerItem("muzzle_mbrake", new AttachmentItem(new FabricItemSettings().maxCount(1),
+            "muzzle_mbrake",
+            0.85f,
+            0.85f,
+            AttachmentItem.AttachType.MUZZLE,
+            false
+    ));
+
     public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_revolver",
             10,
             10,
             8,
             40,
-            new Vector2f(1f,1f),
+            new Vector2f(0.25f,0.25f),
             new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
@@ -90,7 +118,7 @@ public class ModItems
             5,
             7,
             40,
-            new Vector2f(1f,1f),
+            new Vector2f(1.25f,1.25f),
             new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
@@ -103,13 +131,13 @@ public class ModItems
             6,
             2,
             30,
-            20,
-            new Vector2f(1f,1f),
-            new Vector2f(0.625f,1.5f),
-            new Vector4f(0.375f,1.5f, 1.25f, -0.0625f),
-            new Vector3f(0f, 0.125f, 0.75f),
-            8,
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
+            50,
+            new Vector2f(0.875f,0.875f), //Spread
+            new Vector2f(0.625f,1.25f), //Camera Recoil
+            new Vector4f(0.375f,1.5f, 1.25f, -0.0625f), //Viewmodel Recoil
+            new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
+            8, //Viewmodel recoil duration
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -118,26 +146,26 @@ public class ModItems
             2,
             30,
             50,
-            new Vector2f(1f,1f),
-            new Vector2f(0.875f,2f),
+            new Vector2f(1.5f,1.5f),
+            new Vector2f(0.875f,1.75f),
             new Vector4f(0.75f,2f,1f,0.0625f),
             new Vector3f( 0f, 0.375f, 0.75f),
             8,
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
     public static final Item DEV_ASSAULTRIFLE_3 = registerItem("dev_assaultrifle3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle3",
-            10,
+            11,
             3,
             20,
             50,
-            new Vector2f(1f,1f),
-            new Vector2f(0.875f,2.5f),
+            new Vector2f(0.5f,0.5f),
+            new Vector2f(0.625f,1.75f),
             new Vector4f(0.75f, 2.5f, 1.25f, 0.125f),
             new Vector3f(0f,0.0625f,0.5f),
             8,
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
     public static final Item DEV_SNIPER = registerItem("dev_sniper", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
@@ -145,29 +173,14 @@ public class ModItems
             22,
             20,
             5,
-            45,
+            50,
             new int[] {20,30},
-            new Vector2f(1f,1f), //Spread
-            new Vector2f(2f,5.25f),
+            new Vector2f(0.125f,0.125f), //Spread
+            new Vector2f(1.5f,4f),
             new Vector4f(1.5f,7.5f,3f,0.5f),
-            new Vector3f(0f,0.125f,0.625f),
+            new Vector3f(0f,0.125f,0.75f),
             8,
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
-    ));
-
-    public static final Item DEV_SNIPER2 = registerItem("dev_sniper2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
-            "dev_sniper2",
-            22,
-            20,
-            5,
-            45,
-            new int[] {20,30}, //Reload Stages in ticks, must be exactly 2 values
-            new Vector2f(1f,1f), //Spread
-            new Vector2f(2f,5.25f), //Camera Recoil
-            new Vector4f(1.5f,7.5f,3f,0.5f), //ViewModel Recoil
-            new Vector3f(0f,0.125f,0.625f), //ViewModel Recoil Multiplier
-            8,
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE}
     ));
 
     /*
@@ -320,7 +333,7 @@ public class ModItems
             entries.add(new ItemStack(ModItems.PLASTIC));
             entries.add(new ItemStack(ModItems.ENRICHED_IRON));
             entries.add(new ItemStack(ModItems.PISTOL_GRIP));
-            entries.add(new ItemStack(ModItems.GUN_SCOPE));
+            //entries.add(new ItemStack(ModItems.GUN_SCOPE));
             entries.add(new ItemStack(ModItems.LONG_BARREL));
             entries.add(new ItemStack(ModItems.SHORT_BARREL));
             entries.add(new ItemStack(ModItems.HEAVY_BARREL));

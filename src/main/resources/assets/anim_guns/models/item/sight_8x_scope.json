@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "anim_guns:item/sight_holo"
+    "layer0": "anim_guns:item/sight_8x_scope"
   }
 }

@@ -18,4 +18,13 @@ public class AnimationHandler
 
         ServerPlayNetworking.send(player, ModNetworking.S2C_PLAYANIM, buf);
     }
+
+    public static void stopAnim(ServerPlayerEntity player, ItemStack itemStack, long id)
+    {
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeLong(id);
+        buf.writeItemStack(itemStack);
+
+        ServerPlayNetworking.send(player, ModNetworking.S2C_STOPANIM, buf);
+    }
 }

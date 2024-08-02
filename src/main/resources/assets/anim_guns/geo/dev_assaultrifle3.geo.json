@@ -6,13 +6,18 @@
 				"identifier": "geometry.unknown",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 2,
-				"visible_bounds_height": 1.5,
-				"visible_bounds_offset": [0, 0.25, 0]
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
 			},
 			"bones": [
 				{
+					"name": "gun",
+					"pivot": [0, 0, 0]
+				},
+				{
 					"name": "gunbody",
+					"parent": "gun",
 					"pivot": [0.00177, 0.57703, 1.33278],
 					"cubes": [
 						{
@@ -1240,6 +1245,21 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "sightPos",
+					"parent": "gunbody",
+					"pivot": [0, 2.6625, 0]
+				},
+				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 0.75156, -21.10233]
+				},
+				{
+					"name": "gripPos",
+					"parent": "gunbody",
+					"pivot": [0, -0.33594, -8.00233]
 				},
 				{
 					"name": "muzzleflash",

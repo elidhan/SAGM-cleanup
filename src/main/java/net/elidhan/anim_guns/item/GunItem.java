@@ -42,6 +42,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -124,7 +125,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         //Bullet -1
         if (!player.isCreative()) stack.getOrCreateNbt().putInt("ammo", stack.getOrCreateNbt().getInt("ammo")-1);
-        if (player instanceof IFPlayerWithGun player1)
+        if (player instanceof IFPlayerWithGun player1 && player1.isReloading())
         {
             player1.stopReload();
         }
@@ -137,17 +138,23 @@ public class GunItem extends Item implements FabricItem, GeoItem
     //======================//
 
     //=====Attachments Stuff=====//
-    public int getSightID(ItemStack currentItemStack)
+    public String getSightID(ItemStack currentItemStack)
     {
-        return 0;
+        if (currentItemStack.getOrCreateNbt().getString("sightID").equals("")) currentItemStack.getOrCreateNbt().putString("sightID", "default");
+
+        return currentItemStack.getOrCreateNbt().getString("sightID");
     }
-    public int getGripID(ItemStack currentItemStack)
+    public String getGripID(ItemStack currentItemStack)
     {
-        return 0;
+        if (currentItemStack.getOrCreateNbt().getString("gripID").equals("")) currentItemStack.getOrCreateNbt().putString("gripID", "default");
+
+        return currentItemStack.getOrCreateNbt().getString("gripID");
     }
-    public int getMuzzleID(ItemStack currentItemStack)
+    public String getMuzzleID(ItemStack currentItemStack)
     {
-        return 0;
+        if (currentItemStack.getOrCreateNbt().getString("muzzleID").equals("")) currentItemStack.getOrCreateNbt().putString("muzzleID", "default");
+
+        return currentItemStack.getOrCreateNbt().getString("muzzleID");
     }
 
     @Override
@@ -199,14 +206,19 @@ public class GunItem extends Item implements FabricItem, GeoItem
         }
         else
         {
-            int attachID = ((AttachmentItem)attachment.getItem()).getId();
+            String attachID = ((AttachmentItem)attachment.getItem()).getId();
             AttachmentItem.AttachType attachType = ((AttachmentItem) attachment.getItem()).getAttachType();
 
             switch(attachType)
             {
-                case SIGHT -> nbtCompound.putInt("sightID", attachID);
-                case GRIP -> nbtCompound.putInt("gripID", attachID);
-                case MUZZLE -> nbtCompound.putInt("muzzleID", attachID);
+                case SIGHT -> nbtCompound.putString("sightID", attachID);
+                case SCOPE ->
+                {
+                    nbtCompound.putString("sightID", attachID);
+                    nbtCompound.putBoolean("isScoped", true);
+                }
+                case GRIP -> nbtCompound.putString("gripID", attachID);
+                case MUZZLE -> nbtCompound.putString("muzzleID", attachID);
             }
 
             ItemStack itemStack2 = attachment.copyWithCount(k);
@@ -236,9 +248,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         switch(attachType)
         {
-            case SIGHT -> nbtCompound.putInt("sightID", 0);
-            case GRIP -> nbtCompound.putInt("gripID", 0);
-            case MUZZLE -> nbtCompound.putInt("muzzleID", 0);
+            case SIGHT -> nbtCompound.putString("sightID", "default");
+            case SCOPE ->
+            {
+                nbtCompound.putString("sightID", "default");
+                nbtCompound.putBoolean("isScoped", false);
+            }
+            case GRIP -> nbtCompound.putString("gripID", "default");
+            case MUZZLE -> nbtCompound.putString("muzzleID", "default");
         }
 
         if (nbtList.isEmpty()) gun.removeSubNbt("Items");
@@ -271,7 +288,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         //items.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).filter(item -> ItemStack.canCombine(ItemStack.fromNbt(item), stack)).findFirst();
         return items.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).filter(item ->
                         (ItemStack.fromNbt(item).getItem() instanceof AttachmentItem)
-                                && (((AttachmentItem)ItemStack.fromNbt(item).getItem()).getAttachType() == ((AttachmentItem)attachment.getItem()).getAttachType()))
+                                && (((AttachmentItem)ItemStack.fromNbt(item).getItem()).getAttachType() == ((AttachmentItem)attachment.getItem()).getAttachType()
+                        || ((AttachmentItem)ItemStack.fromNbt(item).getItem()).getAttachType().equals(AttachmentItem.AttachType.SCOPE) && ((AttachmentItem)attachment.getItem()).getAttachType().equals(AttachmentItem.AttachType.SIGHT)
+                        || ((AttachmentItem)ItemStack.fromNbt(item).getItem()).getAttachType().equals(AttachmentItem.AttachType.SIGHT) && ((AttachmentItem)attachment.getItem()).getAttachType().equals(AttachmentItem.AttachType.SCOPE)))
                 .findFirst();
     }
 
@@ -303,8 +322,30 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public String getID() {return this.id;}
     public int getMagSize() {return magSize;}
 
-    public float getRecoilX() {return cameraRecoil.x;}
-    public float getRecoilY() {return cameraRecoil.y;}
+    public float getRecoilX()
+    {
+        return cameraRecoil.x;
+    }
+    public float getRecoilY()
+    {
+        return cameraRecoil.y;
+    }
+    public float getRecoilMult(ItemStack stack)
+    {
+        NbtCompound nbtCompound = stack.getOrCreateNbt();
+        NbtList list = nbtCompound.getList("Items", NbtElement.COMPOUND_TYPE);
+
+        float recoilMult = 1.0f;
+
+        List<NbtCompound> l = list.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).toList();
+
+        for (NbtCompound n : l)
+        {
+            recoilMult *= ((AttachmentItem) ItemStack.fromNbt(n).getItem()).getRecoilMult();
+        }
+
+        return recoilMult;
+    }
     public Vector3f getAimVMRecoilMult() {return this.viewModelRecoilMult;}
     public Vector4f getViewModelRecoil() {return this.viewModelRecoil;}
     public int getViewModelRecoilDuration() {return this.viewModelRecoilDuration;}
@@ -348,4 +389,10 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {return this.animationCache;}
     //==========================//
+
+    public enum fireType
+    {
+        AUTO,
+        SEMI
+    }
 }
