@@ -24,16 +24,4 @@ public abstract class MinecraftClientMixin
     {
         return original && !(this.player.getMainHandStack().getItem() instanceof GunItem);
     }
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void tick(CallbackInfo ci)
-    {
-        RecoilHandler.getInstance().tick();
-    }
-
-    @Inject(method = "render", at = @At("HEAD"))
-    private void render(boolean tick, CallbackInfo ci)
-    {
-        RecoilHandler.getInstance().render((MinecraftClient)(Object)this);
-    }
 }

@@ -26,7 +26,7 @@ public class ModNetworking
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-            if (player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize() && !((IFPlayerWithGun) player).isReloading())
+            if (player.getMainHandStack().getItem() instanceof GunItem && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize() && !((IFPlayerWithGun) player).isReloading())
             {
                 ((IFPlayerWithGun) player).startReload();
 

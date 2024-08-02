@@ -64,10 +64,10 @@ public class RecoilHandler
 
         if (player == null) return;
 
-        float f = Easings.easeOutCubic(MathHelper.lerp(client.getTickDelta(), (float) prevCameraRecoilTick, (float) cameraRecoilTick)/3);
+        float f = MathHelper.lerp(client.getTickDelta(), (float) prevCameraRecoilTick, (float) cameraRecoilTick);
 
-        float actualRecoilX = cameraRecoilX * f;
-        float actualRecoilY = cameraRecoilY * f;
+        float actualRecoilX = cameraRecoilX * f * client.getLastFrameDuration();
+        float actualRecoilY = cameraRecoilY * f * client.getLastFrameDuration();
 
         if (cameraRecoilTick > 0)
         {
