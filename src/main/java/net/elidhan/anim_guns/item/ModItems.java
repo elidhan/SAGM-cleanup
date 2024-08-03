@@ -79,23 +79,30 @@ public class ModItems
     public static final Item SIGHT_HOLO = registerItem("sight_holo", new AttachmentItem(new FabricItemSettings().maxCount(1),
             "sight_holo",
             1,
-            0.85f,
+            0.8f,
             AttachmentItem.AttachType.SIGHT,
             false
     ));
     public static final Item SIGHT_8XSCOPE = registerItem("sight_8x_scope", new AttachmentItem(new FabricItemSettings().maxCount(1),
             "sight_8x_scope",
-            0.75f,
+            0.8f,
             1f,
             AttachmentItem.AttachType.SCOPE,
             false
     ));
     public static final Item MUZZLE_MBRAKE = registerItem("muzzle_mbrake", new AttachmentItem(new FabricItemSettings().maxCount(1),
             "muzzle_mbrake",
-            0.85f,
-            0.85f,
+            0.8f,
+            0.8f,
             AttachmentItem.AttachType.MUZZLE,
             false
+    ));
+    public static final Item MUZZLE_SILENCER = registerItem("muzzle_silencer", new AttachmentItem(new FabricItemSettings().maxCount(1),
+            "muzzle_silencer",
+            1f,
+            1f,
+            AttachmentItem.AttachType.MUZZLE,
+            true
     ));
 
     public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
@@ -103,9 +110,9 @@ public class ModItems
             10,
             10,
             8,
-            40,
+            45,
             new Vector2f(0.25f,0.25f),
-            new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector2f(0.25f,2f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
             8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -118,8 +125,8 @@ public class ModItems
             5,
             7,
             40,
-            new Vector2f(1.25f,1.25f),
-            new Vector2f(1.25f,3.75f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector2f(1f,1f),
+            new Vector2f(0.625f,3f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
             8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
@@ -133,7 +140,7 @@ public class ModItems
             30,
             50,
             new Vector2f(0.875f,0.875f), //Spread
-            new Vector2f(0.625f,1.25f), //Camera Recoil
+            new Vector2f(0.25f,1.25f), //Camera Recoil
             new Vector4f(0.375f,1.5f, 1.25f, -0.0625f), //Viewmodel Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             8, //Viewmodel recoil duration
@@ -147,7 +154,7 @@ public class ModItems
             30,
             50,
             new Vector2f(1.5f,1.5f),
-            new Vector2f(0.875f,1.75f),
+            new Vector2f(0.25f,1.25f),
             new Vector4f(0.75f,2f,1f,0.0625f),
             new Vector3f( 0f, 0.375f, 0.75f),
             8,
@@ -161,7 +168,7 @@ public class ModItems
             20,
             50,
             new Vector2f(0.5f,0.5f),
-            new Vector2f(0.625f,1.75f),
+            new Vector2f(0.325f,1.75f),
             new Vector4f(0.75f, 2.5f, 1.25f, 0.125f),
             new Vector3f(0f,0.0625f,0.5f),
             8,
@@ -176,7 +183,7 @@ public class ModItems
             50,
             new int[] {20,30},
             new Vector2f(0.125f,0.125f), //Spread
-            new Vector2f(1.5f,4f),
+            new Vector2f(0.75f,3f),
             new Vector4f(1.5f,7.5f,3f,0.5f),
             new Vector3f(0f,0.125f,0.75f),
             8,

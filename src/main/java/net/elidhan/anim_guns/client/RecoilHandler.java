@@ -66,8 +66,8 @@ public class RecoilHandler
 
         float f = MathHelper.lerp(client.getTickDelta(), (float) prevCameraRecoilTick, (float) cameraRecoilTick);
 
-        float actualRecoilX = cameraRecoilX * f * client.getLastFrameDuration();
-        float actualRecoilY = cameraRecoilY * f * client.getLastFrameDuration();
+        float actualRecoilX = cameraRecoilX * f * client.getLastFrameDuration() * 0.625f;
+        float actualRecoilY = cameraRecoilY * f * client.getLastFrameDuration() * 0.625f;
 
         if (cameraRecoilTick > 0)
         {

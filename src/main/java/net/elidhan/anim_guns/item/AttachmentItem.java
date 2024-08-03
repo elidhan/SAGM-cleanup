@@ -38,6 +38,11 @@ public class AttachmentItem extends Item implements GeoAnimatable
         return this.spreadMult;
     }
 
+    public boolean silencesGun()
+    {
+        return silencesGun;
+    }
+
     public AttachType getAttachType()
     {
         return this.attachType;

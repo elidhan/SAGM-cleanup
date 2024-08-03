@@ -18,12 +18,4 @@ public class AttachmentRenderType extends RenderLayer
     {
         return RenderLayer.of(AnimatedGuns.MOD_ID+":reticle", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, false, MultiPhaseParameters.builder().program(RenderPhase.EYES_PROGRAM).texture(new RenderPhase.Texture(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+attachmentID+".png"), false, false)).transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY).build(false));
     }
-
-    public static RenderLayer getAttachment(String attachmentID)
-    {
-        if (attachmentID.equals("default")) return RenderLayer.getEntityTranslucent(new Identifier(AnimatedGuns.MOD_ID + ":textures/misc/sight_holo.png"));
-
-        MultiPhaseParameters multiPhaseParameters = MultiPhaseParameters.builder().program(RenderPhase.ENTITY_TRANSLUCENT_PROGRAM).texture(new RenderPhase.Texture(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+attachmentID+".png"), false, false)).lightmap(ENABLE_LIGHTMAP).transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY).build(false);
-        return RenderLayer.of(AnimatedGuns.MOD_ID+":"+attachmentID, VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, false, multiPhaseParameters);
-    }
 }

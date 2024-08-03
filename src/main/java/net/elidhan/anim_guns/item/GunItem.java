@@ -157,6 +157,20 @@ public class GunItem extends Item implements FabricItem, GeoItem
         return currentItemStack.getOrCreateNbt().getString("muzzleID");
     }
 
+    public boolean isSilenced(ItemStack gun)
+    {
+        NbtCompound nbtCompound = gun.getOrCreateNbt();
+        NbtList nbtList = nbtCompound.getList("Items", NbtElement.COMPOUND_TYPE);
+
+        Optional<NbtCompound> optional = nbtList.stream().filter(NbtCompound.class::isInstance).map(NbtCompound.class::cast).filter(item ->
+                (ItemStack.fromNbt(item).getItem() instanceof AttachmentItem)
+                && ((((AttachmentItem)ItemStack.fromNbt(item).getItem()).silencesGun()))).findFirst();
+
+        return optional.isPresent();
+    }
+
+
+
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
