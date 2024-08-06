@@ -133,6 +133,20 @@ public class ModItems
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
     ));
 
+    public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "dev_shotgun",
+            35,
+            5,
+            2,
+            50,
+            new Vector2f(5f,5f), //Spread
+            new Vector2f(0.75f,6.25f), //Camera Recoil
+            new Vector4f(0,6.75f,3.75f,0.125f),
+            new Vector3f(0f,0.75f,0.375f),
+            8,
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
+    ));
+
     public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle",
             6,
@@ -141,7 +155,7 @@ public class ModItems
             50,
             new Vector2f(0.875f,0.875f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
-            new Vector4f(0.375f,1.5f, 1.25f, -0.0625f), //Viewmodel Recoil
+            new Vector4f(0.375f,1.5f, 1.25f,  0.0625f), //Viewmodel Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             8, //Viewmodel recoil duration
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}

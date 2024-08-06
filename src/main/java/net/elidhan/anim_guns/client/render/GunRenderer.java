@@ -31,6 +31,7 @@ import net.minecraft.util.math.RotationAxis;
 public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer<GunItem>
 {
     private VertexConsumerProvider bufferSource;
+    private ModelTransformationMode transformType;
 
     public GunRenderer(Identifier identifier)
     {
@@ -44,9 +45,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     public void render(ItemStack stack, ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
     {
         this.bufferSource = bufferSource;
-
-        if (transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
-            return;
+        this.transformType = transformType;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -89,14 +88,15 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float f = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
         alpha = getCurrentItemStack().getOrCreateNbt().getBoolean("isScoped") && ((IFPlayerWithGun)player).isAiming() ? MathHelper.clamp(1-(f*4), 0 ,1) : 1;
 
-        poseStack.push();
-
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
         {
             case "gunbody", "magazine2" ->
             {
+                poseStack.push();
                 aimTransforms(poseStack, f, posX, posY);
+                poseStack.pop();
+
                 recoilTransforms(
                         poseStack,
                         RecoilHandler.getInstance().getVMRotSide(delta, f),
@@ -127,14 +127,17 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 {
                     sightAdjust = getGeoModel().getBone("ads_node").orElse(null).getPivotY() - bone.getPivotY() - attachmentModel.getBone("ads_node").orElse(null).getPivotY();
 
+                    poseStack.push();
+
                     poseStack.translate(bone.getPivotX()/16f, bone.getPivotY()/16f, bone.getPivotZ()/16f);
-
                     super.renderCubesOfBone(poseStack, attachmentBone, buffer1, packedLight, packedOverlay, red, green, blue, alpha);
-
                     if (reticle != null)
                     {
+                        poseStack.push();
                         super.renderCubesOfBone(poseStack, reticle, this.bufferSource.getBuffer(AttachmentRenderType.getReticle(sightID)), packedLight, packedOverlay, red, green, blue, alpha);
+                        poseStack.pop();
                     }
+                    poseStack.pop();
                 }
             }
             case "muzzlePos" ->
@@ -171,6 +174,9 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             case "leftArm", "rightArm" ->
             {
                 bone.setHidden(true);
+                if (this.transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) break;
+
+                poseStack.push();
 
                 PlayerEntityRenderer playerEntityRenderer = (PlayerEntityRenderer) client.getEntityRenderDispatcher().getRenderer(player);
                 PlayerEntityModel<AbstractClientPlayerEntity> playerEntityModel = playerEntityRenderer.getModel();
@@ -197,11 +203,11 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 playerSleeve.setPivot(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
                 playerSleeve.setAngles(0, 0, 0);
                 playerSleeve.render(poseStack, sleeve, packedLight, packedOverlay, 1, 1, 1, alpha);
+                poseStack.pop();
             }
         }
 
         super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-        poseStack.pop();
     }
 
     //=====Transforms=====//

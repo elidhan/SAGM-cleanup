@@ -100,7 +100,7 @@ public class InGameHudMixin
         {
             if (aimingScopedGun)
             {
-                this.simple_Animated_Guns$renderGunScopeOverlay(this.gunScopeScale);
+                //this.simple_Animated_Guns$renderGunScopeOverlay(this.gunScopeScale);
             }
             else
             {

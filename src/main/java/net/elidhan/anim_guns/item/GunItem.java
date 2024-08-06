@@ -4,6 +4,7 @@ import mod.azure.azurelib.animatable.GeoItem;
 import mod.azure.azurelib.animatable.SingletonGeoAnimatable;
 import mod.azure.azurelib.animatable.client.RenderProvider;
 import mod.azure.azurelib.cache.AnimatableIdCache;
+import mod.azure.azurelib.constant.DataTickets;
 import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
 import mod.azure.azurelib.core.animation.*;
 import mod.azure.azurelib.core.object.PlayState;
@@ -19,6 +20,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -140,19 +142,19 @@ public class GunItem extends Item implements FabricItem, GeoItem
     //=====Attachments Stuff=====//
     public String getSightID(ItemStack currentItemStack)
     {
-        if (currentItemStack.getOrCreateNbt().getString("sightID").equals("")) currentItemStack.getOrCreateNbt().putString("sightID", "default");
+        if (currentItemStack.getOrCreateNbt().getString("sightID").isEmpty()) currentItemStack.getOrCreateNbt().putString("sightID", "default");
 
         return currentItemStack.getOrCreateNbt().getString("sightID");
     }
     public String getGripID(ItemStack currentItemStack)
     {
-        if (currentItemStack.getOrCreateNbt().getString("gripID").equals("")) currentItemStack.getOrCreateNbt().putString("gripID", "default");
+        if (currentItemStack.getOrCreateNbt().getString("gripID").isEmpty()) currentItemStack.getOrCreateNbt().putString("gripID", "default");
 
         return currentItemStack.getOrCreateNbt().getString("gripID");
     }
     public String getMuzzleID(ItemStack currentItemStack)
     {
-        if (currentItemStack.getOrCreateNbt().getString("muzzleID").equals("")) currentItemStack.getOrCreateNbt().putString("muzzleID", "default");
+        if (currentItemStack.getOrCreateNbt().getString("muzzleID").isEmpty()) currentItemStack.getOrCreateNbt().putString("muzzleID", "default");
 
         return currentItemStack.getOrCreateNbt().getString("muzzleID");
     }
@@ -393,8 +395,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
     protected PlayState predicate(AnimationState<GunItem> event)
     {
-        if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
-            event.getController().tryTriggerAnimation("idle");
+        //if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
+        //    event.getController().tryTriggerAnimation("idle");
+
+        if (event.getData(DataTickets.ITEM_RENDER_PERSPECTIVE) != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
+        {
+            //event.getController().tryTriggerAnimation("idle");
+            return PlayState.STOP;
+        }
 
         return PlayState.CONTINUE;
     }

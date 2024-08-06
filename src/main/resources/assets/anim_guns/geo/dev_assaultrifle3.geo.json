@@ -967,7 +967,7 @@
 				{
 					"name": "ads_node",
 					"parent": "gunbody",
-					"pivot": [0, 4.0578, 6.79454]
+					"pivot": [0, 4.0578, 8]
 				},
 				{
 					"name": "magazine",

@@ -78,19 +78,23 @@ public class ModNetworking
 
             client.execute(() ->
             {
-                GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
-
-                AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
-
-                animationController.setTransitionLength(animation.equals("firing") ? 0 : 1);
-
-                if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
                 {
-                    animationController.forceAnimationReset();
-                }
-                else
-                {
-                    animationController.tryTriggerAnimation(animation);
+                    GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
+
+                    AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
+
+                    animationController.setTransitionLength(animation.equals("firing") ? 0 : 1);
+
+                    if (!animationController.isPlayingTriggeredAnimation())
+                    {
+                        animationController.tryTriggerAnimation(animation);
+                        return;
+                    }
+
+                    if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
+                    {
+                        animationController.forceAnimationReset();
+                    }
                 }
             });
         }));
