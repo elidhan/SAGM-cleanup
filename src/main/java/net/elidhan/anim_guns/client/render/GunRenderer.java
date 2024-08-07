@@ -124,6 +124,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             case "gunbody", "magazine2" ->
             {
                 if (this.transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) break;
+
+                poseStack.push();
                 recoilTransforms(
                         poseStack,
                         RecoilHandler.getInstance().getVMRotSide(delta, f),
@@ -131,6 +133,9 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                         RecoilHandler.getInstance().getVMMoveUp(delta, f),
                         RecoilHandler.getInstance().getVMMoveBack(delta, f));
 
+                super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+                poseStack.pop();
+                return;
             }
             case "sight_default" -> bone.setHidden(!sightID.equals("default"));
             case "sight_default_down" -> bone.setHidden(sightID.equals("default"));
@@ -160,7 +165,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                     poseStack.push();
 
                     poseStack.translate(bone.getPivotX()/16f, bone.getPivotY()/16f, bone.getPivotZ()/16f);
-                    if (f < 0.625f || scopeBack == null)
+                    if (f < 0.625f || scopeBack == null || this.transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
                     {
                         super.renderCubesOfBone(poseStack, attachmentBone, buffer1, packedLight, packedOverlay, red, green, blue, alpha);
                     }
