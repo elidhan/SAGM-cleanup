@@ -1394,6 +1394,12 @@
 				},
 				{
 					"name": "muzzleflash",
+					"parent": "gun",
+					"pivot": [0, 1.5875, -4.1125]
+				},
+				{
+					"name": "flash",
+					"parent": "muzzleflash",
 					"pivot": [0, 1.5875, -4.1125],
 					"cubes": [
 						{

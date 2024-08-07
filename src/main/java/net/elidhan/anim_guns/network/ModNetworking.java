@@ -79,13 +79,13 @@ public class ModNetworking
             client.execute(() ->
             {
                 {
-                    GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
+                    GunItem animatable = (GunItem)stack.getItem();
 
-                    AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
+                    AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get(animatable.getID()+"_controller");
 
                     animationController.setTransitionLength(animation.equals("firing") ? 0 : 1);
 
-                    if (!animationController.isPlayingTriggeredAnimation())
+                    if (animationController.getCurrentAnimation() == null)
                     {
                         animationController.tryTriggerAnimation(animation);
                         return;
@@ -94,6 +94,10 @@ public class ModNetworking
                     if(animationController.getCurrentAnimation().animation().name().equals(animation) && !animation.equals("idle"))
                     {
                         animationController.forceAnimationReset();
+                    }
+                    else
+                    {
+                        animationController.tryTriggerAnimation(animation);
                     }
                 }
             });
@@ -105,9 +109,9 @@ public class ModNetworking
 
             client.execute(() ->
             {
-                GeoAnimatable animatable = (GeoAnimatable)stack.getItem();
+                GunItem animatable = (GunItem)stack.getItem();
 
-                AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("controller");
+                AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get(animatable.getID()+"_controller");
 
                 animationController.stop();
             });

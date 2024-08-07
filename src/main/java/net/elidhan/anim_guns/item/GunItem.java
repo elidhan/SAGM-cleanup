@@ -4,7 +4,6 @@ import mod.azure.azurelib.animatable.GeoItem;
 import mod.azure.azurelib.animatable.SingletonGeoAnimatable;
 import mod.azure.azurelib.animatable.client.RenderProvider;
 import mod.azure.azurelib.cache.AnimatableIdCache;
-import mod.azure.azurelib.constant.DataTickets;
 import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
 import mod.azure.azurelib.core.animation.*;
 import mod.azure.azurelib.core.object.PlayState;
@@ -20,7 +19,6 @@ import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -170,8 +168,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
         return optional.isPresent();
     }
-
-
 
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
@@ -393,16 +389,10 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
     @Override
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
-    protected PlayState predicate(AnimationState<GunItem> event)
+    protected PlayState predicate(AnimationState<GunItem> animationState)
     {
-        //if (event.getController().getCurrentAnimation() == null || event.getController().getAnimationState() == AnimationController.State.STOPPED)
-        //    event.getController().tryTriggerAnimation("idle");
-
-        if (event.getData(DataTickets.ITEM_RENDER_PERSPECTIVE) != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
-        {
-            //event.getController().tryTriggerAnimation("idle");
-            return PlayState.STOP;
-        }
+        if(animationState.getController().getCurrentAnimation() == null || animationState.getController().getAnimationState() == AnimationController.State.STOPPED)
+            animationState.getController().tryTriggerAnimation("idle");
 
         return PlayState.CONTINUE;
     }

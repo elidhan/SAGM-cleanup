@@ -1263,7 +1263,13 @@
 				},
 				{
 					"name": "muzzleflash",
-					"pivot": [0.00001, 0.7503, -21.125],
+					"parent": "gun",
+					"pivot": [0.00001, 0.7503, -21.125]
+				},
+				{
+					"name": "flash",
+					"parent": "muzzleflash",
+					"pivot": [0, 0, 0],
 					"cubes": [
 						{
 							"origin": [-0.00624, 0.74405, -21.125],

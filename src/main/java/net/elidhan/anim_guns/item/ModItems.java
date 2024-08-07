@@ -152,7 +152,7 @@ public class ModItems
             6,
             2,
             30,
-            50,
+            45,
             new Vector2f(0.875f,0.875f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
             new Vector4f(0.375f,1.5f, 1.25f,  0.0625f), //Viewmodel Recoil
