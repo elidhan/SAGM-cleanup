@@ -41,7 +41,7 @@ public class RecoilHandler
         int leftOrRight = random.nextBoolean() ? 1 : -1;
         cameraRecoilX = recoilX * leftOrRight;
         cameraRecoilY = recoilY;
-        cameraRecoilTick = 3;
+        cameraRecoilTick = 2;
 
         this.viewModelRecoil = viewModelRecoil;
         this.viewModelRecoilMult = viewModelRecoilMult;
