@@ -1,6 +1,6 @@
 package net.elidhan.anim_guns.mixin.client;
 
-import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;
@@ -16,6 +16,7 @@ import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,26 +29,43 @@ public class GameRendererMixin
     @Final
     MinecraftClient client;
 
-    @Inject(method = "renderHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;bobView(Lnet/minecraft/client/util/math/MatrixStack;F)V", shift = At.Shift.BEFORE))
-    private void bobViewGun(MatrixStack matrices, Camera camera, float tickDelta, CallbackInfo ci)
+    @Unique
+    private boolean isRenderHand = false;
+
+    @Inject(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;bobView(Lnet/minecraft/client/util/math/MatrixStack;F)V", shift = At.Shift.BEFORE))
+    public void isRenderWorld(float tickDelta, long limitTime, MatrixStack matrices, CallbackInfo ci)
     {
-        if (this.client.player instanceof IFPlayerWithGun playerWIthGun
-                && ((ClientPlayerEntity)playerWIthGun).getMainHandStack().getItem() instanceof GunItem
-                && !playerWIthGun.isAiming())
+        isRenderHand = false;
+    }
+    @Inject(method = "renderHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;bobView(Lnet/minecraft/client/util/math/MatrixStack;F)V", shift =  At.Shift.BEFORE))
+    public void isRenderHand(MatrixStack matrices, Camera camera, float tickDelta, CallbackInfo ci)
+    {
+        isRenderHand = true;
+    }
+
+    @Inject(method = "bobView", at = @At(value = "HEAD"), cancellable = true)
+    private void bobIfGun(MatrixStack matrices, float tickDelta, CallbackInfo ci)
+    {
+        if (!isRenderHand) return;
+
+        if (this.client.player instanceof IFPlayerWithGun playerWIthGun && playerWIthGun.isAiming())
+        {
+            ci.cancel();
+            return;
+        }
+
+        if (this.client.player instanceof IFPlayerWithGun playerWIthGun && ((ClientPlayerEntity)playerWIthGun).getMainHandStack().getItem() instanceof GunItem)
         {
             gunBobView(matrices, tickDelta);
+            ci.cancel();
         }
     }
 
-    @SuppressWarnings("unused")
-    @WrapWithCondition(method = "renderHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;bobView(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
-    private boolean vanillaBobView(GameRenderer instance, MatrixStack matrices, float tickDelta)
+    @Unique
+    private void gunBobView(MatrixStack matrices, float tickDelta)
     {
-        return !(this.client.player.getMainHandStack().getItem() instanceof GunItem);
-    }
-
-    private void gunBobView(MatrixStack matrices, float tickDelta) {
-        if (!(this.client.getCameraEntity() instanceof PlayerEntity playerEntity)) {
+        if (!(this.client.getCameraEntity() instanceof PlayerEntity playerEntity))
+        {
             return;
         }
         float f = (playerEntity.horizontalSpeed - playerEntity.prevHorizontalSpeed);

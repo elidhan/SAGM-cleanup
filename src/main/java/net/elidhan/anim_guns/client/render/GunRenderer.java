@@ -44,10 +44,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     private ItemStack gunStack;
 
     @Override
-    public void actuallyRender(MatrixStack poseStack, GunItem animatable, BakedGeoModel model, RenderLayer renderType, VertexConsumerProvider bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
-    {
-        super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-    }
+    protected void renderInGui(ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
+    {}
 
     @Override
     public void render(ItemStack stack, ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
@@ -56,12 +54,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         this.transformType = transformType;
         this.gunStack = stack;
 
-        if (transformType == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
-        {
-            super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
-        }
-        else if (transformType != ModelTransformationMode.FIRST_PERSON_LEFT_HAND)
-            super.render(new ItemStack(stack.getItem()), transformType, poseStack, bufferSource, packedLight, packedOverlay);
+        super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
 
     @Override
@@ -155,7 +148,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 GeoBone reticle = attachmentModel.getBone("reticle").orElse(null);
                 GeoBone scopeBack = attachmentModel.getBone("scopeBack").orElse(null);
 
-                buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntitySolid(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+sightID+".png")));
+                buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+sightID+".png")));
 
                 if(attachmentBone != null)
                 {

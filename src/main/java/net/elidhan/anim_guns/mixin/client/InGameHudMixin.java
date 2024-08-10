@@ -35,7 +35,7 @@ public class InGameHudMixin
 
     @Unique
     public void simple_Animated_Guns$renderGunScopeOverlay(float scale) {
-        float progress = MathHelper.clamp(scale*1.3333f, 0, 1);
+        float progress = MathHelper.clamp(scale, 0, 1);
         float f;
         scale += RecoilHandler.getInstance().getVMMoveBack(client.getTickDelta(), 0) / 16f;
         RenderSystem.disableDepthTest();
@@ -90,7 +90,7 @@ public class InGameHudMixin
         this.scaledHeight = this.client.getWindow().getScaledHeight();
 
         float f = this.client.getLastFrameDuration();
-        this.gunScopeScale = MathHelper.lerp(0.5f * f, this.gunScopeScale, 0.75f);
+        this.gunScopeScale = MathHelper.lerp(f, this.gunScopeScale, 0.75f);
         boolean aimingScopedGun = this.client.player != null
                 && this.client.player.getMainHandStack().getItem() instanceof GunItem
                 && this.client.player.getMainHandStack().getOrCreateNbt().getBoolean("isScoped")
