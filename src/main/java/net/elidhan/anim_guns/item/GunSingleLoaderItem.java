@@ -26,6 +26,7 @@ public class GunSingleLoaderItem extends GunItem
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
         AnimationController<GunItem> controller = new AnimationController<>(this, this.getID()+"_controller", 1, super::predicate)
+                .receiveTriggeredAnimations()
                 .triggerableAnim("idle", GunAnimations.IDLE)
                 .triggerableAnim("firing", GunAnimations.FIRING)
                 .triggerableAnim("reload_0", GunAnimations.RELOAD_0)

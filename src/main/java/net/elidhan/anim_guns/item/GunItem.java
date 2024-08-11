@@ -4,12 +4,14 @@ import mod.azure.azurelib.animatable.GeoItem;
 import mod.azure.azurelib.animatable.SingletonGeoAnimatable;
 import mod.azure.azurelib.animatable.client.RenderProvider;
 import mod.azure.azurelib.cache.AnimatableIdCache;
+import mod.azure.azurelib.constant.DataTickets;
 import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
 import mod.azure.azurelib.core.animation.*;
 import mod.azure.azurelib.core.object.PlayState;
 import mod.azure.azurelib.util.AzureLibUtil;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
+import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -19,6 +21,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -389,10 +392,25 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
     @Override
     public Supplier<Object> getRenderProvider() {return this.renderProvider;}
+
+    @Override
+    public boolean isPerspectiveAware()
+    {
+        return true;
+    }
+
     protected PlayState predicate(AnimationState<GunItem> animationState)
     {
-        if(animationState.getController().getCurrentAnimation() == null || animationState.getController().getAnimationState() == AnimationController.State.STOPPED)
-            animationState.getController().tryTriggerAnimation("idle");
+        if (animationState.getData(DataTickets.ITEM_RENDER_PERSPECTIVE) != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
+        {
+            if (animationState.getController() != null && animationState.getController().getCurrentAnimation() != null && !animationState.getController().getCurrentAnimation().animation().name().equals("idle"))
+                animationState.getController().tryTriggerAnimation("idle");
+        }
+        else
+        {
+            if (animationState.getController().getAnimationState() == AnimationController.State.STOPPED)
+                animationState.getController().tryTriggerAnimation("idle");
+        }
 
         return PlayState.CONTINUE;
     }
