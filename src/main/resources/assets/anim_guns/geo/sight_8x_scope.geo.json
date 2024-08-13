@@ -765,7 +765,7 @@
 				{
 					"name": "ads_node",
 					"parent": "sight",
-					"pivot": [0, 1.3687, 3.76875]
+					"pivot": [0, 1.3687, 5.00625]
 				},
 				{
 					"name": "reticle",

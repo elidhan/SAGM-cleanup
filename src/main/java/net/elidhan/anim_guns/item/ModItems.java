@@ -168,7 +168,7 @@ public class ModItems
             30,
             50,
             new Vector2f(1.5f,1.5f),
-            new Vector2f(0.25f,1.25f),
+            new Vector2f(0.375f,2.5f),
             new Vector4f(0.75f,2f,1f,0.0625f),
             new Vector3f( 0f, 0.375f, 0.75f),
             8,
@@ -182,7 +182,7 @@ public class ModItems
             20,
             50,
             new Vector2f(0.5f,0.5f),
-            new Vector2f(0.325f,1.75f),
+            new Vector2f(0.375f,2f),
             new Vector4f(0.75f, 2.5f, 1.25f, 0.125f),
             new Vector3f(0f,0.0625f,0.5f),
             8,
@@ -195,7 +195,7 @@ public class ModItems
             20,
             5,
             50,
-            new int[] {20,30},
+            new int[] {20,30}, //Reload stages
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),
             new Vector4f(1.5f,7.5f,5f,0.825f),

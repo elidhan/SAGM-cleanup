@@ -404,7 +404,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         if (animationState.getData(DataTickets.ITEM_RENDER_PERSPECTIVE) != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
         {
             if (animationState.getController() != null && animationState.getController().getCurrentAnimation() != null && !animationState.getController().getCurrentAnimation().animation().name().equals("idle"))
-                animationState.getController().tryTriggerAnimation("idle");
+                animationState.getController().setAnimation(GunAnimations.IDLE);
         }
         else
         {

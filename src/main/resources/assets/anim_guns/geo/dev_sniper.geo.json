@@ -1521,7 +1521,7 @@
 				{
 					"name": "sightPos",
 					"parent": "gunbody",
-					"pivot": [0.00258, 2.82127, -1.64989]
+					"pivot": [0, 2.82127, -1.64989]
 				},
 				{
 					"name": "muzzlePos",

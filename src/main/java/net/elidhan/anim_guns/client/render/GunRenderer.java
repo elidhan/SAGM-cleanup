@@ -76,6 +76,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         BakedModel model = client.getItemRenderer().getModel(this.gunStack, player.getWorld(), player, 0);
         float posX = model.getTransformation().firstPersonRightHand.translation.x;
         float posY = model.getTransformation().firstPersonRightHand.translation.y;
+        float posZ = model.getTransformation().firstPersonRightHand.translation.z;
 
         /*
         DistanceX from 0 to center of in-game screen = -8.9675
@@ -153,7 +154,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 if(attachmentBone != null)
                 {
                     sightAdjust = getGeoModel().getBone("ads_node").orElse(null).getPivotY() - bone.getPivotY() - attachmentModel.getBone("ads_node").orElse(null).getPivotY();
-                    sightAdjustForward = getGeoModel().getBone("ads_node").orElse(null).getPivotZ() - (bone.getPivotZ() + attachmentModel.getBone("ads_node").orElse(null).getPivotZ());
+                    sightAdjustForward = (bone.getPivotZ() + attachmentModel.getBone("ads_node").orElse(null).getPivotZ());
+                    sightAdjustForward = Math.abs(sightAdjustForward - getGeoModel().getBone("ads_node").orElse(null).getPivotZ()) - posZ*16;
 
                     poseStack.push();
 
@@ -263,7 +265,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
         float centeredX = ((-8.96325f)-(posX*16))/16f;
         float centeredY = 0.50875f - posY - (adsAdjustHeight/16f) + sightAdjust/16f;
-        float adjustZ = 10.6f/16f - adsAdjustForward/16f + sightAdjustForward/16f;
+        float adjustZ =  (10.6f/16f - (adsAdjustForward/16f)) + sightAdjustForward/16f;
 
         poseStack.translate(centeredX * f, centeredY * f, adjustZ * f);
     }
