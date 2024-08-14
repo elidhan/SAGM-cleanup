@@ -1,5 +1,7 @@
 package net.elidhan.anim_guns;
 
+import mod.azure.azurelib.core.math.Variable;
+import mod.azure.azurelib.core.molang.MolangParser;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.item.ModItems;
 import net.elidhan.anim_guns.network.ModNetworking;
@@ -26,6 +28,11 @@ public class AnimatedGuns implements ModInitializer
 	public void onInitialize()
 	{
 		LOGGER.info("Init S.A.G.M");
+
+		MolangParser.INSTANCE.register(new Variable("query.x_pos_mult", 1));
+		MolangParser.INSTANCE.register(new Variable("query.x_rot_mult", 1));
+		MolangParser.INSTANCE.register(new Variable("query.y_rot_mult", 1));
+		MolangParser.INSTANCE.register(new Variable("query.z_pos_mult", 1));
 
 		//Reg
 		ModItems.registerModItems();

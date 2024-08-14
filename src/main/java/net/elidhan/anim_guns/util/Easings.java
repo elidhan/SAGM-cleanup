@@ -2,6 +2,8 @@ package net.elidhan.anim_guns.util;
 
 public class Easings
 {
+    //All equations are reversed because the input values go from 1 to 0 instead of 0 to 1
+
     //TODO: Make this shit
     public static float easeInOutSine(float input)
     {
@@ -25,10 +27,11 @@ public class Easings
 
     public static float easeOutBack(float input, float overShootMult)
     {
-        overShootMult = 0.625f;
         float f = overShootMult + 1;
-        return (float) (f * Math.pow(input, 3) - overShootMult * input);
-        //return (float)(f * Math.pow(input, 3) - overShootMult * (Math.pow(input, 2)));
+        //return (float) (f * Math.pow(input, 3) - overShootMult * input);
+        return (float)(f * Math.pow(input, 3) - overShootMult * Math.pow(input, 2));
+
+
         //return (float)(1f + f * Math.pow(input - 1f, 3f) + overShootMult * Math.pow(input - 1f, 2f));
     }
 }

@@ -143,7 +143,7 @@ public class ModItems
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector4f(0,12f,5.625f,0.625f),
             new Vector3f(0f,0.75f,0.375f),
-            8,
+            10,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
     ));
 
@@ -200,7 +200,7 @@ public class ModItems
             new Vector2f(0.75f,3f),
             new Vector4f(1.5f,7.5f,5f,0.825f),
             new Vector3f(0f,0.125f,0.5f),
-            8,
+            10,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE}
     ));
 

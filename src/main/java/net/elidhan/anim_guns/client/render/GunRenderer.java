@@ -9,7 +9,6 @@ import mod.azure.azurelib.util.RenderUtils;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
-import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -63,7 +62,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         MinecraftClient client = MinecraftClient.getInstance();
         float delta = client.getTickDelta();
         ClientPlayerEntity player = client.player;
-        VertexConsumer buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(getGeoModel().getTextureResource(animatable)));
+        VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
 
         //Attachments test
         String sightID = this.getAnimatable().getSightID(this.gunStack);
@@ -114,22 +113,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 if (this.transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) break;
                 aimTransforms(poseStack, f, posX, posY);
-            }
-            case "gunbody", "magazine2" ->
-            {
-                if (this.transformType != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) break;
-
-                poseStack.push();
-                recoilTransforms(
-                        poseStack,
-                        RecoilHandler.getInstance().getVMRotSide(delta, f),
-                        RecoilHandler.getInstance().getVMRotUp(delta, f),
-                        RecoilHandler.getInstance().getVMMoveUp(delta, f),
-                        RecoilHandler.getInstance().getVMMoveBack(delta, f));
-
-                super.renderRecursively(poseStack, animatable, bone, renderType, bufferSource, buffer1, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-                poseStack.pop();
-                return;
             }
             case "sight_default" -> bone.setHidden(!sightID.equals("default"));
             case "sight_default_down" -> bone.setHidden(sightID.equals("default"));
