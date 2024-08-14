@@ -11,7 +11,6 @@ import mod.azure.azurelib.core.object.PlayState;
 import mod.azure.azurelib.util.AzureLibUtil;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
-import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.client.render.GunRenderer;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
@@ -403,8 +402,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         if (animationState.getData(DataTickets.ITEM_RENDER_PERSPECTIVE) != ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
         {
-            if (animationState.getController() != null && animationState.getController().getCurrentAnimation() != null && !animationState.getController().getCurrentAnimation().animation().name().equals("idle"))
-                animationState.getController().setAnimation(GunAnimations.IDLE);
+            return PlayState.STOP;
         }
         else
         {

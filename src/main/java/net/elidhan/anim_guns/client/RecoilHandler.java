@@ -1,6 +1,8 @@
 package net.elidhan.anim_guns.client;
 
 import net.elidhan.anim_guns.util.Easings;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.math.MathHelper;
@@ -9,6 +11,7 @@ import org.joml.Vector4f;
 
 import java.util.Random;
 
+@Environment(EnvType.CLIENT)
 public class RecoilHandler
 {
     private static RecoilHandler recoilHandler;
@@ -22,6 +25,8 @@ public class RecoilHandler
     }
 
     private final Random random = new Random();
+
+    public int leftOrRight = 1;
 
     //Player camera recoil
     private float cameraRecoilX = 0;
@@ -38,7 +43,7 @@ public class RecoilHandler
 
     public void shot(float recoilX, float recoilY, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration)
     {
-        int leftOrRight = random.nextBoolean() ? 1 : -1;
+        leftOrRight = random.nextBoolean() ? 1 : -1;
         cameraRecoilX = recoilX * leftOrRight;
         cameraRecoilY = recoilY;
         cameraRecoilTick = 2;
@@ -47,6 +52,11 @@ public class RecoilHandler
         this.viewModelRecoilMult = viewModelRecoilMult;
         this.viewModelRecoil.x *= leftOrRight;
         this.viewModelRecoilTick = this.viewModelRecoilDuration = viewModelRecoilDuration;
+    }
+
+    public int getLeftOrRight()
+    {
+        return this.leftOrRight;
     }
 
     public void tick()

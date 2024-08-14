@@ -3,6 +3,7 @@ package net.elidhan.anim_guns.client.model;
 import mod.azure.azurelib.core.molang.MolangParser;
 import mod.azure.azurelib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
@@ -72,7 +73,7 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
 
                 float xPosMult = (1 + (viewModelRecoilMult.y() - 1) * aimProgress);
                 float xRotMult = (1 + (viewModelRecoilMult.y() - 1) * aimProgress);
-                float yRotMult = (1 + (viewModelRecoilMult.x() - 1) * aimProgress);
+                float yRotMult = (1 + (viewModelRecoilMult.x() - 1) * aimProgress) * RecoilHandler.getInstance().getLeftOrRight();
                 float zPosMult = (1 + (viewModelRecoilMult.z() - 1) * aimProgress);
 
                 parser.setValue("query.x_pos_mult", () -> xPosMult);

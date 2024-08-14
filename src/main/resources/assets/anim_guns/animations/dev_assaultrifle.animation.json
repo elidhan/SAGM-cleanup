@@ -29,7 +29,7 @@
 		},
 		"firing": {
 			"loop": true,
-			"animation_length": 1,
+			"animation_length": 0.5,
 			"bones": {
 				"muzzleflash": {
 					"scale": {
@@ -55,6 +55,26 @@
 					},
 					"position": {
 						"vector": [5.25, -9.03125, 5.42969]
+					}
+				},
+				"gunbody": {
+					"rotation": {
+						"0.0": {
+							"vector": ["-1.5 * query.x_rot_mult", 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, "0.0875 * query.x_rot_mult", "1 * query.z_pos_mult"]
+						},
+						"0.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutBack"
+						}
 					}
 				}
 			}
