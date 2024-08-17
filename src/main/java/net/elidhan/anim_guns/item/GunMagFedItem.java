@@ -9,8 +9,8 @@ import org.joml.Vector4f;
 
 public class GunMagFedItem extends GunItem
 {
-    public GunMagFedItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration, AttachmentItem.AttachType[] acceptedAttachmentTypes) {
-        super(settings, id, damage, fireRate, magSize, reloadTime, spread, cameraRecoil, viewModelRecoil, viewModelRecoilMult, viewModelRecoilDuration, acceptedAttachmentTypes);
+    public GunMagFedItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes) {
+        super(settings, id, damage, fireRate, magSize, reloadTime, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes);
     }
 
     @Override

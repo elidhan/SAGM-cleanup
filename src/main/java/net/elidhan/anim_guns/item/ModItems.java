@@ -113,9 +113,7 @@ public class ModItems
             45,
             new Vector2f(0.25f,0.25f),
             new Vector2f(0.25f,2f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
-            8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.MUZZLE}
     ));
 
@@ -127,23 +125,31 @@ public class ModItems
             40,
             new Vector2f(1f,1f),
             new Vector2f(0.625f,3f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
-            new Vector4f(1.5f,25f,1.5f,1.25f),
             new Vector3f(0.5f, 1f,1f),
-            8,// Should contain 5 values: rotate up-down, rotate side, move up-down, move backward, and duration
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
     ));
 
     public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
             "dev_shotgun",
-            35,
+            45,
             5,
             2,
             50,
             new Vector2f(5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
-            new Vector4f(0,12f,5.625f,0.625f),
             new Vector3f(0f,0.75f,0.375f),
-            10,
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
+    ));
+
+    public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "dev_shotgun2",
+            35,
+            12,
+            6,
+            20,
+            new Vector2f(5f,5f), //Spread
+            new Vector2f(0.75f,6.25f), //Camera Recoil
+            new Vector3f(0f,0.5f,0.125f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
     ));
 
@@ -155,9 +161,7 @@ public class ModItems
             45,
             new Vector2f(0.875f,0.875f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
-            new Vector4f(0.375f,1.5f, 1f,  0.125f), //Viewmodel Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
-            8, //Viewmodel recoil duration
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -169,9 +173,7 @@ public class ModItems
             50,
             new Vector2f(1.5f,1.5f),
             new Vector2f(0.375f,2.5f),
-            new Vector4f(0.75f,2f,1f,0.0625f),
             new Vector3f( 0f, 0.375f, 0.75f),
-            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -183,9 +185,7 @@ public class ModItems
             50,
             new Vector2f(0.5f,0.5f),
             new Vector2f(0.375f,2f),
-            new Vector4f(0.75f, 2.5f, 1.25f, 0.125f),
             new Vector3f(0f,0.0625f,0.5f),
-            8,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
     ));
 
@@ -198,9 +198,7 @@ public class ModItems
             new int[] {20,30}, //Reload stages
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),
-            new Vector4f(1.5f,7.5f,5f,0.825f),
             new Vector3f(0f,0.125f,0.5f),
-            10,
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE}
     ));
 

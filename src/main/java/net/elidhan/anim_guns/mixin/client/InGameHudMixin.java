@@ -37,7 +37,6 @@ public class InGameHudMixin
     public void simple_Animated_Guns$renderGunScopeOverlay(float scale) {
         float progress = MathHelper.clamp(scale, 0, 1);
         float f;
-        scale += RecoilHandler.getInstance().getVMMoveBack(client.getTickDelta(), 0) / 16f;
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.defaultBlendFunc();
@@ -100,7 +99,7 @@ public class InGameHudMixin
         {
             if (aimingScopedGun)
             {
-                //this.simple_Animated_Guns$renderGunScopeOverlay(this.gunScopeScale);
+
             }
             else
             {

@@ -60,16 +60,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
 
     private final Vector2f spread;
     private final Vector2f cameraRecoil;
-    private final Vector4f viewModelRecoil;
     private final Vector3f viewModelRecoilMult;
-    private final int viewModelRecoilDuration;
 
     private final AttachmentItem.AttachType[] acceptedAttachmentTypes;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector4f viewModelRecoil, Vector3f viewModelRecoilMult, int viewModelRecoilDuration, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -81,9 +79,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.reloadTime = reloadTime;
         this.spread = spread; //Spread array should contain exactly 2 values
         this.cameraRecoil = cameraRecoil; //Recoil array should have exactly 2 values
-        this.viewModelRecoil = viewModelRecoil; // Should contain 5 values: rotate up-down, rotate side, move up-down, move forward, and duration
+
         this.viewModelRecoilMult = viewModelRecoilMult; //Viewmodel recoil multiplier when aiming
-        this.viewModelRecoilDuration = viewModelRecoilDuration;
+
         this.acceptedAttachmentTypes = acceptedAttachmentTypes;
     }
 
@@ -361,8 +359,6 @@ public class GunItem extends Item implements FabricItem, GeoItem
         return recoilMult;
     }
     public Vector3f getAimVMRecoilMult() {return this.viewModelRecoilMult;}
-    public Vector4f getViewModelRecoil() {return this.viewModelRecoil;}
-    public int getViewModelRecoilDuration() {return this.viewModelRecoilDuration;}
     //=================//
 
     //=====Stuff=====//

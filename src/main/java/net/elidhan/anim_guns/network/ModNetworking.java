@@ -60,13 +60,12 @@ public class ModNetworking
         {
             client.execute(() ->
             {
-                GunItem gun = (GunItem)(client.player.getMainHandStack().getItem());
-                RecoilHandler.getInstance().shot(
-                        gun.getRecoilX() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
-                        gun.getRecoilY() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun)client.player).isAiming() ? 0.5f : 1f),
-                        gun.getViewModelRecoil(),
-                        gun.getAimVMRecoilMult(),
-                        gun.getViewModelRecoilDuration());
+                if (client.player != null && client.player.getMainHandStack().getItem() instanceof GunItem gun)
+                {
+                    RecoilHandler.getInstance().shot(
+                            gun.getRecoilX() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f),
+                            gun.getRecoilY() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f));
+                }
             });
         }));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->
