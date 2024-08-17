@@ -15,16 +15,6 @@ import org.joml.Vector3f;
 
 public class GunModel extends DefaultedItemGeoModel<GunItem>
 {
-    /**
-     * Create a new instance of this model class.<br>
-     * The asset path should be the truncated relative path from the base folder.<br>
-     * E.G.
-     * <pre>{@code
-     * 	new ResourceLocation("myMod", "armor/obsidian")
-     * }</pre>
-     *
-     * @param assetSubpath
-     */
     public GunModel(Identifier assetSubpath) {
         super(assetSubpath);
     }

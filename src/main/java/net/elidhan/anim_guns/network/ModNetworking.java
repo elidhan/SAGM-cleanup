@@ -57,17 +57,15 @@ public class ModNetworking
     public static void registerS2CPackets()
     {
         ClientPlayNetworking.registerGlobalReceiver(S2C_RECOIL, ((client, handler, buf, responseSender) ->
-        {
-            client.execute(() ->
-            {
-                if (client.player != null && client.player.getMainHandStack().getItem() instanceof GunItem gun)
+                client.execute(() ->
                 {
-                    RecoilHandler.getInstance().shot(
-                            gun.getRecoilX() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f),
-                            gun.getRecoilY() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f));
-                }
-            });
-        }));
+                    if (client.player != null && client.player.getMainHandStack().getItem() instanceof GunItem gun)
+                    {
+                        RecoilHandler.getInstance().shot(
+                                gun.getRecoilX() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f),
+                                gun.getRecoilY() * gun.getRecoilMult(client.player.getMainHandStack()) * (((IFPlayerWithGun) client.player).isAiming() ? 0.5f : 1f));
+                    }
+                })));
         ClientPlayNetworking.registerGlobalReceiver(S2C_PLAYANIM, ((client, handler, buf, responseSender) ->
         {
             long id = buf.readLong();

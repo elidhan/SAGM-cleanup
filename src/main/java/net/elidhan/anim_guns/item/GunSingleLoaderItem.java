@@ -5,7 +5,6 @@ import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.animations.GunAnimations;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 public class GunSingleLoaderItem extends GunItem
 {

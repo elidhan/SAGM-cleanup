@@ -29,11 +29,6 @@ public class AnimatedGuns implements ModInitializer
 	{
 		LOGGER.info("Init S.A.G.M");
 
-		MolangParser.INSTANCE.register(new Variable("query.x_pos_mult", 1));
-		MolangParser.INSTANCE.register(new Variable("query.x_rot_mult", 1));
-		MolangParser.INSTANCE.register(new Variable("query.y_rot_mult", 1));
-		MolangParser.INSTANCE.register(new Variable("query.z_pos_mult", 1));
-
 		//Reg
 		ModItems.registerModItems();
 		ModItems.registerModItemGroups();

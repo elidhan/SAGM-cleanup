@@ -141,12 +141,13 @@ public class ModItems
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
     ));
 
-    public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunMagFedItem(new Item.Settings().maxCount(1),
+    public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_shotgun2",
             35,
             12,
             6,
-            20,
+            50,
+            new int[] {14,25},
             new Vector2f(5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.5f,0.125f),

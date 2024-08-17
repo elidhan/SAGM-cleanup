@@ -1,6 +1,5 @@
 package net.elidhan.anim_guns.mixin.client;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;

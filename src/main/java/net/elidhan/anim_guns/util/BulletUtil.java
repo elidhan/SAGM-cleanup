@@ -9,20 +9,20 @@ import org.joml.Vector3f;
 
 public class BulletUtil
 {
-    public static Vec3d horiSpread(PlayerEntity player, double x_spread)
+    public static Vec3d horiSpread(PlayerEntity player, double spreadY)
     {
         Vec3d vec3d = player.getOppositeRotationVector(1.0f);
-        Quaternionf quaternion = (new Quaternionf()).setAngleAxis((x_spread * 0.017453292F), vec3d.x, vec3d.y, vec3d.z);
+        Quaternionf quaternion = (new Quaternionf()).setAngleAxis((spreadY * 0.017453292F), vec3d.x, vec3d.y, vec3d.z);
         Vec3d vec3d2 = player.getRotationVec(1.0f);
         Vector3f vec3f = vec3d2.toVector3f().rotate(quaternion);
         vec3f.rotate(quaternion);
 
         return new Vec3d(vec3f);
     }
-    public static Vec3d vertiSpread(PlayerEntity player, double y_spread)
+    public static Vec3d vertiSpread(PlayerEntity player, double spreadX)
     {
         Vec3d vec3d = getOppositeRotationVector(0,player.getYaw(1.0f)-90);
-        Quaternionf quaternion = (new Quaternionf()).setAngleAxis((y_spread * 0.017453292F), vec3d.x, vec3d.y, vec3d.z);
+        Quaternionf quaternion = (new Quaternionf()).setAngleAxis((spreadX * 0.017453292F), vec3d.x, vec3d.y, vec3d.z);
         Vec3d vec3d2 = player.getRotationVec(1.0f);
         Vector3f vec3f = vec3d2.toVector3f().rotate(quaternion);
         vec3f.rotate(quaternion);

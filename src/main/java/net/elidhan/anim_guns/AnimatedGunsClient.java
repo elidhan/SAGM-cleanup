@@ -43,9 +43,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		BuiltinItemRendererRegistry.INSTANCE.register(gun, renderer);
 
 		ModelLoadingPlugin.register(pluginContext ->
-		{
-			pluginContext.addModels((new ModelIdentifier(gunId.withPath(gunId.getPath() + "_gui"), "inventory")));
-		});
+				pluginContext.addModels((new ModelIdentifier(gunId.withPath(gunId.getPath() + "_gui"), "inventory"))));
 	}
 
 	@Override
