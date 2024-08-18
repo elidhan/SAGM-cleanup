@@ -122,6 +122,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "sightPos" ->
             {
+                if (this.transformType == ModelTransformationMode.GROUND || this.transformType == ModelTransformationMode.FIXED) break;
                 sightAdjust = 0;
                 sightAdjustForward = 0;
 
@@ -135,14 +136,16 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 GeoBone attachmentBone = attachmentModel.getBone("sight").orElse(null);
                 GeoBone reticle = attachmentModel.getBone("reticle").orElse(null);
                 GeoBone scopeBack = attachmentModel.getBone("scopeBack").orElse(null);
+                GeoBone adsNode = getGeoModel().getBone("ads_node").orElse(null);
+                GeoBone attachADSNode = attachmentModel.getBone("ads_node").orElse(null);
 
                 buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+sightID+".png")));
 
                 if(attachmentBone != null)
                 {
-                    sightAdjust = getGeoModel().getBone("ads_node").orElse(null).getPivotY() - bone.getPivotY() - attachmentModel.getBone("ads_node").orElse(null).getPivotY();
-                    sightAdjustForward = (bone.getPivotZ() + attachmentModel.getBone("ads_node").orElse(null).getPivotZ());
-                    sightAdjustForward = Math.abs(sightAdjustForward - getGeoModel().getBone("ads_node").orElse(null).getPivotZ()) - posZ*16;
+                    sightAdjust = adsNode.getPivotY() - bone.getPivotY() - attachADSNode.getPivotY();
+                    sightAdjustForward = (bone.getPivotZ() + attachADSNode.getPivotZ());
+                    sightAdjustForward = Math.abs(sightAdjustForward - adsNode.getPivotZ()) - posZ*16;
 
                     poseStack.push();
 
