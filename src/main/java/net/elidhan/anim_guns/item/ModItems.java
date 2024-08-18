@@ -137,7 +137,7 @@ public class ModItems
             50,
             new Vector2f(5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
-            new Vector3f(0f,0.75f,0.375f),
+            new Vector3f(0f,0.25f,0.325f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
     ));
 

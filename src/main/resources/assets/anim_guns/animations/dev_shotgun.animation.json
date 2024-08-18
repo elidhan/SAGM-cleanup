@@ -24,6 +24,7 @@
 		},
 		"firing": {
 			"loop": true,
+			"animation_length": 1,
 			"bones": {
 				"leftArm": {
 					"rotation": {
@@ -39,6 +40,62 @@
 					},
 					"position": {
 						"vector": [5.25, -6.73125, 8.02969]
+					}
+				},
+				"gunbody": {
+					"rotation": {
+						"0.0": {
+							"vector": ["-12 * query.x_rot_mult", 0, 0]
+						},
+						"0.0417": {
+							"vector": ["-16.5 * query.x_rot_mult", 0, 0]
+						},
+						"0.1417": {
+							"vector": ["-13.12 * query.x_rot_mult", 0, 0]
+						},
+						"0.3833": {
+							"vector": ["2 * query.x_rot_mult", 0, 0],
+							"easing": "easeInOutSine"
+						},
+						"0.5167": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, "-2.0625 * query.x_rot_mult", "3.8875 * query.z_pos_mult"]
+						},
+						"0.0583": {
+							"vector": [0, "-1.0212 * query.x_rot_mult", "3.4787 * query.z_pos_mult"]
+						},
+						"0.1083": {
+							"vector": [0, "-0.4962 * query.x_rot_mult", "2.98 * query.z_pos_mult"]
+						},
+						"0.2": {
+							"vector": [0, "0.2638 * query.x_rot_mult", "1.85 * query.z_pos_mult"]
+						},
+						"0.3167": {
+							"vector": [0, "0.2638 * query.x_rot_mult", "0.3813 * query.z_pos_mult"]
+						},
+						"0.4083": {
+							"vector": [0, "0.105 * query.x_rot_mult", "-0.2787 * query.z_pos_mult"]
+						},
+						"0.5417": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"flash": {
+					"rotation": {
+						"vector": [0, 0, "math.random(-45,45)"]
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1250, 1250, 1]
+						},
+						"0.025": {
+							"vector": [1, 1, 1]
+						}
 					}
 				}
 			}

@@ -40,7 +40,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     private float sightAdjust = 0.0f;
     private float sightAdjustForward = 0.0f;
     private float muzzleFlashAdjust = 0.0f;
-    private ItemStack gunStack;
 
     @Override
     protected void renderInGui(ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
@@ -51,7 +50,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
     {
         this.bufferSource = bufferSource;
         this.transformType = transformType;
-        this.gunStack = stack;
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }
@@ -65,14 +63,14 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         VertexConsumer buffer1 = this.bufferSource.getBuffer(renderType);
 
         //Attachments test
-        String sightID = this.getAnimatable().getSightID(this.gunStack);
-        String gripID = this.getAnimatable().getGripID(this.gunStack);
-        String muzzleID = this.getAnimatable().getMuzzleID(this.gunStack);
+        String sightID = this.getAnimatable().getSightID(getCurrentItemStack());
+        String gripID = this.getAnimatable().getGripID(getCurrentItemStack());
+        String muzzleID = this.getAnimatable().getMuzzleID(getCurrentItemStack());
 
-        boolean isSilenced = this.getAnimatable().isSilenced(this.gunStack);
+        boolean isSilenced = this.getAnimatable().isSilenced(getCurrentItemStack());
 
         //This bunch of code just to dynamically center guns regardless of their translations in 1st person view and in edit mode
-        BakedModel model = client.getItemRenderer().getModel(this.gunStack, player.getWorld(), player, 0);
+        BakedModel model = client.getItemRenderer().getModel(getCurrentItemStack(), player.getWorld(), player, 0);
         float posX = model.getTransformation().firstPersonRightHand.translation.x;
         float posY = model.getTransformation().firstPersonRightHand.translation.y;
         float posZ = model.getTransformation().firstPersonRightHand.translation.z;
@@ -105,7 +103,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         Because if I don't structure it like this, the translating the muzzle flash affects the rest of the gun
         Need to find a more elegant fix to this ASAP but for now this will work
         */
-
+        //System.out.println(sightAdjustForward);
         //Does different things depending on which bone is being rendered
         switch (bone.getName())
         {
@@ -124,10 +122,16 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "sightPos" ->
             {
-                sightAdjust = 0.0f;
-                sightAdjustForward = 0.0f;
+                sightAdjust = 0;
+                sightAdjustForward = 0;
+
                 BakedGeoModel attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+sightID+".geo.json"));
-                if (attachmentModel == null) return;
+
+                if (attachmentModel == null)
+                {
+                    return;
+                }
+
                 GeoBone attachmentBone = attachmentModel.getBone("sight").orElse(null);
                 GeoBone reticle = attachmentModel.getBone("reticle").orElse(null);
                 GeoBone scopeBack = attachmentModel.getBone("scopeBack").orElse(null);
