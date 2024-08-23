@@ -132,7 +132,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "sightPos" ->
             {
-                if (this.transformType == ModelTransformationMode.GROUND || this.transformType == ModelTransformationMode.FIXED) break;
+                //if (this.transformType == ModelTransformationMode.GROUND || this.transformType == ModelTransformationMode.FIXED) break;
                 sightAdjust = 0;
                 sightAdjustForward = 0;
 
