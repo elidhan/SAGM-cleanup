@@ -168,6 +168,13 @@ public class GunItem extends Item implements FabricItem, GeoItem
         return optional.isPresent();
     }
 
+    public boolean isScoped(ItemStack gun)
+    {
+        NbtCompound nbtCompound = gun.getOrCreateNbt();
+
+        return nbtCompound.getBoolean("isScoped");
+    }
+
     @Override
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
