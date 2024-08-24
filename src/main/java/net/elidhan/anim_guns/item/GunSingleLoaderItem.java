@@ -10,9 +10,9 @@ public class GunSingleLoaderItem extends GunItem
 {
     private final int[] reloadStages;
 
-    public GunSingleLoaderItem(Settings settings, String id, float damage, int fireRate, int magSize, int reloadTime, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunSingleLoaderItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
-        super(settings, id, damage, fireRate, magSize, reloadTime, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes);
+        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes);
         this.reloadStages = reloadStages;
     }
 

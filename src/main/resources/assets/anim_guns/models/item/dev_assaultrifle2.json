@@ -34,15 +34,15 @@
     "firstperson_righthand": {
       "translation": [
         -6.5,
-        5.75,
-        3
+        6,
+        3.5
       ]
     },
     "firstperson_lefthand": {
       "translation": [
         -6.5,
-        5.75,
-        3
+        6,
+        3.5
       ]
     },
     "ground": {

@@ -107,10 +107,7 @@ public class ModItems
 
     public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_revolver",
-            10,
-            10,
-            8,
-            45,
+            10, 1, 10, 8, 45,
             new Vector2f(0.25f,0.25f),
             new Vector2f(0.25f,2f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector3f(0.5f, 1f,1f),
@@ -119,11 +116,8 @@ public class ModItems
 
     public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol2",
-            10,
-            5,
-            7,
-            40,
-            new Vector2f(1f,1f),
+            10, 1, 5, 7, 40,
+            new Vector2f(2f,2f),
             new Vector2f(0.625f,3f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector3f(0.5f, 1f,1f),
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
@@ -131,11 +125,8 @@ public class ModItems
 
     public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
             "dev_shotgun",
-            45,
-            5,
-            2,
-            50,
-            new Vector2f(5f,5f), //Spread
+            48, 6, 5, 2, 50,
+            new Vector2f(15f,15f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.25f,0.325f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
@@ -143,12 +134,9 @@ public class ModItems
 
     public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_shotgun2",
-            35,
-            12,
-            6,
-            50,
-            new int[] {14,25},
-            new Vector2f(5f,5f), //Spread
+            48, 6, 12, 6, 50,
+            new int[] {14,25}, //Reload stages in ticks
+            new Vector2f(10f,10f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.5f,0.125f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
@@ -156,11 +144,8 @@ public class ModItems
 
     public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle",
-            6,
-            2,
-            30,
-            45,
-            new Vector2f(0.875f,0.875f), //Spread
+            7,1, 2, 30, 44,
+            new Vector2f(1f,1f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
@@ -168,11 +153,8 @@ public class ModItems
 
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle2",
-            7,
-            2,
-            30,
-            50,
-            new Vector2f(1.5f,1.5f),
+            8, 1, 3, 30, 50,
+            new Vector2f(1f,1f),
             new Vector2f(0.375f,2.5f),
             new Vector3f( 0f, 0.375f, 0.75f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
@@ -180,11 +162,8 @@ public class ModItems
 
     public static final Item DEV_ASSAULTRIFLE_3 = registerItem("dev_assaultrifle3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle3",
-            11,
-            3,
-            20,
-            50,
-            new Vector2f(0.5f,0.5f),
+            11, 1, 3, 20, 50,
+            new Vector2f(0.25f,0.25f),
             new Vector2f(0.375f,2f),
             new Vector3f(0f,0.0625f,0.5f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
@@ -192,11 +171,8 @@ public class ModItems
 
     public static final Item DEV_SNIPER = registerItem("dev_sniper", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_sniper",
-            22,
-            20,
-            5,
-            50,
-            new int[] {20,30}, //Reload stages
+            22, 1, 18, 5, 50,
+            new int[] {20,30}, //Reload stages in ticks
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),
             new Vector3f(0f,0.125f,0.5f),
