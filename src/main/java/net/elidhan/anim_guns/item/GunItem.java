@@ -34,6 +34,8 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
@@ -59,6 +61,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final int magSize;
     private final int reloadTime;
 
+    protected final SoundEvent shotSound;
+    protected final SoundEvent[] reloadSounds;
+
     private final Vector2f spread;
     private final Vector2f cameraRecoil;
     private final Vector3f viewModelRecoilMult;
@@ -68,7 +73,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -81,6 +86,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.reloadTime = reloadTime;
         this.spread = spread; //Spread array should contain exactly 2 values
         this.cameraRecoil = cameraRecoil; //Recoil array should have exactly 2 values
+
+        this.shotSound = shotSound;
+        this.reloadSounds = reloadSounds;
 
         this.viewModelRecoilMult = viewModelRecoilMult; //Viewmodel recoil multiplier when aiming
 
@@ -134,6 +142,8 @@ public class GunItem extends Item implements FabricItem, GeoItem
         {
             player1.stopReload();
         }
+
+        player.getWorld().playSound(null, player.getPos().getX(), player.getPos().getY(), player.getPos().getZ(), this.shotSound, SoundCategory.PLAYERS, 1, 1);
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");

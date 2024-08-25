@@ -61,9 +61,11 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
             {
                 Vector3f viewModelRecoilMult = gun.getAimVMRecoilMult();
 
+                float sideStr = (float) (0.5f + Math.random() * (1f - (0.5f)));
+
                 float xPosMult = (1 + (viewModelRecoilMult.y() - 1) * aimProgress);
                 float xRotMult = (1 + (viewModelRecoilMult.y() - 1) * aimProgress);
-                float yRotMult = (1 + (viewModelRecoilMult.x() - 1) * aimProgress) * RecoilHandler.getInstance().getLeftOrRight();
+                float yRotMult = (1 + (viewModelRecoilMult.x() - 1) * aimProgress) * RecoilHandler.getInstance().getLeftOrRight() * sideStr;
                 float zPosMult = (1 + (viewModelRecoilMult.z() - 1) * aimProgress);
 
                 parser.setValue("query.x_pos_mult", () -> xPosMult);

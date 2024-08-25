@@ -1,6 +1,7 @@
 package net.elidhan.anim_guns.item;
 
 import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.sound.ModSounds;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.Item;
@@ -8,6 +9,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.joml.Vector2f;
@@ -108,6 +111,16 @@ public class ModItems
     public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_revolver",
             10, 1, 10, 8, 45,
+            ModSounds.SHOT_REVOLVER,
+            new SoundEvent[]
+                    {
+                            ModSounds.RLD_REVOLVER_1_READY, //Reload Ready, can be empty
+                            ModSounds.RLD_REVOLVER_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_REVOLVER_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Release
+                            ModSounds.RLD_REVOLVER_1_FINISH, //Reload Finish, can be empty
+                    },
             new Vector2f(0.25f,0.25f),
             new Vector2f(0.25f,2f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector3f(0.5f, 1f,1f),
@@ -117,6 +130,16 @@ public class ModItems
     public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol2",
             10, 1, 5, 7, 40,
+            ModSounds.SHOT_PISTOL_HEAVY,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_PISTOL_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_PISTOL_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            ModSounds.RLD_PISTOL_1_SLIDEFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
             new Vector2f(2f,2f),
             new Vector2f(0.625f,3f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector3f(0.5f, 1f,1f),
@@ -126,6 +149,16 @@ public class ModItems
     public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
             "dev_shotgun",
             48, 6, 5, 2, 50,
+            ModSounds.SHOT_SHOTGUN_DOUBLEBARREL,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_SHOTGUN_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SHOTGUN_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Release
+                            ModSounds.RLD_SHOTGUN_1_FINISH, //Reload Finish, can be empty
+                    },
             new Vector2f(15f,15f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.25f,0.325f),
@@ -135,6 +168,16 @@ public class ModItems
     public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_shotgun2",
             48, 6, 12, 6, 50,
+            ModSounds.SHOT_SHOTGUN_COMBAT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
+                            ModSounds.RLD_SHOTGUN_SHELL_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SHOTGUN_2_PUMPBACK, //Bolt Pull
+                            ModSounds.RLD_SHOTGUN_2_PUMPFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
             new int[] {14,25}, //Reload stages in ticks
             new Vector2f(10f,10f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
@@ -142,9 +185,38 @@ public class ModItems
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE}
     ));
 
+    public static final Item DEV_SMG = registerItem("dev_smg", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "dev_smg",
+            5, 1, 1, 30, 47,
+            ModSounds.SHOT_SMG_MACHINEPISTOL,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_SMG_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SMG_1_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SMG_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SMG_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(5f,5f),
+            new Vector2f(1.25f,2.5f),
+            new Vector3f( 0f, 0.375f, 0.75f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP}
+    ));
+
     public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle",
             7,1, 2, 30, 44,
+            ModSounds.SHOT_ASSAULT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
             new Vector2f(1f,1f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
@@ -154,6 +226,16 @@ public class ModItems
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle2",
             8, 1, 3, 30, 50,
+            ModSounds.SHOT_ASSAULT_CLASSIC,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_AR_2_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AR_2_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_AR_2_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
             new Vector2f(1f,1f),
             new Vector2f(0.375f,2.5f),
             new Vector3f( 0f, 0.375f, 0.75f),
@@ -163,6 +245,16 @@ public class ModItems
     public static final Item DEV_ASSAULTRIFLE_3 = registerItem("dev_assaultrifle3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle3",
             11, 1, 3, 20, 50,
+            ModSounds.SHOT_ASSAULT_DESERT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
             new Vector2f(0.25f,0.25f),
             new Vector2f(0.375f,2f),
             new Vector3f(0f,0.0625f,0.5f),
@@ -172,6 +264,16 @@ public class ModItems
     public static final Item DEV_SNIPER = registerItem("dev_sniper", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_sniper",
             22, 1, 18, 5, 50,
+            ModSounds.SHOT_SNIPER_CLASSIC,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
+                            ModSounds.RLD_SNIPER_1_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SNIPER_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SNIPER_1_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_REVOLVER_1_FINISH, //Reload Finish, can be empty
+                    },
             new int[] {20,30}, //Reload stages in ticks
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),

@@ -390,6 +390,17 @@
 						}
 					}
 				}
+			},
+			"sound_effects": {
+				"0.3542": {
+					"effect": "remove"
+				},
+				"1.1875": {
+					"effect": "insert"
+				},
+				"1.6667": {
+					"effect": "reload_finish"
+				}
 			}
 		}
 	},

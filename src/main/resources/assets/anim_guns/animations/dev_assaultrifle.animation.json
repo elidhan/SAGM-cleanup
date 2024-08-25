@@ -369,6 +369,17 @@
 						}
 					}
 				}
+			},
+			"sound_effects": {
+				"0.2917": {
+					"effect": "remove"
+				},
+				"0.9583": {
+					"effect": "insert"
+				},
+				"1.625": {
+					"effect": "bolt_release"
+				}
 			}
 		}
 	},
