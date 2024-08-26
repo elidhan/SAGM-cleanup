@@ -45,14 +45,15 @@ public class BulletProjectileEntity extends PersistentProjectileEntity
     @Override
     public void tick()
     {
-        super.tick();
-
         this.setVelocity(vel);
 
         if(this.lifeTicks++ >= this.maxLife)
         {
             this.discard();
+            return;
         }
+
+        super.tick();
     }
 
     @Override

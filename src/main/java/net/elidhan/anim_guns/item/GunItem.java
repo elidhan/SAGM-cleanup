@@ -108,6 +108,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
     //=====Shooty Shooty=====//
     public void shoot(ServerPlayerEntity player, ItemStack stack)
     {
+        World world = player.getWorld();
+        if (world.isClient()) return;
+
         if (!stack.getOrCreateNbt().contains("ammo")) stack.getOrCreateNbt().putInt("ammo", 0);
 
         if (stack.getOrCreateNbt().getInt("ammo") <= 0) return;
@@ -116,9 +119,9 @@ public class GunItem extends Item implements FabricItem, GeoItem
         player.getItemCooldownManager().set(this, this.fireRate);
 
         //Actually shoot
-        for (int i = 0; i < shotCount; i++)
+        for (int i = 0; i < this.shotCount; i++)
         {
-            BulletProjectileEntity bullet = new BulletProjectileEntity(player, player.getWorld(), this.damage/this.shotCount, shotCount);
+            BulletProjectileEntity bullet = new BulletProjectileEntity(player, player.getWorld(), this.damage, shotCount);
             bullet.setPosition(player.getX(), player.getEyeY(), player.getZ());
 
             double spreadX = -spread.x + Math.random() * (spread.x - (-spread.x));
@@ -133,7 +136,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
             bullet.setBaseVel(bullet.getVelocity());
             bullet.setOwner(player);
 
-            player.getWorld().spawnEntity(bullet);
+            world.spawnEntity(bullet);
         }
 
         //Bullet -1
@@ -143,7 +146,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
             player1.stopReload();
         }
 
-        player.getWorld().playSound(null, player.getPos().getX(), player.getPos().getY(), player.getPos().getZ(), this.shotSound, SoundCategory.PLAYERS, 1, 1);
+        world.playSound(null, player.getPos().getX(), player.getPos().getY(), player.getPos().getZ(), this.shotSound, SoundCategory.PLAYERS, 1, 1);
 
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");

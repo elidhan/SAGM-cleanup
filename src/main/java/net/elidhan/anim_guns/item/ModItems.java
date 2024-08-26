@@ -148,7 +148,7 @@ public class ModItems
 
     public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
             "dev_shotgun",
-            48, 6, 5, 2, 50,
+            6, 8, 5, 2, 50,
             ModSounds.SHOT_SHOTGUN_DOUBLEBARREL,
             new SoundEvent[]
                     {
@@ -167,7 +167,7 @@ public class ModItems
 
     public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "dev_shotgun2",
-            48, 6, 12, 6, 50,
+            6, 8, 12, 6, 50,
             ModSounds.SHOT_SHOTGUN_COMBAT,
             new SoundEvent[]
                     {
@@ -225,7 +225,7 @@ public class ModItems
 
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle2",
-            8, 1, 3, 30, 50,
+            8, 1, 3, 30, 60,
             ModSounds.SHOT_ASSAULT_CLASSIC,
             new SoundEvent[]
                     {

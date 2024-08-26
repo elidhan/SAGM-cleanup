@@ -35,5 +35,9 @@
 	"smg_1_boltforward": { "category": "players", "sounds": [ "anim_guns:smg_1_boltforward" ] },
 	"ar_1_remove": { "category": "players", "sounds": [ "anim_guns:ar_1_remove" ] },
 	"ar_1_insert": { "category": "players", "sounds": [ "anim_guns:ar_1_insert" ] },
-	"ar_1_boltforward": { "category": "players", "sounds": [ "anim_guns:ar_1_boltforward" ] }
+	"ar_1_boltforward": { "category": "players", "sounds": [ "anim_guns:ar_1_boltforward" ] },
+	"ar_2_remove": { "category": "players", "sounds": [ "anim_guns:ar_2_remove" ] },
+	"ar_2_insert": { "category": "players", "sounds": [ "anim_guns:ar_2_insert" ] },
+	"ar_2_boltback": { "category": "players", "sounds": [ "anim_guns:ar_2_boltback" ] },
+	"ar_2_boltforward": { "category": "players", "sounds": [ "anim_guns:ar_2_boltforward" ] }
 }
