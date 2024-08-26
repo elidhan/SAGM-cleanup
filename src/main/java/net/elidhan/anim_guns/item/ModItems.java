@@ -269,10 +269,10 @@ public class ModItems
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
                             SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
-                            ModSounds.RLD_SNIPER_1_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
                             ModSounds.RLD_SNIPER_1_BOLTBACK, //Bolt Pull
                             ModSounds.RLD_SNIPER_1_BOLTFORWARD, //Bolt Release
-                            ModSounds.RLD_REVOLVER_1_FINISH, //Reload Finish, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
             new int[] {20,30}, //Reload stages in ticks
             new Vector2f(0.125f,0.125f), //Spread

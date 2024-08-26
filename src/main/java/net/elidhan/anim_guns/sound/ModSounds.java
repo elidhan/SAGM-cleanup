@@ -70,7 +70,9 @@ public class ModSounds
     public static SoundEvent RLD_AR_2_BOLTBACK = registerSoundEvent("ar_2_boltback");
     public static SoundEvent RLD_AR_2_BOLTFORWARD = registerSoundEvent("ar_2_boltforward");
 
-    public static SoundEvent RLD_SNIPER_1_INSERT = registerSoundEvent("sniper_1_insert");
+    public static SoundEvent RLD_CARTRIDGE_INSERT = registerSoundEvent("cartridge_insert");
+    public static SoundEvent RLD_DMR_1_BOLTBACK = registerSoundEvent("dmr_1_boltback");
+    public static SoundEvent RLD_DMR_1_BOLTFORWARD = registerSoundEvent("dmr_1_boltforward");
     public static SoundEvent RLD_SNIPER_1_BOLTBACK = registerSoundEvent("sniper_1_boltback");
     public static SoundEvent RLD_SNIPER_1_BOLTFORWARD = registerSoundEvent("sniper_1_boltforward");
 

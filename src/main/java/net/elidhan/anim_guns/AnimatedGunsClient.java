@@ -53,6 +53,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		registerGunWorldViewRenderer(ModItems.DEV_PISTOL_2);
 		registerGunWorldViewRenderer(ModItems.DEV_REVOLVER);
 		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN);
+		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN2);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_2);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_3);

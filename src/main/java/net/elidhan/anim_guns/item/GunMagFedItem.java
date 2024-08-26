@@ -7,7 +7,6 @@ import net.elidhan.anim_guns.animations.GunAnimations;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 

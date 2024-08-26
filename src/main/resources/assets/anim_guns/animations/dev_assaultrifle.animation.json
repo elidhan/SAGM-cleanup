@@ -60,7 +60,7 @@
 				"gunbody": {
 					"rotation": {
 						"0.0": {
-							"vector": ["-1.5 * query.x_rot_mult", 0, 0]
+							"vector": ["-1.5 * query.x_rot_mult", "0.125 * query.y_rot_mult", "-0.25 * query.y_rot_mult"]
 						},
 						"0.5": {
 							"vector": [0, 0, 0],
@@ -69,7 +69,7 @@
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, "0.0875 * query.x_rot_mult", "1 * query.z_pos_mult"]
+							"vector": ["-0.0625 * query.y_rot_mult", "0.0875 * query.x_rot_mult", "1 * query.z_pos_mult"]
 						},
 						"0.5": {
 							"vector": [0, 0, 0],
