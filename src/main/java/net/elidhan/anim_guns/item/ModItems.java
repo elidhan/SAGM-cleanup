@@ -127,6 +127,25 @@ public class ModItems
             new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.MUZZLE}
     ));
 
+    public static final Item DEV_PISTOL = registerItem("dev_pistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "dev_pistol",
+            5.5f, 1, 4, 17, 36,
+            ModSounds.SHOT_PISTOL_LIGHT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_PISTOL_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_PISTOL_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            ModSounds.RLD_PISTOL_1_SLIDEFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(1f,1f),
+            new Vector2f(0.25f,1.5f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector3f(0.5f, 1f,1f),
+            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.MUZZLE}
+    ));
+
     public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol2",
             10, 1, 5, 7, 40,
@@ -143,7 +162,7 @@ public class ModItems
             new Vector2f(2f,2f),
             new Vector2f(0.625f,3f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
             new Vector3f(0.5f, 1f,1f),
-            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE}
+            new AttachmentItem.AttachType[ ]{AttachmentItem.AttachType.MUZZLE}
     ));
 
     public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
