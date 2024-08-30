@@ -67,11 +67,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         if(meleeTick > 0)
             meleeTick--;
 
-        if(!this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) > 0)
-            this.dataTracker.set(AIM_TICK, Math.max(0, this.dataTracker.get(AIM_TICK)-1));
-        else if (this.dataTracker.get(IS_AIMING) && this.dataTracker.get(AIM_TICK) < 4)
-            this.dataTracker.set(AIM_TICK, Math.max(0, this.dataTracker.get(AIM_TICK)+1));
-
         if(isReloading())
             tickReload();
     }
@@ -167,20 +162,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         if (b)
         {
-            this.dataTracker.set(AIM_TICK, 1);
             this.setSprinting(false);
-        }
-        else if (getAimTick() >= 4)
-        {
-            this.dataTracker.set(AIM_TICK, 3);
         }
     }
     @Override
     public boolean isAiming() {return this.dataTracker.get(IS_AIMING);}
-    @Override
-    public int getAimTick() {return this.dataTracker.get(AIM_TICK);}
-    @Override
-    public int getPreviousAimTick() {return this.dataTracker.get(PREVIOUS_AIM_TICK);}
     //====================//
 
     //=====Dropping Gun=====//

@@ -10,8 +10,6 @@ public interface IFPlayerWithGun
     int getReloadProgressTick();
 
     void toggleAim(boolean b);
-    int getAimTick();
-    int getPreviousAimTick();
     boolean isAiming();
 
     void melee();

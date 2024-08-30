@@ -11,6 +11,7 @@ import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
@@ -83,13 +84,12 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             posY = bakedGunModel.getTransformation().firstPersonRightHand.translation.y;
         }
 
-        float prevAimTick = (float)((IFPlayerWithGun)player).getPreviousAimTick();
-        float aimTick = (float)((IFPlayerWithGun)player).getAimTick();
+        float prevAimTick = (float)((IFClientPlayerWithGun)player).getPrevAimTick();
+        float aimTick = (float)((IFClientPlayerWithGun)player).getAimTick();
 
         aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
 
-        if (this.transformType == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND)
-            aimTransforms(poseStack, aimProgress, posX, posY);
+        if (this.transformType == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) aimTransforms(poseStack, aimProgress, posX, posY);
 
         super.render(stack, transformType, poseStack, bufferSource, packedLight, packedOverlay);
     }

@@ -1,4 +1,4 @@
-package net.elidhan.anim_guns.mixin.client;
+package net.elidhan.anim_guns.mixin;
 
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;

@@ -5,6 +5,7 @@ import mod.azure.azurelib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,10 +46,10 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
         PlayerEntity player = mc.player;
         float aimProgress = 1;
 
-        if (player instanceof IFPlayerWithGun player1)
+        if (player instanceof IFClientPlayerWithGun player1)
         {
             //Get Aim Progress
-            float prevAimTick = player1.getPreviousAimTick();
+            float prevAimTick = player1.getPrevAimTick();
             float aimTick = player1.getAimTick();
 
             aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * mc.getTickDelta())/4f, 0f, 1f);
