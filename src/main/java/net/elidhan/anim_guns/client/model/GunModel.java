@@ -52,7 +52,7 @@ public class GunModel extends DefaultedItemGeoModel<GunItem>
             float prevAimTick = player1.getPrevAimTick();
             float aimTick = player1.getAimTick();
 
-            aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * mc.getTickDelta())/4f, 0f, 1f);
+            aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * mc.getTickDelta())/3f, 0f, 1f);
         }
 
         if (player != null)

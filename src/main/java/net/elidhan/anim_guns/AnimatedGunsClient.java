@@ -49,11 +49,13 @@ public class AnimatedGunsClient implements ClientModInitializer
 	@Override
 	public void onInitializeClient()
 	{
-		//Register gun non-first-person perspective renderers
+		//Register GUI perspective renderers
+		registerGunWorldViewRenderer(ModItems.DEV_PISTOL);
 		registerGunWorldViewRenderer(ModItems.DEV_PISTOL_2);
 		registerGunWorldViewRenderer(ModItems.DEV_REVOLVER);
 		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN);
 		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN2);
+		registerGunWorldViewRenderer(ModItems.DEV_SMG);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_2);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_3);

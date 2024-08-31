@@ -33,10 +33,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Unique
     private static final TrackedData<Boolean> IS_AIMING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     @Unique
-    private static final TrackedData<Integer> AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    @Unique
-    private static final TrackedData<Integer> PREVIOUS_AIM_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    @Unique
     private static final TrackedData<Integer> RELOAD_TICK = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.INTEGER);
     @Unique
     private static final TrackedData<Boolean> IS_RELOADING = DataTracker.registerData(PlayerEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -62,8 +58,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Inject(method = "tickMovement", at = @At("TAIL"))
     public void tickMovement(CallbackInfo ci)
     {
-        this.dataTracker.set(PREVIOUS_AIM_TICK, this.dataTracker.get(AIM_TICK));
-
         if(meleeTick > 0)
             meleeTick--;
 
@@ -142,6 +136,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Override
     public int getMeleeProgress() {return meleeTick;}
 
+    @SuppressWarnings("all")
     @WrapOperation(method = "attack", constant = @Constant(classValue = SwordItem.class))
     private boolean sweepMeleeIfGun(Object obj, Operation<Boolean> original)
     {
@@ -188,7 +183,5 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
         this.dataTracker.startTracking(IS_AIMING, false);
         this.dataTracker.startTracking(IS_RELOADING, false);
         this.dataTracker.startTracking(RELOAD_TICK, 0);
-        this.dataTracker.startTracking(AIM_TICK, 0);
-        this.dataTracker.startTracking(PREVIOUS_AIM_TICK, 0);
     }
 }

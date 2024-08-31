@@ -87,7 +87,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
         float prevAimTick = (float)((IFClientPlayerWithGun)player).getPrevAimTick();
         float aimTick = (float)((IFClientPlayerWithGun)player).getAimTick();
 
-        aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/4f, 0f, 1f);
+        aimProgress = MathHelper.clamp((prevAimTick + (aimTick - prevAimTick) * delta)/3f, 0f, 1f);
 
         if (this.transformType == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) aimTransforms(poseStack, aimProgress, posX, posY);
 

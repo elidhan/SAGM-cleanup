@@ -1,6 +1,7 @@
 package net.elidhan.anim_guns.mixin.client;
 
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -42,38 +43,32 @@ public class GameRendererMixin
         isRenderHand = true;
     }
 
-    @Inject(method = "bobView", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "bobView", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;getCameraEntity()Lnet/minecraft/entity/Entity;", ordinal = 1, shift = At.Shift.AFTER), cancellable = true)
     private void bobIfGun(MatrixStack matrices, float tickDelta, CallbackInfo ci)
     {
         if (!isRenderHand) return;
 
-        if (this.client.player instanceof IFPlayerWithGun playerWIthGun && playerWIthGun.isAiming())
+        if (this.client.player.getMainHandStack().getItem() instanceof GunItem && this.client.player instanceof IFClientPlayerWithGun clientPlayerWithGun)
         {
+            float f1 = clientPlayerWithGun.getAimTick();
+            float f2 = clientPlayerWithGun.getPrevAimTick();
+
+            float aimProgress = MathHelper.clamp((f2 + (f1 - f2) * tickDelta)/3f, 0f, 1f);
+
+            if (!(this.client.getCameraEntity() instanceof PlayerEntity playerEntity))
+            {
+                return;
+            }
+            float f = (playerEntity.horizontalSpeed - playerEntity.prevHorizontalSpeed);
+            float g = -(playerEntity.horizontalSpeed + f * tickDelta);
+            float h = MathHelper.lerp(tickDelta, playerEntity.prevStrideDistance, playerEntity.strideDistance) * (0.25f * (1f - aimProgress));
+
+            matrices.translate(MathHelper.sin(g * (float)Math.PI) * h * 0.5f, -Math.abs(MathHelper.cos(g * (float)Math.PI) * h), 0.0);
+
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.sin(g * (float)Math.PI) * h * 3.0f));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(Math.abs(MathHelper.cos(g * (float)Math.PI - 0.2f) * h) * 5.0f));
+
             ci.cancel();
-            return;
         }
-
-        if (this.client.player instanceof IFPlayerWithGun playerWIthGun && ((ClientPlayerEntity)playerWIthGun).getMainHandStack().getItem() instanceof GunItem)
-        {
-            gunBobView(matrices, tickDelta);
-            ci.cancel();
-        }
-    }
-
-    @Unique
-    private void gunBobView(MatrixStack matrices, float tickDelta)
-    {
-        if (!(this.client.getCameraEntity() instanceof PlayerEntity playerEntity))
-        {
-            return;
-        }
-        float f = (playerEntity.horizontalSpeed - playerEntity.prevHorizontalSpeed);
-        float g = -(playerEntity.horizontalSpeed + f * tickDelta);
-        float h = MathHelper.lerp(tickDelta, playerEntity.prevStrideDistance, playerEntity.strideDistance) * 0.25f;
-
-        matrices.translate(MathHelper.sin(g * (float)Math.PI) * h * 0.5f, -Math.abs(MathHelper.cos(g * (float)Math.PI) * h), 0.0);
-
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.sin(g * (float)Math.PI) * h * 3.0f));
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(Math.abs(MathHelper.cos(g * (float)Math.PI - 0.2f) * h) * 5.0f));
     }
 }

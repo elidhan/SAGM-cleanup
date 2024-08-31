@@ -39,7 +39,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity imple
     {
         this.prevAimTick = this.aimTick;
 
-        if (((IFPlayerWithGun)this).isAiming() && this.aimTick < 4)
+        if (((IFPlayerWithGun)this).isAiming() && this.aimTick < 3)
             this.aimTick++;
         else if (!((IFPlayerWithGun)this).isAiming() && this.aimTick > 0)
             this.aimTick--;
