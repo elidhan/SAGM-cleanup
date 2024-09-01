@@ -64,9 +64,7 @@ public class GunGUIRenderer implements BuiltinItemRendererRegistry.DynamicItemRe
         }
         if (mode == ModelTransformationMode.GUI)
         {
-            DiffuseLighting.enableGuiDepthLighting();
-            renderItem(itemRenderer, stack, mode, false, matrices, vertexConsumers, 255, overlay, this.inventoryModel);
-            DiffuseLighting.disableGuiDepthLighting();
+            renderItem(itemRenderer, stack, mode, false, matrices, vertexConsumers, 15728880, overlay, this.inventoryModel);
         }
     }
 
