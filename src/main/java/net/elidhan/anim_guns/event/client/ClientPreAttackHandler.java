@@ -15,9 +15,14 @@ public class ClientPreAttackHandler implements ClientPreAttackCallback
     public boolean onClientPlayerPreAttack(MinecraftClient client, ClientPlayerEntity player, int clickCount)
     {
         ItemStack mainHandItem = player.getMainHandStack();
-        if (mainHandItem.getItem() instanceof GunItem)
+        if (mainHandItem.getItem() instanceof GunItem gun)
         {
             ClientPlayNetworking.send(ModNetworking.C2S_SHOOT, PacketByteBufs.empty());
+
+            if (gun.getFiringType() == GunItem.fireType.SEMI)
+            {
+                client.options.attackKey.setPressed(false);
+            }
             return true;
         }
 

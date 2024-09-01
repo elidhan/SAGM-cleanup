@@ -27,7 +27,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
@@ -50,7 +49,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class GunItem extends Item implements FabricItem, GeoItem
 {
@@ -69,11 +67,12 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final Vector3f viewModelRecoilMult;
 
     private final AttachmentItem.AttachType[] acceptedAttachmentTypes;
+    private final fireType firingType;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, fireType firingType)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -93,6 +92,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         this.viewModelRecoilMult = viewModelRecoilMult; //Viewmodel recoil multiplier when aiming
 
         this.acceptedAttachmentTypes = acceptedAttachmentTypes;
+        this.firingType = firingType;
     }
 
     //=====Give ID=====//
@@ -151,7 +151,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
         //Animation
         AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "firing");
         //Recoil
-        ServerPlayNetworking.send(player, ModNetworking.S2C_RECOIL, PacketByteBufs.empty());
+        ServerPlayNetworking.send(player, ModNetworking.S2C_SHOT, PacketByteBufs.empty());
     }
     //======================//
 
@@ -237,6 +237,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     }
 
     //=====Getters=====//
+    public fireType getFiringType() {return firingType;}
     public int getReloadTime() {return reloadTime;}
     public String getID() {return this.id;}
     public int getMagSize() {return magSize;}

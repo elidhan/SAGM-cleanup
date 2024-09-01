@@ -60,6 +60,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_2);
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_3);
 		registerGunWorldViewRenderer(ModItems.DEV_SNIPER);
+		registerGunWorldViewRenderer(ModItems.DEV_DMR_3);
 
 		//Intercept Attack mouse key
 		ClientPreAttackCallback.EVENT.register(new ClientPreAttackHandler());

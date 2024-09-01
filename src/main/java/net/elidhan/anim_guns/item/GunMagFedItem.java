@@ -12,9 +12,9 @@ import org.joml.Vector3f;
 
 public class GunMagFedItem extends GunItem
 {
-    public GunMagFedItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunMagFedItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
     {
-        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes);
+        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class RecoilHandler
 
     private final Random random = new Random();
 
-    private int leftOrRight = 1;
+    private float leftOrRight = 0.0f;
 
     //Player camera recoil
     private float cameraRecoilX = 0;
@@ -33,13 +33,13 @@ public class RecoilHandler
 
     public void shot(float recoilX, float recoilY)
     {
-        leftOrRight = random.nextBoolean() ? 1 : -1;
+        leftOrRight = (random.nextBoolean() ? 1 : -1) * (float)(0.25f + Math.random() * (1f - (0.25f)));
         cameraRecoilX = recoilX * leftOrRight;
         cameraRecoilY = recoilY;
         cameraRecoilTick = 2;
     }
 
-    public int getLeftOrRight()
+    public float getLeftOrRight()
     {
         return this.leftOrRight;
     }

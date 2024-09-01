@@ -13,7 +13,9 @@ import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+import org.joml.Vector3f;
 
 public class ModNetworking
 {
@@ -21,7 +23,7 @@ public class ModNetworking
     public static final Identifier C2S_RELOAD = new Identifier(AnimatedGuns.MOD_ID, "c2s_reload");
     public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
     public static final Identifier C2S_SHOOT = new Identifier(AnimatedGuns.MOD_ID, "c2s_shoot");
-    public static final Identifier C2S_ATTACHMENT = new Identifier(AnimatedGuns.MOD_ID, "c2s_attachment");
+    public static final Identifier C2S_PARTICLES = new Identifier(AnimatedGuns.MOD_ID, "c2s_particles");
     public static void registerC2SPackets()
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
@@ -45,18 +47,18 @@ public class ModNetworking
         {
             if (player.getMainHandStack().getItem() instanceof GunItem gun) gun.shoot(player, player.getMainHandStack());
         }));
-        ServerPlayNetworking.registerGlobalReceiver(C2S_ATTACHMENT, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
+        ServerPlayNetworking.registerGlobalReceiver(C2S_PARTICLES, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
 
         });
     }
     //Server-to-Client
-    public static final Identifier S2C_RECOIL = new Identifier(AnimatedGuns.MOD_ID, "s2c_recoil");
+    public static final Identifier S2C_SHOT = new Identifier(AnimatedGuns.MOD_ID, "s2c_shot");
     public static final Identifier S2C_PLAYANIM = new Identifier(AnimatedGuns.MOD_ID, "s2c_playanim");
     public static final Identifier S2C_STOPANIM = new Identifier(AnimatedGuns.MOD_ID, "s2c_stopanim");
     public static void registerS2CPackets()
     {
-        ClientPlayNetworking.registerGlobalReceiver(S2C_RECOIL, ((client, handler, buf, responseSender) ->
+        ClientPlayNetworking.registerGlobalReceiver(S2C_SHOT, ((client, handler, buf, responseSender) ->
                 client.execute(() ->
                 {
                     if (client.player != null && client.player.getMainHandStack().getItem() instanceof GunItem gun)

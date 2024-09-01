@@ -14,9 +14,9 @@ public class GunSingleLoaderItem extends GunItem
 {
     private final int[] reloadStages;
 
-    public GunSingleLoaderItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes)
+    public GunSingleLoaderItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
     {
-        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes);
+        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
         this.reloadStages = reloadStages;
     }
 
