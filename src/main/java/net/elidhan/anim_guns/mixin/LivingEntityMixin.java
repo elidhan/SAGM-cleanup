@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -51,6 +52,15 @@ public abstract class LivingEntityMixin extends Entity implements Attackable
                 super.setSprinting(false);
                 if(entityAttributeInstance != null) entityAttributeInstance.removeModifier(SPRINTING_SPEED_BOOST);
             }
+        }
+    }
+
+    @Inject(method = "swingHand(Lnet/minecraft/util/Hand;Z)V", at = @At("HEAD"), cancellable = true)
+    public void dontSwingIfGun(Hand hand, boolean fromServerPlayer, CallbackInfo ci)
+    {
+        if (this instanceof IFPlayerWithGun && this.getMainHandStack().getItem() instanceof GunItem)
+        {
+            ci.cancel();
         }
     }
 }

@@ -15,7 +15,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 public class ModItems
 {
@@ -110,7 +109,7 @@ public class ModItems
 
     public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_revolver",
-            12, 1, 8, 8, 45,
+            12, 1, 8, 8, 55,
             ModSounds.SHOT_REVOLVER,
             new SoundEvent[]
                     {
@@ -251,7 +250,7 @@ public class ModItems
 
     public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_assaultrifle2",
-            8, 1, 3, 30, 60,
+            8, 1, 2, 30, 60,
             ModSounds.SHOT_ASSAULT_CLASSIC,
             new SoundEvent[]
                     {
@@ -262,7 +261,7 @@ public class ModItems
                             ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(1f,1f),
+            new Vector2f(1.625f,1.625f),
             new Vector2f(0.375f,2.5f),
             new Vector3f( 0f, 0.375f, 0.75f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
@@ -444,43 +443,20 @@ public class ModItems
 
     public static void registerModItemGroups()
     {
-        //TODO: Add items and item groups
         final ItemGroup GUNS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.STANDARD_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.STANDARD_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.SHOTGUN_SHELL));
-            //entries.add(new ItemStack(ModItems.PISTOL_LIGHT));
-            //entries.add(new ItemStack(ModItems.PISTOL_HEAVY));
-            //entries.add(new ItemStack(ModItems.SERVICE_PISTOL));
-            //entries.add(new ItemStack(ModItems.MAGNUM_REVOLVER));
-            //entries.add(new ItemStack(ModItems.OLD_ARMY_REVOLVER));
-            //entries.add(new ItemStack(ModItems.SMG_MP));
-            //entries.add(new ItemStack(ModItems.HEAVY_SMG));
-            //entries.add(new ItemStack(ModItems.SMG_RAPID));
-            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
-            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
-            //entries.add(new ItemStack(ModItems.ASSAULTRIFLE_RUS));
-            //entries.add(new ItemStack(ModItems.DOUBLE_BARRELED_SHOTGUN));
-            //entries.add(new ItemStack(ModItems.COMBAT_SHOTGUN));
-            //entries.add(new ItemStack(ModItems.RIOT_SHOTGUN));
-            //entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
-            //entries.add(new ItemStack(ModItems.ARCTIC_SNIPER_RIFLE));
-            //entries.add(new ItemStack(ModItems.BRUSH_GUN));
-            //entries.add(new ItemStack(ModItems.SNIPER_MARKSMAN));
-            //entries.add(new ItemStack(ModItems.MOTHERLAND_MARKSMAN_RIFLE));
-            //entries.add(new ItemStack(ModItems.LMG));
-            //entries.add(new ItemStack(ModItems.ANTI_MATERIEL_RIFLE));
-            //entries.add(new ItemStack(ModItems.MINIGUN));
         }).displayName(Text.translatable("guns")).build();
+
         final ItemGroup CRAFTING = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.HARDENED_IRON_INGOT));
             entries.add(new ItemStack(ModItems.HARDENED_IRON_NUGGET));
             entries.add(new ItemStack(ModItems.PLASTIC));
             entries.add(new ItemStack(ModItems.ENRICHED_IRON));
             entries.add(new ItemStack(ModItems.PISTOL_GRIP));
-            //entries.add(new ItemStack(ModItems.GUN_SCOPE));
             entries.add(new ItemStack(ModItems.LONG_BARREL));
             entries.add(new ItemStack(ModItems.SHORT_BARREL));
             entries.add(new ItemStack(ModItems.HEAVY_BARREL));
@@ -495,34 +471,18 @@ public class ModItems
             entries.add(new ItemStack(ModItems.RIFLE_MAGAZINE));
             entries.add(new ItemStack(ModItems.TUBE_MAGAZINE));
             entries.add(new ItemStack(ModItems.LMG_AMMO_BOX));
-            /*
-            entries.add(new ItemStack(ModItems.BLUEPRINT_BUNDLE));
-            entries.add(new ItemStack(ModItems.PISTOL_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.SERVICE_PISTOL_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.HEAVY_PISTOL_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.MAGNUM_REVOLVER_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.OLD_ARMY_REVOLVER_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.MACHINE_PISTOL_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.HEAVY_SMG_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.RAPID_SMG_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.LIGHT_ASSAULT_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.HEAVY_ASSAULT_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.WAR_TORN_ASSAULT_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.COMBAT_SHOTGUN_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.RIOT_SHOTGUN_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.DOUBLE_BARRELED_SHOTGUN_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.CLASSIC_SNIPER_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.ARCTIC_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.BRUSH_GUN_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.MARKSMAN_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.MOTHERLAND_MARKSMAN_RIFLE_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.LMG_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.MINIGUN_BLUEPRINT));
-            entries.add(new ItemStack(ModItems.ANTI_MATERIEL_RIFLE_BLUEPRINT));
-             */
         }).displayName(Text.translatable("crafting")).build();
+
+        final ItemGroup ATTACHMENTS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
+            entries.add(new ItemStack(ModItems.SIGHT_HOLO));
+            entries.add(new ItemStack(ModItems.SIGHT_8XSCOPE));
+            entries.add(new ItemStack(ModItems.MUZZLE_MBRAKE));
+            entries.add(new ItemStack(ModItems.MUZZLE_SILENCER));
+            entries.add(new ItemStack(ModItems.GRIP_FOREGRIP));
+        }).displayName(Text.translatable("attachments")).build();
 
         Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.guns"), GUNS);
         Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.crafting"), CRAFTING);
+        Registry.register(Registries.ITEM_GROUP, new Identifier(AnimatedGuns.MOD_ID, "anim_guns.attachments"), ATTACHMENTS);
     }
 }
