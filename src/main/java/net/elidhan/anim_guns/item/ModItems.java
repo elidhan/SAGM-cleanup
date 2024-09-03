@@ -241,7 +241,7 @@ public class ModItems
                             ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(1f,1f), //Spread
+            new Vector2f(0.5f,0.5f), //Spread
             new Vector2f(0.25f,1.25f), //Camera Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
@@ -261,10 +261,10 @@ public class ModItems
                             ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(1.625f,1.625f),
-            new Vector2f(0.375f,2.5f),
-            new Vector3f( 0f, 0.375f, 0.75f),
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
+            new Vector2f(1.5f,1.5f),
+            new Vector2f(0.75f,2.5f),
+            new Vector3f( 0.0625f, 0.5f, 0.75f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE},
             GunItem.fireType.AUTO
     ));
 
