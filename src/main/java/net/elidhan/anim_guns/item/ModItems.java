@@ -1,6 +1,7 @@
 package net.elidhan.anim_guns.item;
 
 import net.elidhan.anim_guns.AnimatedGuns;
+import net.elidhan.anim_guns.config.ModConfigs;
 import net.elidhan.anim_guns.sound.ModSounds;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -129,7 +130,7 @@ public class ModItems
 
     public static final Item DEV_PISTOL = registerItem("dev_pistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol",
-            5.5f, 1, 2, 17, 36,
+            ModConfigs.DMG_PISTOL_LIGHT, 1, 2, 17, 36,
             ModSounds.SHOT_PISTOL_LIGHT,
             new SoundEvent[]
                     {

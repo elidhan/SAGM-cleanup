@@ -2,6 +2,7 @@ package net.elidhan.anim_guns;
 
 import mod.azure.azurelib.core.math.Variable;
 import mod.azure.azurelib.core.molang.MolangParser;
+import net.elidhan.anim_guns.config.ModConfigs;
 import net.elidhan.anim_guns.entity.projectile.BulletProjectileEntity;
 import net.elidhan.anim_guns.item.ModItems;
 import net.elidhan.anim_guns.network.ModNetworking;
@@ -30,6 +31,8 @@ public class AnimatedGuns implements ModInitializer
 		LOGGER.info("Init S.A.G.M");
 
 		//Reg
+		ModConfigs.registerConfigs();
+
 		ModItems.registerModItems();
 		ModItems.registerModItemGroups();
 		ModNetworking.registerC2SPackets();
