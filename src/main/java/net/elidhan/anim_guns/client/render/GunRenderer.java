@@ -184,6 +184,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 attachmentBone = attachmentModel.getBone("muzzle").orElse(null);
                 GeoBone muzzleEnd = attachmentModel.getBone("end").orElse(null);
 
+                buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+muzzleID+".png")));
+
                 poseStack.push();
 
                 if(attachmentBone != null)
@@ -203,6 +205,8 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 if (attachmentModel == null) return;
 
                 attachmentBone = attachmentModel.getBone("grip").orElse(null);
+
+                buffer1 = this.bufferSource.getBuffer(RenderLayer.getEntityTranslucent(new Identifier(AnimatedGuns.MOD_ID, "textures/misc/"+gripID+".png")));
 
                 poseStack.push();
 
