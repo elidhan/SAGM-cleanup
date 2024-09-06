@@ -404,14 +404,14 @@
 							"vector": [3.46141, -7.1174, -1.73474]
 						},
 						"2.1563": {
-							"vector": [3.8, -6.13125, -6.45781]
+							"vector": [3.8, -6.13125, -2.45781]
 						},
 						"2.2604": {
-							"vector": [3.8, -6.13, -2.46],
+							"vector": [3.8, -6.13, -1.96],
 							"easing": "easeInOutSine"
 						},
 						"2.3333": {
-							"vector": [3.8, -6.13, -2.46],
+							"vector": [3.8, -6.13, -1.96],
 							"easing": "easeInOutSine"
 						},
 						"2.4167": {
@@ -431,14 +431,15 @@
 				"bolt": {
 					"position": {
 						"2.1563": {
-							"vector": [0, 0, 0]
-						},
-						"2.25": {
 							"vector": [0, 0, 4],
 							"easing": "easeInOutSine"
 						},
+						"2.25": {
+							"vector": [0, 0, 4.5],
+							"easing": "easeInOutSine"
+						},
 						"2.3333": {
-							"vector": [0, 0, 4],
+							"vector": [0, 0, 4.5],
 							"easing": "easeInOutSine"
 						},
 						"2.4167": {

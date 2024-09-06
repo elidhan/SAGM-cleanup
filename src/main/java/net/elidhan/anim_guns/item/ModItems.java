@@ -150,7 +150,7 @@ public class ModItems
 
     public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol2",
-            11, 1, 3, 7, 40,
+            11, 1, 6, 7, 40,
             ModSounds.SHOT_PISTOL_HEAVY,
             new SoundEvent[]
                     {
@@ -170,7 +170,7 @@ public class ModItems
 
     public static final Item DEV_PISTOL_3 = registerItem("dev_pistol3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "dev_pistol3",
-            7, 1, 2, 7, 36,
+            7, 1, 3, 7, 36,
             ModSounds.SHOT_PISTOL_SERVICE,
             new SoundEvent[]
                     {
