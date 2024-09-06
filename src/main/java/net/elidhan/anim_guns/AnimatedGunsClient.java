@@ -4,6 +4,7 @@ import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.client.render.BulletRenderer;
 import net.elidhan.anim_guns.client.render.GunGUIRenderer;
 import net.elidhan.anim_guns.event.client.ClientPreAttackHandler;
+import net.elidhan.anim_guns.event.client.HudRenderHandler;
 import net.elidhan.anim_guns.item.ModItems;
 import net.elidhan.anim_guns.network.ModNetworking;
 import net.fabricmc.api.ClientModInitializer;
@@ -13,6 +14,7 @@ import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -65,13 +67,12 @@ public class AnimatedGunsClient implements ClientModInitializer
 
 		//Intercept Attack mouse key
 		ClientPreAttackCallback.EVENT.register(new ClientPreAttackHandler());
+		HudRenderCallback.EVENT.register(new HudRenderHandler());
 
 		ModNetworking.registerS2CPackets();
-
 		EntityRendererRegistry.register(AnimatedGuns.BulletEntityType, BulletRenderer::new);
 
 		WorldRenderEvents.START.register(context -> RecoilHandler.getInstance().render(MinecraftClient.getInstance()));
-
 		ClientTickEvents.START_CLIENT_TICK.register(client ->
 		{
 			RecoilHandler.getInstance().tick();
