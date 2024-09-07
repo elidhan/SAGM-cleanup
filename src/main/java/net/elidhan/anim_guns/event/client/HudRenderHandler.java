@@ -27,7 +27,6 @@ public class HudRenderHandler implements HudRenderCallback
         Text text = Text.translatable(String.valueOf(ammoCount));
         if (ammoCount < 10) text = Text.translatable("0"+ammoCount);
 
-
         if(maxAmmo < 20)
         {
             drawContext.drawTextWithShadow(client.textRenderer, text,
@@ -40,7 +39,7 @@ public class HudRenderHandler implements HudRenderCallback
                 int k = (i < maxAmmo-ammoCount) ? 16 : 0;
 
                 drawContext.drawTexture(AMMO_ICONS,
-                        (scaledWidth/2) + (i*5 - i ) + client.textRenderer.getWidth(text) + 92,
+                        (scaledWidth/2) + (i*5 - i ) + 96,
                         scaledHeight - 39,
                         3, k, 6, 16);
             }
@@ -54,12 +53,14 @@ public class HudRenderHandler implements HudRenderCallback
 
             for (int i = 0; i < maxAmmo; i++)
             {
-                int j = i / (maxAmmo/2);
                 int k = (i < maxAmmo-ammoCount) ? 8 : 0;
 
+                int xPos = i%2 == 0 ? (scaledWidth/2) + (i*2 - i) + 96 : (scaledWidth/2) + (i*2 - i) + 95;
+                int yPos = i%2 == 0 ? scaledHeight - 39 : scaledHeight - 31;
+
                 drawContext.drawTexture(AMMO_ICONS,
-                        (scaledWidth/2) + (i*3-i) + client.textRenderer.getWidth(text) + 92 - (j * maxAmmo),
-                        scaledHeight - (39-(8*j)),
+                        xPos,
+                        yPos,
                         11, k, 3, 8);
             }
         }
