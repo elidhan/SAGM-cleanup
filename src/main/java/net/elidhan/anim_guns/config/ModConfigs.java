@@ -11,7 +11,7 @@ public class ModConfigs {
     public static float DMG_PISTOL_HEAVY;
     public static float DMG_PISTOL_SERVICE;
 
-    //public static float DMG_REVOLVER_COMPACT;
+    public static float DMG_REVOLVER_COMPACT;
     public static float DMG_REVOLVER_MAGNUM;
     public static float DMG_REVOLVER_COLT;
 
@@ -51,7 +51,7 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("damage.pistol_heavy", 11), "double");
         configs.addKeyValuePair(new Pair<>("damage.pistol_service", 7), "double");
 
-        configs.addKeyValuePair(new Pair<>("damage.revolver_compact", 12), "double");
+        configs.addKeyValuePair(new Pair<>("damage.revolver_compact", 7), "double");
         configs.addKeyValuePair(new Pair<>("damage.revolver_magnum", 12), "double");
         configs.addKeyValuePair(new Pair<>("damage.revolver_coltarmy", 12), "double");
 
@@ -84,6 +84,7 @@ public class ModConfigs {
         DMG_PISTOL_HEAVY = (float) CONFIG.getOrDefault("damage.pistol_heavy", 11);
         DMG_PISTOL_SERVICE = (float) CONFIG.getOrDefault("damage.pistol_service", 7);
 
+        DMG_REVOLVER_COMPACT = (float) CONFIG.getOrDefault("damage.revolver_compact", 7);
         DMG_REVOLVER_MAGNUM = (float) CONFIG.getOrDefault("damage.revolver_magnum", 12);
         DMG_REVOLVER_COLT = (float) CONFIG.getOrDefault("damage.revolver_coltarmy", 12);
 

@@ -7,6 +7,7 @@ import net.elidhan.anim_guns.event.client.ClientPreAttackHandler;
 import net.elidhan.anim_guns.event.client.HudRenderHandler;
 import net.elidhan.anim_guns.item.ModItems;
 import net.elidhan.anim_guns.network.ModNetworking;
+import net.elidhan.anim_guns.screen.BlueprintScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -20,6 +21,7 @@ import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.ModelIdentifier;
@@ -64,6 +66,8 @@ public class AnimatedGunsClient implements ClientModInitializer
 		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_3);
 		registerGunWorldViewRenderer(ModItems.DEV_SNIPER);
 		registerGunWorldViewRenderer(ModItems.DEV_DMR_3);
+
+		HandledScreens.register(AnimatedGuns.BLUEPRINT_SCREEN_HANDLER_TYPE, BlueprintScreen::new);
 
 		//Intercept Attack mouse key
 		ClientPreAttackCallback.EVENT.register(new ClientPreAttackHandler());

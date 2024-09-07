@@ -24,6 +24,7 @@ public class ModItems
     public static final Item PLASTIC = registerItem("plastic", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item ENRICHED_IRON = registerItem("enriched_iron", new Item(new FabricItemSettings().maxCount(64)));
 
+    public static final Item PISTOL_GRIP_WOOD = registerItem("wooden_pistol_grip", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item PISTOL_GRIP = registerItem("pistol_grip", new Item(new FabricItemSettings().maxCount(64)));
 
     public static final Item LONG_BARREL = registerItem("long_barrel", new Item(new FabricItemSettings().maxCount(64)));
@@ -40,7 +41,7 @@ public class ModItems
     public static final Item RIFLE_MAGAZINE = registerItem("rifle_magazine", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item TUBE_MAGAZINE = registerItem("tube_magazine", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item LMG_AMMO_BOX = registerItem("lmg_ammo_box", new Item(new FabricItemSettings().maxCount(64)));
-    /*
+
     public static final Item BLUEPRINT_BUNDLE = registerItem("blueprint_bundle", new BlueprintBundleItem(new FabricItemSettings().maxCount(1)));
     public static final Item PISTOL_BLUEPRINT = registerItem("blueprint_pistol_light", new BlueprintItem(new FabricItemSettings().maxCount(1)));
     public static final Item SERVICE_PISTOL_BLUEPRINT = registerItem("blueprint_pistol_service", new BlueprintItem(new FabricItemSettings().maxCount(1)));
@@ -64,7 +65,6 @@ public class ModItems
     public static final Item LMG_BLUEPRINT = registerItem("blueprint_lmg_m60", new BlueprintItem(new FabricItemSettings().maxCount(1)));
     public static final Item MINIGUN_BLUEPRINT = registerItem("blueprint_lmg_minigun", new BlueprintItem(new FabricItemSettings().maxCount(1)));
     public static final Item ANTI_MATERIEL_RIFLE_BLUEPRINT = registerItem("blueprint_amr_classic", new BlueprintItem(new FabricItemSettings().maxCount(1)));
-     */
 
     public static final Item STANDARD_HANDGUN_BULLET = registerItem("standard_handgun_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item HEAVY_HANDGUN_BULLET = registerItem("heavy_handgun_cartridge", new Item(new FabricItemSettings().maxCount(64)));
@@ -332,7 +332,7 @@ public class ModItems
 
     public static final Item DEV_DMR_3 = registerItem("dev_dmr3", new GunMagFedItem(new Item.Settings().maxCount(1),
             "dev_dmr3",
-            16, 1, 9, 10, 60,
+            ModConfigs.DMG_SNIPER_DRAGUNOV, 1, 9, 10, 60,
             ModSounds.SHOT_DMR_IRONCURTAIN,
             new SoundEvent[]
                     {
@@ -464,7 +464,7 @@ public class ModItems
 
     public static void registerModItemGroups()
     {
-        final ItemGroup GUNS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
+        final ItemGroup GUNS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.STANDARD_RIFLE_BULLET)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.STANDARD_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.STANDARD_RIFLE_BULLET));
@@ -477,6 +477,7 @@ public class ModItems
             entries.add(new ItemStack(ModItems.HARDENED_IRON_NUGGET));
             entries.add(new ItemStack(ModItems.PLASTIC));
             entries.add(new ItemStack(ModItems.ENRICHED_IRON));
+            entries.add(new ItemStack(ModItems.PISTOL_GRIP_WOOD));
             entries.add(new ItemStack(ModItems.PISTOL_GRIP));
             entries.add(new ItemStack(ModItems.LONG_BARREL));
             entries.add(new ItemStack(ModItems.SHORT_BARREL));
@@ -492,9 +493,32 @@ public class ModItems
             entries.add(new ItemStack(ModItems.RIFLE_MAGAZINE));
             entries.add(new ItemStack(ModItems.TUBE_MAGAZINE));
             entries.add(new ItemStack(ModItems.LMG_AMMO_BOX));
+            entries.add(new ItemStack(ModItems.BLUEPRINT_BUNDLE));
+            entries.add(new ItemStack(ModItems.PISTOL_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.SERVICE_PISTOL_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.HEAVY_PISTOL_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.MAGNUM_REVOLVER_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.OLD_ARMY_REVOLVER_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.MACHINE_PISTOL_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.HEAVY_SMG_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.RAPID_SMG_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.LIGHT_ASSAULT_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.HEAVY_ASSAULT_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.WAR_TORN_ASSAULT_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.COMBAT_SHOTGUN_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.RIOT_SHOTGUN_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.DOUBLE_BARRELED_SHOTGUN_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.CLASSIC_SNIPER_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.ARCTIC_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.BRUSH_GUN_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.MARKSMAN_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.MOTHERLAND_MARKSMAN_RIFLE_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.LMG_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.MINIGUN_BLUEPRINT));
+            entries.add(new ItemStack(ModItems.ANTI_MATERIEL_RIFLE_BLUEPRINT));
         }).displayName(Text.translatable("crafting")).build();
 
-        final ItemGroup ATTACHMENTS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {
+        final ItemGroup ATTACHMENTS = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.SIGHT_8XSCOPE)).entries((displayContext, entries) -> {
             entries.add(new ItemStack(ModItems.SIGHT_HOLO));
             entries.add(new ItemStack(ModItems.SIGHT_8XSCOPE));
             entries.add(new ItemStack(ModItems.MUZZLE_MBRAKE));

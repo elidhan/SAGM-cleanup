@@ -6,12 +6,11 @@ import mod.azure.azurelib.core.animation.AnimationController;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.RecoilHandler;
-import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.item.GunMagFedItem;
-import net.elidhan.anim_guns.item.GunSingleLoaderItem;
+import net.elidhan.anim_guns.item.*;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
@@ -24,8 +23,27 @@ public class ModNetworking
     public static final Identifier C2S_MELEE = new Identifier(AnimatedGuns.MOD_ID, "c2s_melee");
     public static final Identifier C2S_SHOOT = new Identifier(AnimatedGuns.MOD_ID, "c2s_shoot");
     public static final Identifier C2S_PARTICLES = new Identifier(AnimatedGuns.MOD_ID, "c2s_particles");
+    public static final Identifier C2S_SELECT_BLUEPRINT = new Identifier(AnimatedGuns.MOD_ID, "c2s_select_blueprint");
     public static void registerC2SPackets()
     {
+        ServerPlayNetworking.registerGlobalReceiver(C2S_SELECT_BLUEPRINT, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
+        {
+            int i = buf.readInt();
+            Item blueprint = BlueprintItem.BLUEPRINT_ITEM_LIST.get(i);
+
+            if (player.getMainHandStack().getItem() instanceof BlueprintItem || player.getMainHandStack().getItem() instanceof BlueprintBundleItem) {
+                player.getMainHandStack().decrement(1);
+            } else if (player.getOffHandStack().getItem() instanceof BlueprintItem || player.getOffHandStack().getItem() instanceof BlueprintBundleItem) {
+                player.getOffHandStack().decrement(1);
+            }
+
+            if (player.getInventory().getEmptySlot() > -1) {
+                player.giveItemStack(new ItemStack(blueprint));
+            } else {
+                player.dropItem(new ItemStack(blueprint), false, true);
+            }
+
+        });
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
             if (player.getMainHandStack().getItem() instanceof GunItem && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize() && !((IFPlayerWithGun) player).isReloading())
