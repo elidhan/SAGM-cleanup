@@ -27,29 +27,40 @@ public class HudRenderHandler implements HudRenderCallback
         Text text = Text.translatable(String.valueOf(ammoCount));
         if (ammoCount < 10) text = Text.translatable("0"+ammoCount);
 
-        drawContext.drawTextWithShadow(client.textRenderer, text, scaledWidth - client.textRenderer.getWidth(text) - 12,scaledHeight - 32  , 16777215);
+
         if(maxAmmo < 20)
         {
+            drawContext.drawTextWithShadow(client.textRenderer, text,
+                    scaledWidth/2 + client.textRenderer.getWidth(text) + (93 + (maxAmmo*4)),
+                    scaledHeight - 35,
+                    16777215);
+
             for (int i = 0; i < maxAmmo; i++)
             {
-                drawContext.drawTexture(AMMO_ICONS, scaledWidth - (i*6 - i) - client.textRenderer.getWidth(text) - 20, scaledHeight - 36, 2, 16, 7, 16);
-            }
-            for (int i = 0; i < ammoCount; i++)
-            {
-                drawContext.drawTexture(AMMO_ICONS, scaledWidth - (i*6 - i) - client.textRenderer.getWidth(text) - 20, scaledHeight - 36, 2, 0, 7, 16);
+                int k = (i < maxAmmo-ammoCount) ? 16 : 0;
+
+                drawContext.drawTexture(AMMO_ICONS,
+                        (scaledWidth/2) + (i*5 - i ) + client.textRenderer.getWidth(text) + 92,
+                        scaledHeight - 39,
+                        3, k, 6, 16);
             }
         }
         else
         {
+            drawContext.drawTextWithShadow(client.textRenderer, text,
+                    scaledWidth/2 + client.textRenderer.getWidth(text) + 115 + (maxAmmo - 20),
+                    scaledHeight - 35,
+                    16777215);
+
             for (int i = 0; i < maxAmmo; i++)
             {
-                int j = i / (maxAmmo / 2);
-                drawContext.drawTexture(AMMO_ICONS, scaledWidth - (i*3 - i ) - client.textRenderer.getWidth(text) - 20 + (j * maxAmmo), scaledHeight - (28 + (8 * j)), 11, 8, 3, 8);
-            }
-            for (int i = 0; i < ammoCount; i++)
-            {
-                int j = i / (maxAmmo / 2);
-                drawContext.drawTexture(AMMO_ICONS, scaledWidth - (i*3 - i ) - client.textRenderer.getWidth(text) - 20 + (j * maxAmmo), scaledHeight - (28 + (8 * j)), 11, 0, 3, 8);
+                int j = i / (maxAmmo/2);
+                int k = (i < maxAmmo-ammoCount) ? 8 : 0;
+
+                drawContext.drawTexture(AMMO_ICONS,
+                        (scaledWidth/2) + (i*3-i) + client.textRenderer.getWidth(text) + 92 - (j * maxAmmo),
+                        scaledHeight - (39-(8*j)),
+                        11, k, 3, 8);
             }
         }
     }

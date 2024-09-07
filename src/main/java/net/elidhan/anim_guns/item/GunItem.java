@@ -230,7 +230,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     {
         if (hand != Hand.MAIN_HAND) return TypedActionResult.fail(user.getStackInHand(hand));
 
-        if(world instanceof ServerWorld && user instanceof IFPlayerWithGun player && !player.isReloading())
+        if(user instanceof IFPlayerWithGun player && !player.isReloading())
             player.toggleAim(!player.isAiming());
 
         return TypedActionResult.pass(user.getStackInHand(hand));
