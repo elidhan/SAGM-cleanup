@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggi",
+    "ggi",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "i": {
+      "item": "anim_guns:hardened_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "anim_guns:max_power_rifle_cartridge",
+    "count": 5
+  }
+}

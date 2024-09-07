@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggs",
+    "ggn",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "item": "anim_guns:hardened_iron_ingot"
+    },
+    "s": {
+      "item": "minecraft:gold_ingot"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "n": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "item": "anim_guns:max_power_rifle_cartridge",
+    "count": 2
+  }
+}

@@ -70,6 +70,8 @@ public class ModItems
     public static final Item HEAVY_HANDGUN_BULLET = registerItem("heavy_handgun_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item STANDARD_RIFLE_BULLET = registerItem("standard_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item HEAVY_RIFLE_BULLET = registerItem("heavy_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
+    public static final Item MAX_POWER_RIFLE_BULLET = registerItem("max_power_rifle_cartridge", new Item(new FabricItemSettings().maxCount(64)));
+    public static final Item ANTI_MATERIEL_BULLET = registerItem("anti_materiel_cartridge", new Item(new FabricItemSettings().maxCount(64)));
     public static final Item SHOTGUN_SHELL = registerItem("shotgun_shell", new Item(new FabricItemSettings().maxCount(64)));
 
     public static final Item GRIP_FOREGRIP = registerItem("grip_foregrip", new AttachmentItem(new FabricItemSettings().maxCount(1),
@@ -108,8 +110,8 @@ public class ModItems
             true
     ));
 
-    public static final Item DEV_REVOLVER = registerItem("dev_revolver", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_revolver",
+    public static final Item REVOLVER_MAGNUM = registerItem("revolver_magnum", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "revolver_magnum",
             12, 1, 8, 8, 55,
             ModSounds.SHOT_REVOLVER,
             new SoundEvent[]
@@ -128,8 +130,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_PISTOL = registerItem("dev_pistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_pistol",
+    public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "pistol_light",
             ModConfigs.DMG_PISTOL_LIGHT, 1, 2, 17, 36,
             ModSounds.SHOT_PISTOL_LIGHT,
             new SoundEvent[]
@@ -148,8 +150,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_PISTOL_2 = registerItem("dev_pistol2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_pistol2",
+    public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "pistol_heavy",
             11, 1, 6, 7, 40,
             ModSounds.SHOT_PISTOL_HEAVY,
             new SoundEvent[]
@@ -168,8 +170,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_PISTOL_3 = registerItem("dev_pistol3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_pistol3",
+    public static final Item PISTOL_SERVICE = registerItem("pistol_service", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "pistol_service",
             7, 1, 3, 7, 36,
             ModSounds.SHOT_PISTOL_SERVICE,
             new SoundEvent[]
@@ -188,8 +190,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_SHOTGUN = registerItem("dev_shotgun", new GunMagFedItem(new Item.Settings().maxCount(1),
-            "dev_shotgun",
+    public static final Item SHOTGUN_DOUBLEBARREL = registerItem("shotgun_doublebarrel", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "shotgun_doublebarrel",
             6, 8, 3, 2, 50,
             ModSounds.SHOT_SHOTGUN_DOUBLEBARREL,
             new SoundEvent[]
@@ -208,8 +210,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_SHOTGUN2 = registerItem("dev_shotgun2", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
-            "dev_shotgun2",
+    public static final Item SHOTGUN_COMBAT = registerItem("shotgun_combat", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "shotgun_combat",
             6, 8, 10, 6, 50,
             ModSounds.SHOT_SHOTGUN_COMBAT,
             new SoundEvent[]
@@ -229,8 +231,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_SMG = registerItem("dev_smg", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_smg",
+    public static final Item SMG_MACHINEPISTOL = registerItem("smg_machinepistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "smg_machinepistol",
             5, 1, 1, 30, 47,
             ModSounds.SHOT_SMG_MACHINEPISTOL,
             new SoundEvent[]
@@ -249,8 +251,8 @@ public class ModItems
             GunItem.fireType.AUTO
     ));
 
-    public static final Item DEV_ASSAULTRIFLE = registerItem("dev_assaultrifle", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_assaultrifle",
+    public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "assaultrifle_light",
             7,1, 2, 30, 44,
             ModSounds.SHOT_ASSAULT,
             new SoundEvent[]
@@ -269,8 +271,8 @@ public class ModItems
             GunItem.fireType.AUTO
     ));
 
-    public static final Item DEV_ASSAULTRIFLE_2 = registerItem("dev_assaultrifle2", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_assaultrifle2",
+    public static final Item ASSAULTRIFLE_RUS = registerItem("assaultrifle_rus", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "assaultrifle_rus",
             8, 1, 2, 30, 60,
             ModSounds.SHOT_ASSAULT_CLASSIC,
             new SoundEvent[]
@@ -289,9 +291,9 @@ public class ModItems
             GunItem.fireType.AUTO
     ));
 
-    public static final Item DEV_ASSAULTRIFLE_3 = registerItem("dev_assaultrifle3", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "dev_assaultrifle3",
-            11, 1, 3, 20, 50,
+    public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "assaultrifle_heavy",
+            ModConfigs.DMG_ASSAULT_DESERT, 1, 3, 20, 50,
             ModSounds.SHOT_ASSAULT_DESERT,
             new SoundEvent[]
                     {
@@ -309,9 +311,9 @@ public class ModItems
             GunItem.fireType.AUTO
     ));
 
-    public static final Item DEV_SNIPER = registerItem("dev_sniper", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
-            "dev_sniper",
-            22, 1, 17, 5, 50,
+    public static final Item SNIPER_CLASSIC = registerItem("sniper_classic", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "sniper_classic",
+            ModConfigs.DMG_SNIPER_CLASSIC, 1, 17, 5, 50,
             ModSounds.SHOT_SNIPER_CLASSIC,
             new SoundEvent[]
                     {
@@ -330,8 +332,8 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
-    public static final Item DEV_DMR_3 = registerItem("dev_dmr3", new GunMagFedItem(new Item.Settings().maxCount(1),
-            "dev_dmr3",
+    public static final Item SNIPER_DRAGUNOV = registerItem("sniper_dragunov", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "sniper_dragunov",
             ModConfigs.DMG_SNIPER_DRAGUNOV, 1, 9, 10, 60,
             ModSounds.SHOT_DMR_IRONCURTAIN,
             new SoundEvent[]
@@ -469,6 +471,8 @@ public class ModItems
             entries.add(new ItemStack(ModItems.HEAVY_HANDGUN_BULLET));
             entries.add(new ItemStack(ModItems.STANDARD_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.HEAVY_RIFLE_BULLET));
+            entries.add(new ItemStack(ModItems.MAX_POWER_RIFLE_BULLET));
+            entries.add(new ItemStack(ModItems.ANTI_MATERIEL_BULLET));
             entries.add(new ItemStack(ModItems.SHOTGUN_SHELL));
         }).displayName(Text.translatable("guns")).build();
 

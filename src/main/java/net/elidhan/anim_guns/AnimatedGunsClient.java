@@ -54,18 +54,18 @@ public class AnimatedGunsClient implements ClientModInitializer
 	public void onInitializeClient()
 	{
 		//Register GUI perspective renderers
-		registerGunWorldViewRenderer(ModItems.DEV_PISTOL);
-		registerGunWorldViewRenderer(ModItems.DEV_PISTOL_2);
-		registerGunWorldViewRenderer(ModItems.DEV_PISTOL_3);
-		registerGunWorldViewRenderer(ModItems.DEV_REVOLVER);
-		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN);
-		registerGunWorldViewRenderer(ModItems.DEV_SHOTGUN2);
-		registerGunWorldViewRenderer(ModItems.DEV_SMG);
-		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE);
-		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_2);
-		registerGunWorldViewRenderer(ModItems.DEV_ASSAULTRIFLE_3);
-		registerGunWorldViewRenderer(ModItems.DEV_SNIPER);
-		registerGunWorldViewRenderer(ModItems.DEV_DMR_3);
+		registerGunWorldViewRenderer(ModItems.PISTOL_LIGHT);
+		registerGunWorldViewRenderer(ModItems.PISTOL_HEAVY);
+		registerGunWorldViewRenderer(ModItems.PISTOL_SERVICE);
+		registerGunWorldViewRenderer(ModItems.REVOLVER_MAGNUM);
+		registerGunWorldViewRenderer(ModItems.SHOTGUN_DOUBLEBARREL);
+		registerGunWorldViewRenderer(ModItems.SHOTGUN_COMBAT);
+		registerGunWorldViewRenderer(ModItems.SMG_MACHINEPISTOL);
+		registerGunWorldViewRenderer(ModItems.ASSAULTRIFLE_LIGHT);
+		registerGunWorldViewRenderer(ModItems.ASSAULTRIFLE_RUS);
+		registerGunWorldViewRenderer(ModItems.ASSAULTRIFLE_HEAVY);
+		registerGunWorldViewRenderer(ModItems.SNIPER_CLASSIC);
+		registerGunWorldViewRenderer(ModItems.SNIPER_DRAGUNOV);
 
 		HandledScreens.register(AnimatedGuns.BLUEPRINT_SCREEN_HANDLER_TYPE, BlueprintScreen::new);
 

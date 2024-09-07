@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggn",
+    "cc "
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "n": {
+      "item": "anim_guns:hardened_iron_nugget"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "anim_guns:heavy_handgun_cartridge",
+    "count": 5
+  }
+}
