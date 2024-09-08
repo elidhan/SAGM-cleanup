@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " #p",
+    "  p",
     "bis",
     "fmg"
   ],
@@ -11,9 +11,6 @@
     },
     "p": {
       "item": "anim_guns:blueprint_sniper_marksman"
-    },
-    "#": {
-      "item": "anim_guns:gun_scope"
     },
     "f": {
       "item": "anim_guns:modern_handguard"
