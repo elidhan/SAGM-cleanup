@@ -5,6 +5,7 @@ import mod.azure.azurelib.core.animation.AnimationController;
 import mod.azure.azurelib.util.ClientUtils;
 import net.elidhan.anim_guns.animations.GunAnimations;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import org.joml.Vector2f;
@@ -12,9 +13,9 @@ import org.joml.Vector3f;
 
 public class GunMagFedItem extends GunItem
 {
-    public GunMagFedItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
+    public GunMagFedItem(Settings settings, String id, Item ammoItem, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
     {
-        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
+        super(settings, id, ammoItem, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
     }
 
     @Override

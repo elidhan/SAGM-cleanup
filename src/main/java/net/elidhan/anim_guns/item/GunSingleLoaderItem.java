@@ -1,10 +1,17 @@
 package net.elidhan.anim_guns.item;
 
+import mod.azure.azurelib.animatable.GeoItem;
 import mod.azure.azurelib.core.animation.AnimatableManager;
 import mod.azure.azurelib.core.animation.AnimationController;
 import mod.azure.azurelib.util.ClientUtils;
+import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.animations.GunAnimations;
+import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.util.InventoryUtil;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import org.joml.Vector2f;
@@ -14,10 +21,32 @@ public class GunSingleLoaderItem extends GunItem
 {
     private final int[] reloadStages;
 
-    public GunSingleLoaderItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
+    public GunSingleLoaderItem(Settings settings, String id, Item ammoItem, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, int[] reloadStages, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, GunItem.fireType fireType)
     {
-        super(settings, id, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
+        super(settings, id, ammoItem, damage, shotCount, fireRate, magSize, reloadTime, shotSound, reloadSounds, spread, cameraRecoil, viewModelRecoilMult, acceptedAttachmentTypes, fireType);
         this.reloadStages = reloadStages;
+    }
+
+    @Override
+    public void tickReload(ServerPlayerEntity player, ItemStack stack, int tick)
+    {
+        if (tick == getReloadStageTick(0))
+            AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "reload_1");
+        if (tick == getReloadStageTick(1))
+        {
+            stack.getOrCreateNbt().putInt("ammo", stack.getOrCreateNbt().getInt("ammo") + 1);
+            InventoryUtil.removeItemFromInventory(player, this.getAmmoItem(), 1);
+
+            if (stack.getOrCreateNbt().getInt("ammo") < this.getMagSize())
+            {
+                AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "reload_1");
+                ((IFPlayerWithGun)player).setReloadProgressTick(getReloadStageTick(0));
+            }
+            else
+            {
+                AnimationHandler.playAnim(player, stack, GeoItem.getId(stack), "reload_2");
+            }
+        }
     }
 
     public int getReloadStageTick(int stage)

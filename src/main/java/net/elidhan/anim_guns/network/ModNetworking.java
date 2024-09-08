@@ -8,6 +8,7 @@ import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.*;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.util.InventoryUtil;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.Item;
@@ -46,7 +47,10 @@ public class ModNetworking
         });
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
-            if (player.getMainHandStack().getItem() instanceof GunItem && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize() && !((IFPlayerWithGun) player).isReloading())
+            if (player.getMainHandStack().getItem() instanceof GunItem gun
+                    && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize()
+                    && InventoryUtil.itemCountInInventory(player, gun.getAmmoItem()) > 0
+                    && !((IFPlayerWithGun) player).isReloading())
             {
                 ((IFPlayerWithGun) player).startReload();
 

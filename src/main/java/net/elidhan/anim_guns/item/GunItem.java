@@ -53,6 +53,7 @@ import java.util.function.Supplier;
 public class GunItem extends Item implements FabricItem, GeoItem
 {
     private final String id;
+    private final Item ammoItem;
     private final float damage;
     private final int shotCount;
     private final int fireRate;
@@ -72,12 +73,14 @@ public class GunItem extends Item implements FabricItem, GeoItem
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
     protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
 
-    public GunItem(Settings settings, String id, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, fireType firingType)
+    public GunItem(Settings settings, String id, Item ammoItem, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, fireType firingType)
     {
         super(settings);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
 
         this.id = id;
+
+        this.ammoItem = ammoItem;
         this.damage = damage;
         this.shotCount = shotCount;
         this.fireRate = fireRate;
@@ -154,6 +157,11 @@ public class GunItem extends Item implements FabricItem, GeoItem
         ServerPlayNetworking.send(player, ModNetworking.S2C_SHOT, PacketByteBufs.empty());
     }
     //======================//
+
+    //=====Reloading=====//
+    public void tickReload(ServerPlayerEntity player, ItemStack stack, int tick)
+    {}
+    //===================//
 
     //=====Attachments Stuff=====//
     public String getSightID(ItemStack currentItemStack)
@@ -241,6 +249,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public int getReloadTime() {return reloadTime;}
     public String getID() {return this.id;}
     public int getMagSize() {return magSize;}
+    public Item getAmmoItem() {return ammoItem;}
 
     public float getRecoilX()
     {

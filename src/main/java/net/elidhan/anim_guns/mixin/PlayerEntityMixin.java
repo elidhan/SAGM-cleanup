@@ -5,8 +5,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mod.azure.azurelib.animatable.GeoItem;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.item.GunItem;
-import net.elidhan.anim_guns.item.GunSingleLoaderItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
+import net.elidhan.anim_guns.util.InventoryUtil;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -86,29 +86,19 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         GunItem gun = (GunItem)this.currentGun.getItem();
 
-        if (gun instanceof GunSingleLoaderItem singleLoader)
-        {
-            if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(0))
-                AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_1");
-            if (this.getReloadProgressTick() == singleLoader.getReloadStageTick(1))
-            {
-                this.currentGun.getOrCreateNbt().putInt("ammo", this.currentGun.getOrCreateNbt().getInt("ammo") + 1);
+        if(InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem()) <= 0)
+            stopReload();
 
-                if (this.currentGun.getOrCreateNbt().getInt("ammo") < gun.getMagSize())
-                {
-                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_1");
-                    setReloadProgressTick(singleLoader.getReloadStageTick(0));
-                }
-                else
-                {
-                    AnimationHandler.playAnim((ServerPlayerEntity) (Object) this, this.currentGun, GeoItem.getId(this.currentGun), "reload_2");
-                }
-            }
-        }
+        gun.tickReload((ServerPlayerEntity)(Object) this, this.currentGun, getReloadProgressTick());
 
         if (getReloadProgressTick() >= ((GunItem)(this.currentGun.getItem())).getReloadTime())
         {
-            this.currentGun.getOrCreateNbt().putInt("ammo", ((GunItem)this.currentGun.getItem()).getMagSize());
+            int ammoNeeded = gun.getMagSize() - this.currentGun.getOrCreateNbt().getInt("ammo");
+            int ammoAvailable = InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem());
+            int ammoToPut = Math.min(ammoAvailable, ammoNeeded);
+
+            this.currentGun.getOrCreateNbt().putInt("ammo", ammoToPut + this.currentGun.getOrCreateNbt().getInt("ammo"));
+            InventoryUtil.removeItemFromInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem(), ammoToPut);
 
             stopReload();
             return;
@@ -116,7 +106,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         setReloadProgressTick(getReloadProgressTick()+1);
     }
-    @Unique
+    @Override
     public void setReloadProgressTick(int reloadTick) {this.dataTracker.set(RELOAD_TICK, reloadTick);}
     @Override
     public int getReloadProgressTick() {return this.dataTracker.get(RELOAD_TICK);}

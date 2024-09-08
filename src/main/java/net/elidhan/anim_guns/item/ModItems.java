@@ -111,7 +111,7 @@ public class ModItems
     ));
 
     public static final Item REVOLVER_MAGNUM = registerItem("revolver_magnum", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "revolver_magnum",
+            "revolver_magnum", ModItems.HEAVY_HANDGUN_BULLET,
             ModConfigs.DMG_REVOLVER_MAGNUM, 1, 8, 8, 55,
             ModSounds.SHOT_REVOLVER,
             new SoundEvent[]
@@ -131,7 +131,7 @@ public class ModItems
     ));
 
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "pistol_light",
+            "pistol_light", ModItems.STANDARD_HANDGUN_BULLET,
             ModConfigs.DMG_PISTOL_LIGHT, 1, 2, 17, 36,
             ModSounds.SHOT_PISTOL_LIGHT,
             new SoundEvent[]
@@ -151,7 +151,7 @@ public class ModItems
     ));
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "pistol_heavy",
+            "pistol_heavy", ModItems.HEAVY_HANDGUN_BULLET,
             ModConfigs.DMG_PISTOL_HEAVY, 1, 6, 7, 40,
             ModSounds.SHOT_PISTOL_HEAVY,
             new SoundEvent[]
@@ -171,7 +171,7 @@ public class ModItems
     ));
 
     public static final Item PISTOL_SERVICE = registerItem("pistol_service", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "pistol_service",
+            "pistol_service", ModItems.STANDARD_HANDGUN_BULLET,
             ModConfigs.DMG_PISTOL_SERVICE, 1, 3, 7, 36,
             ModSounds.SHOT_PISTOL_SERVICE,
             new SoundEvent[]
@@ -191,7 +191,7 @@ public class ModItems
     ));
 
     public static final Item SHOTGUN_DOUBLEBARREL = registerItem("shotgun_doublebarrel", new GunMagFedItem(new Item.Settings().maxCount(1),
-            "shotgun_doublebarrel",
+            "shotgun_doublebarrel", ModItems.SHOTGUN_SHELL,
             ModConfigs.DMG_SHOTGUN_DOUBLEBARREL, 8, 3, 2, 50,
             ModSounds.SHOT_SHOTGUN_DOUBLEBARREL,
             new SoundEvent[]
@@ -211,7 +211,7 @@ public class ModItems
     ));
 
     public static final Item SHOTGUN_COMBAT = registerItem("shotgun_combat", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
-            "shotgun_combat",
+            "shotgun_combat", ModItems.SHOTGUN_SHELL,
             ModConfigs.DMG_SHOTGUN_COMBAT, 8, 10, 6, 50,
             ModSounds.SHOT_SHOTGUN_COMBAT,
             new SoundEvent[]
@@ -232,7 +232,7 @@ public class ModItems
     ));
 
     public static final Item SMG_MACHINEPISTOL = registerItem("smg_machinepistol", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "smg_machinepistol",
+            "smg_machinepistol", ModItems.STANDARD_HANDGUN_BULLET,
             ModConfigs.DMG_SMG_MACHINEPISTOL, 1, 1, 30, 47,
             ModSounds.SHOT_SMG_MACHINEPISTOL,
             new SoundEvent[]
@@ -252,7 +252,7 @@ public class ModItems
     ));
 
     public static final Item ASSAULTRIFLE_LIGHT = registerItem("assaultrifle_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "assaultrifle_light",
+            "assaultrifle_light", ModItems.STANDARD_RIFLE_BULLET,
             ModConfigs.DMG_ASSAULT_LIGHT,1, 2, 30, 44,
             ModSounds.SHOT_ASSAULT,
             new SoundEvent[]
@@ -272,7 +272,7 @@ public class ModItems
     ));
 
     public static final Item ASSAULTRIFLE_RUS = registerItem("assaultrifle_rus", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "assaultrifle_rus",
+            "assaultrifle_rus", ModItems.STANDARD_RIFLE_BULLET,
             ModConfigs.DMG_ASSAULT_CLASSIC, 1, 2, 30, 60,
             ModSounds.SHOT_ASSAULT_CLASSIC,
             new SoundEvent[]
@@ -292,7 +292,7 @@ public class ModItems
     ));
 
     public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
-            "assaultrifle_heavy",
+            "assaultrifle_heavy", ModItems.HEAVY_RIFLE_BULLET,
             ModConfigs.DMG_ASSAULT_DESERT, 1, 3, 20, 50,
             ModSounds.SHOT_ASSAULT_DESERT,
             new SoundEvent[]
@@ -312,7 +312,7 @@ public class ModItems
     ));
 
     public static final Item SNIPER_CLASSIC = registerItem("sniper_classic", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
-            "sniper_classic",
+            "sniper_classic", ModItems.MAX_POWER_RIFLE_BULLET,
             ModConfigs.DMG_SNIPER_CLASSIC, 1, 17, 5, 50,
             ModSounds.SHOT_SNIPER_CLASSIC,
             new SoundEvent[]
@@ -333,7 +333,7 @@ public class ModItems
     ));
 
     public static final Item SNIPER_DRAGUNOV = registerItem("sniper_dragunov", new GunMagFedItem(new Item.Settings().maxCount(1),
-            "sniper_dragunov",
+            "sniper_dragunov", ModItems.HEAVY_RIFLE_BULLET,
             ModConfigs.DMG_SNIPER_DRAGUNOV, 1, 9, 10, 60,
             ModSounds.SHOT_DMR_IRONCURTAIN,
             new SoundEvent[]
