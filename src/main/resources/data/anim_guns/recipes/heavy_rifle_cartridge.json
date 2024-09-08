@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ggi",
-    "ccc"
+    "ggg",
+    "cci"
   ],
   "key": {
     "c": {
@@ -17,6 +17,6 @@
   },
   "result": {
     "item": "anim_guns:heavy_rifle_cartridge",
-    "count": 4
+    "count": 6
   }
 }

@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mod.azure.azurelib.animatable.GeoItem;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.item.GunItem;
+import net.elidhan.anim_guns.item.GunSingleLoaderItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.elidhan.anim_guns.util.InventoryUtil;
 import net.minecraft.entity.EntityType;
@@ -86,7 +87,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         GunItem gun = (GunItem)this.currentGun.getItem();
 
-        if(InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem()) <= 0)
+        if(!(gun instanceof GunSingleLoaderItem) && InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem()) <= 0)
             stopReload();
 
         gun.tickReload((ServerPlayerEntity)(Object) this, this.currentGun, getReloadProgressTick());
