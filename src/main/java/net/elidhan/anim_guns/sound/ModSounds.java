@@ -60,7 +60,12 @@ public class ModSounds
     public static SoundEvent RLD_SMG_1_INSERT = registerSoundEvent("smg_1_insert");
     public static SoundEvent RLD_SMG_1_BOLTBACK = registerSoundEvent("smg_1_boltback");
     public static SoundEvent RLD_SMG_1_BOLTFORWARD = registerSoundEvent("smg_1_boltforward");
-    
+
+    public static SoundEvent RLD_SMG_3_REMOVE = registerSoundEvent("smg_3_remove");
+    public static SoundEvent RLD_SMG_3_INSERT = registerSoundEvent("smg_3_insert");
+    public static SoundEvent RLD_SMG_3_BOLTBACK = registerSoundEvent("smg_3_boltback");
+    public static SoundEvent RLD_SMG_3_BOLTFORWARD = registerSoundEvent("smg_3_boltforward");
+
     public static SoundEvent RLD_AR_1_REMOVE = registerSoundEvent("ar_1_remove");
     public static SoundEvent RLD_AR_1_INSERT = registerSoundEvent("ar_1_insert");
     public static SoundEvent RLD_AR_1_BOLTFORWARD = registerSoundEvent("ar_1_boltforward");

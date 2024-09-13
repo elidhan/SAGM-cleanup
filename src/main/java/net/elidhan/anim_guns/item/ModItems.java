@@ -253,15 +253,15 @@ public class ModItems
 
     public static final Item SMG_HEAVY = registerItem("smg_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "smg_heavy", ModItems.STANDARD_HANDGUN_BULLET,
-            ModConfigs.DMG_SMG_HEAVY,1, 2, 25, 44,
+            ModConfigs.DMG_SMG_HEAVY,1, 2, 25, 60,
             ModSounds.SHOT_SMG_HEAVY,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
-                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
-                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
-                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_SMG_3_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SMG_3_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SMG_3_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SMG_3_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
             new Vector2f(2f,2f),
