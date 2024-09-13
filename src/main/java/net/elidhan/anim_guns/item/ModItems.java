@@ -152,7 +152,7 @@ public class ModItems
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_heavy", ModItems.HEAVY_HANDGUN_BULLET,
-            ModConfigs.DMG_PISTOL_HEAVY, 1, 6, 7, 40,
+            ModConfigs.DMG_PISTOL_HEAVY, 1, 5, 7, 40,
             ModSounds.SHOT_PISTOL_HEAVY,
             new SoundEvent[]
                     {
@@ -248,6 +248,26 @@ public class ModItems
             new Vector2f(1.25f,2.5f),
             new Vector3f( 0f, 0.375f, 0.75f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
+            GunItem.fireType.AUTO
+    ));
+
+    public static final Item SMG_HEAVY = registerItem("smg_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "smg_heavy", ModItems.STANDARD_HANDGUN_BULLET,
+            ModConfigs.DMG_SMG_HEAVY,1, 2, 25, 44,
+            ModSounds.SHOT_SMG_HEAVY,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
+                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(2f,2f),
+            new Vector2f(1f,2.5f),
+            new Vector3f( 0.125f, 0.125f, 0.625f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
             GunItem.fireType.AUTO
     ));
 
