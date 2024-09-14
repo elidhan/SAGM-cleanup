@@ -264,7 +264,7 @@ public class ModItems
                             ModSounds.RLD_SMG_3_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(2f,2f),
+            new Vector2f(3.5f,3.5f),
             new Vector2f(1f,2.5f),
             new Vector3f( 0.125f, 0.125f, 0.625f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
