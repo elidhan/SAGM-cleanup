@@ -152,7 +152,7 @@ public class ModItems
 
     public static final Item PISTOL_HEAVY = registerItem("pistol_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_heavy", ModItems.HEAVY_HANDGUN_BULLET,
-            ModConfigs.DMG_PISTOL_HEAVY, 1, 5, 7, 40,
+            ModConfigs.DMG_PISTOL_HEAVY, 1, 4, 7, 40,
             ModSounds.SHOT_PISTOL_HEAVY,
             new SoundEvent[]
                     {
@@ -225,6 +225,27 @@ public class ModItems
                     },
             new int[] {14,25}, //Reload stages in ticks
             new Vector2f(10f,10f), //Spread
+            new Vector2f(0.75f,6.25f), //Camera Recoil
+            new Vector3f(0f,0.5f,0.125f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE},
+            GunItem.fireType.SEMI
+    ));
+
+    public static final Item SHOTGUN_RIOT = registerItem("shotgun_riot", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "shotgun_riot", ModItems.SHOTGUN_SHELL,
+            ModConfigs.DMG_SHOTGUN_RIOT, 12, 3, 5, 48,
+            ModSounds.SHOT_SHOTGUN_RIOT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
+                            ModSounds.RLD_SHOTGUN_SHELL_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SHOTGUN_3_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SHOTGUN_3_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new int[] {8,21}, //Reload stages in ticks
+            new Vector2f(22.5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.5f,0.125f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE},

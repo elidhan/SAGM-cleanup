@@ -55,6 +55,8 @@ public class ModSounds
     public static SoundEvent RLD_SHOTGUN_SHELL_INSERT = registerSoundEvent("shotgun_shell_insert");
     public static SoundEvent RLD_SHOTGUN_2_PUMPBACK = registerSoundEvent("shotgun_2_pumpback");
     public static SoundEvent RLD_SHOTGUN_2_PUMPFORWARD = registerSoundEvent("shotgun_2_pumpforward");
+    public static SoundEvent RLD_SHOTGUN_3_BOLTBACK = registerSoundEvent("shotgun_3_boltback");
+    public static SoundEvent RLD_SHOTGUN_3_BOLTFORWARD = registerSoundEvent("shotgun_3_boltforward");
 
     public static SoundEvent RLD_SMG_1_REMOVE = registerSoundEvent("smg_1_remove");
     public static SoundEvent RLD_SMG_1_INSERT = registerSoundEvent("smg_1_insert");

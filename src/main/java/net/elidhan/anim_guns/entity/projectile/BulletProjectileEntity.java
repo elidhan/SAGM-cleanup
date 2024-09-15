@@ -17,15 +17,13 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class BulletProjectileEntity extends PersistentProjectileEntity
 {
     private int pelletGroupCount;
-    private int maxLife;
     private int lifeTicks;
-    private Vec3d vel;
+    private int maxLife;
 
     public BulletProjectileEntity(EntityType<? extends BulletProjectileEntity> entityEntityType, World world)
     {
@@ -35,8 +33,8 @@ public class BulletProjectileEntity extends PersistentProjectileEntity
     public BulletProjectileEntity(LivingEntity owner, World world, float bulletDamage, int pelletGroupCount)
     {
         super(AnimatedGuns.BulletEntityType, owner, world);
-        this.maxLife = 10;
         this.lifeTicks = 0;
+        this.maxLife = 10;
         this.pelletGroupCount = pelletGroupCount;
         this.setDamage(bulletDamage);
         this.setNoGravity(true);
@@ -45,15 +43,12 @@ public class BulletProjectileEntity extends PersistentProjectileEntity
     @Override
     public void tick()
     {
-        this.setVelocity(vel);
+        super.tick();
 
         if(this.lifeTicks++ >= this.maxLife)
         {
             this.discard();
-            return;
         }
-
-        super.tick();
     }
 
     @Override
@@ -86,8 +81,11 @@ public class BulletProjectileEntity extends PersistentProjectileEntity
         Entity entity = entityHitResult.getEntity();
         if(entity.damage(entity.getDamageSources().arrow(this, this.getOwner() != null ? this.getOwner() : this), (float)this.getDamage()))
         {
-            entity.timeUntilRegen = 0;
-            if(entity instanceof EnderDragonPart) ((EnderDragonPart) entity).owner.timeUntilRegen = 0;
+            if (entity instanceof LivingEntity entity1 && entity1.getHealth() > 0)
+                entity.timeUntilRegen = 0;
+
+            if(entity instanceof EnderDragonPart part)
+                part.owner.timeUntilRegen = 0;
         }
         this.discard();
     }
@@ -119,9 +117,5 @@ public class BulletProjectileEntity extends PersistentProjectileEntity
     protected SoundEvent getHitSound()
     {
         return SoundEvents.INTENTIONALLY_EMPTY;
-    }
-
-    public void setBaseVel(Vec3d velocity) {
-        this.vel = velocity;
     }
 }

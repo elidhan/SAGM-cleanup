@@ -33,6 +33,8 @@
 	"shotgun_2_insert": 		{ "category": "players", "sounds": [ "anim_guns:shotgun_2_insert" ] },
 	"shotgun_2_pumpback": 		{ "category": "players", "sounds": [ "anim_guns:shotgun_2_pumpback" ] },
 	"shotgun_2_pumpforward": 	{ "category": "players", "sounds": [ "anim_guns:shotgun_2_pumpforward" ] },
+	"shotgun_3_boltback": 		{ "category": "players", "sounds": [ "anim_guns:shotgun_3_boltback" ] },
+	"shotgun_3_boltforward": 	{ "category": "players", "sounds": [ "anim_guns:shotgun_3_boltforward" ] },
 	"smg_1_remove": 			{ "category": "players", "sounds": [ "anim_guns:smg_1_remove" ] },
 	"smg_1_insert": 			{ "category": "players", "sounds": [ "anim_guns:smg_1_insert" ] },
 	"smg_1_boltback": 			{ "category": "players", "sounds": [ "anim_guns:smg_1_boltback" ] },

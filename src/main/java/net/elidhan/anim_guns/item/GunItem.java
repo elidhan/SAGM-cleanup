@@ -130,13 +130,13 @@ public class GunItem extends Item implements FabricItem, GeoItem
             double spreadX = -spread.x + Math.random() * (spread.x - (-spread.x));
             double spreadY = -spread.y + Math.random() * (spread.y - (-spread.y));
 
-            Vec3d vertiSpread = BulletUtil.vertiSpread(player, spreadX);
-            Vec3d horiSpread = BulletUtil.horiSpread(player, spreadY);
+            Vec3d horiSpread = BulletUtil.horiSpread(player, spreadX);
+            Vec3d vertiSpread = BulletUtil.vertiSpread(player, spreadY);
 
             Vec3d result = player.getRotationVector().add(vertiSpread).add(horiSpread);
+            //Vec3d vec3d = result.normalize().add(bullet.random.nextTriangular(0.0, 0), bullet.random.nextTriangular(0.0, 0), bullet.random.nextTriangular(0.0, 0)).multiply(20);
 
             bullet.setVelocity(result.getX(), result.getY(), result.getZ(), 20, 0);
-            bullet.setBaseVel(bullet.getVelocity());
             bullet.setOwner(player);
 
             world.spawnEntity(bullet);
