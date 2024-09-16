@@ -67,6 +67,7 @@ public class AnimatedGunsClient implements ClientModInitializer
 		registerGunWorldViewRenderer(ModItems.ASSAULTRIFLE_RUS);
 		registerGunWorldViewRenderer(ModItems.ASSAULTRIFLE_HEAVY);
 		registerGunWorldViewRenderer(ModItems.SNIPER_CLASSIC);
+		registerGunWorldViewRenderer(ModItems.SNIPER_COWBOY);
 		registerGunWorldViewRenderer(ModItems.SNIPER_DRAGUNOV);
 
 		HandledScreens.register(AnimatedGuns.BLUEPRINT_SCREEN_HANDLER_TYPE, BlueprintScreen::new);
