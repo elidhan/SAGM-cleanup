@@ -375,21 +375,21 @@ public class ModItems
 
     public static final Item SNIPER_COWBOY = registerItem("sniper_cowboy", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "sniper_cowboy", ModItems.HEAVY_RIFLE_BULLET,
-            ModConfigs.DMG_SNIPER_COWBOY, 1, 11, 7, 50,
-            ModSounds.SHOT_SHOTGUN_COMBAT,
+            ModConfigs.DMG_SNIPER_COWBOY, 1, 10, 7, 50,
+            ModSounds.SHOT_DMR_BRUSHGUN,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
                             SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
                             ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
-                            ModSounds.RLD_AR_2_BOLTBACK, //Bolt Pull
-                            ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_DMR_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_DMR_1_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new int[] {20,30}, //Reload stages in ticks
+            new int[] {14,27}, //Reload stages in ticks
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),
-            new Vector3f(0f,0.125f,0.5f),
+            new Vector3f(0f,0.125f,0.25f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE},
             GunItem.fireType.SEMI
     ));
