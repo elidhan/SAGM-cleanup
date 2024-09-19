@@ -132,16 +132,16 @@ public class ModItems
 
     public static final Item REVOLVER_COLTARMY = registerItem("revolver_coltarmy", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "revolver_coltarmy", ModItems.HEAVY_HANDGUN_BULLET,
-            ModConfigs.DMG_REVOLVER_COLT, 1, 3, 6, 64,
+            ModConfigs.DMG_REVOLVER_COLT, 1, 3, 6, 69,
             ModSounds.SHOT_REVOLVER_COLT,
             new SoundEvent[]
                     {
-                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_REVOLVER_2_READY, //Reload Ready, can be empty
                             SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
                             ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
-                            ModSounds.RLD_DMR_1_BOLTBACK, //Bolt Pull
-                            ModSounds.RLD_DMR_1_BOLTFORWARD, //Bolt Release
-                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                            ModSounds.RLD_REVOLVER_2_HAMMERBACK, //Bolt Pull
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Release
+                            ModSounds.RLD_REVOLVER_2_FINISH, //Reload Finish, can be empty
                     },
             new int[] {24,44}, //Reload stages in ticks
             new Vector2f(0.25f,0.25f),

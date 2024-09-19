@@ -48,6 +48,10 @@ public class ModSounds
     public static SoundEvent RLD_REVOLVER_1_INSERT = registerSoundEvent("revolver_1_insert");
     public static SoundEvent RLD_REVOLVER_1_FINISH = registerSoundEvent("revolver_1_finish");
 
+    public static SoundEvent RLD_REVOLVER_2_READY = registerSoundEvent("revolver_2_ready");
+    public static SoundEvent RLD_REVOLVER_2_FINISH = registerSoundEvent("revolver_2_finish");
+    public static SoundEvent RLD_REVOLVER_2_HAMMERBACK = registerSoundEvent("revolver_2_hammerback");
+
     public static SoundEvent RLD_SHOTGUN_1_REMOVE = registerSoundEvent("shotgun_1_remove");
     public static SoundEvent RLD_SHOTGUN_1_INSERT = registerSoundEvent("shotgun_1_insert");
     public static SoundEvent RLD_SHOTGUN_1_FINISH = registerSoundEvent("shotgun_1_finish");
