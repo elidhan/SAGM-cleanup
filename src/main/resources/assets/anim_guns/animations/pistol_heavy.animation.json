@@ -119,7 +119,8 @@
 			}
 		},
 		"reloading": {
-			"animation_length": 2.0417,
+			"loop": "hold_on_last_frame",
+			"animation_length": 2,
 			"bones": {
 				"leftArm": {
 					"rotation": {
@@ -240,10 +241,10 @@
 							"vector": [-5.288, -2.154, -2.202]
 						},
 						"1.9583": {
-							"vector": [1.25, 0, 0],
+							"vector": [0.25, 0, 0],
 							"easing": "easeInOutSine"
 						},
-						"2.0417": {
+						"2.0": {
 							"vector": [0, 0, 0]
 						}
 					},
@@ -287,10 +288,10 @@
 							"vector": [-0.13239, 1.55123, -0.14226]
 						},
 						"1.9583": {
-							"vector": [-0.08639, -0.15061, -0.00323],
+							"vector": [-0.01, -0.02, 0],
 							"easing": "easeInOutSine"
 						},
-						"2.0417": {
+						"2.0": {
 							"vector": [0, 0, 0]
 						}
 					}
@@ -333,6 +334,17 @@
 							"easing": "easeInSine"
 						}
 					}
+				}
+			},
+			"sound_effects": {
+				"0.3333": {
+					"effect": "remove"
+				},
+				"1.0417": {
+					"effect": "insert"
+				},
+				"1.4167": {
+					"effect": "bolt_release"
 				}
 			}
 		}

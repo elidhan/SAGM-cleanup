@@ -130,6 +130,27 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
+    public static final Item REVOLVER_COLTARMY = registerItem("revolver_coltarmy", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
+            "revolver_coltarmy", ModItems.HEAVY_HANDGUN_BULLET,
+            ModConfigs.DMG_REVOLVER_COLT, 1, 3, 6, 64,
+            ModSounds.SHOT_REVOLVER_COLT,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
+                            ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_DMR_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_DMR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new int[] {24,44}, //Reload stages in ticks
+            new Vector2f(0.25f,0.25f),
+            new Vector2f(0.25f,2f), //Camera Recoil, must be 4 values exactly, recoilX, recoilY, and aim multiplier for up kick
+            new Vector3f(0.5f, 1f,1f),
+            new AttachmentItem.AttachType[]{},
+            GunItem.fireType.SEMI
+    ));
+
     public static final Item PISTOL_LIGHT = registerItem("pistol_light", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "pistol_light", ModItems.STANDARD_HANDGUN_BULLET,
             ModConfigs.DMG_PISTOL_LIGHT, 1, 2, 17, 36,
@@ -247,7 +268,7 @@ public class ModItems
             new int[] {8,21}, //Reload stages in ticks
             new Vector2f(22.5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
-            new Vector3f(0f,0.5f,0.125f),
+            new Vector3f(0f,0.75f,0.1875f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.SIGHT},
             GunItem.fireType.SEMI
     ));
@@ -334,7 +355,7 @@ public class ModItems
 
     public static final Item ASSAULTRIFLE_HEAVY = registerItem("assaultrifle_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "assaultrifle_heavy", ModItems.HEAVY_RIFLE_BULLET,
-            ModConfigs.DMG_ASSAULT_DESERT, 1, 3, 20, 50,
+            ModConfigs.DMG_ASSAULT_DESERT, 1, 3, 20, 44,
             ModSounds.SHOT_ASSAULT_DESERT,
             new SoundEvent[]
                     {
@@ -434,6 +455,22 @@ public class ModItems
             entries.add(new ItemStack(ModItems.MAX_POWER_RIFLE_BULLET));
             entries.add(new ItemStack(ModItems.ANTI_MATERIEL_BULLET));
             entries.add(new ItemStack(ModItems.SHOTGUN_SHELL));
+
+            entries.add(new ItemStack(ModItems.PISTOL_LIGHT));
+            entries.add(new ItemStack(ModItems.PISTOL_HEAVY));
+            entries.add(new ItemStack(ModItems.REVOLVER_MAGNUM));
+            entries.add(new ItemStack(ModItems.REVOLVER_COLTARMY));
+            entries.add(new ItemStack(ModItems.SHOTGUN_DOUBLEBARREL));
+            entries.add(new ItemStack(ModItems.SHOTGUN_COMBAT));
+            entries.add(new ItemStack(ModItems.SHOTGUN_RIOT));
+            entries.add(new ItemStack(ModItems.SMG_MACHINEPISTOL));
+            entries.add(new ItemStack(ModItems.SMG_HEAVY));
+            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_RUS));
+            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
+            entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
+            entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
+            entries.add(new ItemStack(ModItems.SNIPER_COWBOY));
+            entries.add(new ItemStack(ModItems.SNIPER_DRAGUNOV));
         }).displayName(Text.translatable("guns")).build();
 
         final ItemGroup CRAFTING = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {

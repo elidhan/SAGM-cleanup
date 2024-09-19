@@ -62,25 +62,25 @@
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, 0, "4 * query.z_pos_mult"]
+							"vector": [0, -1, "0+4 * query.z_pos_mult"]
 						},
 						"0.05": {
-							"vector": [0, "0.4087 * query.x_rot_mult", "3.6976 * query.z_pos_mult"]
+							"vector": [0, "-1+0.4087 * query.x_rot_mult", "0+3.6976 * query.z_pos_mult"]
 						},
 						"0.1": {
-							"vector": [0, "0.8076 * query.x_rot_mult", "3.1932 * query.z_pos_mult"]
+							"vector": [0, "-1+0.8076 * query.x_rot_mult", "0+3.1932 * query.z_pos_mult"]
 						},
 						"0.125": {
-							"vector": [0, "0.9862 * query.x_rot_mult", "2.7693 * query.z_pos_mult"]
+							"vector": [0, "-1+0.9862 * query.x_rot_mult", "0+2.7693 * query.z_pos_mult"]
 						},
 						"0.15": {
-							"vector": [0, "1.0744 * query.x_rot_mult", "2.2375 * query.z_pos_mult"]
+							"vector": [0, "-0.875+1.0744 * query.x_rot_mult", "2.2375 * query.z_pos_mult"]
 						},
 						"0.175": {
-							"vector": [0, "0.9562 * query.x_rot_mult", "1.5031 * query.z_pos_mult"]
+							"vector": [0, "-0.6875+0.9562 * query.x_rot_mult", "0+1.5031 * query.z_pos_mult"]
 						},
 						"0.225": {
-							"vector": [0, "0.6913 * query.x_rot_mult", "0.789 * query.z_pos_mult"]
+							"vector": [0, "-0.5+0.6913 * query.x_rot_mult", "0+0.789 * query.z_pos_mult"]
 						},
 						"0.375": {
 							"vector": [0, -0.01702, -0.04743]
