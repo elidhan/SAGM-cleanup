@@ -477,6 +477,7 @@ public class ModItems
 
             entries.add(new ItemStack(ModItems.PISTOL_LIGHT));
             entries.add(new ItemStack(ModItems.PISTOL_HEAVY));
+            entries.add(new ItemStack(ModItems.PISTOL_SERVICE));
             entries.add(new ItemStack(ModItems.REVOLVER_MAGNUM));
             entries.add(new ItemStack(ModItems.REVOLVER_COLTARMY));
             entries.add(new ItemStack(ModItems.SHOTGUN_DOUBLEBARREL));
