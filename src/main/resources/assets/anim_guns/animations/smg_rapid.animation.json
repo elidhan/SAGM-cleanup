@@ -105,7 +105,7 @@
 							"vector": [89.78633, -42.60705, -166.32307],
 							"easing": "easeOutSine"
 						},
-						"1.5417": {
+						"1.5": {
 							"vector": [97.19035, -45.61804, -175.83968],
 							"easing": "easeInSine"
 						},
@@ -121,7 +121,7 @@
 							"vector": [141.34868, 7.04796, -267.78069],
 							"easing": "easeInQuad"
 						},
-						"2.375": {
+						"2.4583": {
 							"vector": [141.34868, 7.04796, -267.78069],
 							"easing": "easeInQuad"
 						},
@@ -161,7 +161,7 @@
 							"vector": [-2.5059, -17.87557, -3.09301],
 							"easing": "easeOutSine"
 						},
-						"1.5417": {
+						"1.5": {
 							"vector": [-2.5138, -13.95181, -5.05347],
 							"easing": "easeInSine"
 						},
@@ -248,13 +248,17 @@
 						"2.375": {
 							"vector": [-12.28, -0.8, 12.52]
 						},
-						"2.4583": {
-							"vector": [-3.77959, -1.04926, 8.7778],
-							"easing": "linear"
-						},
 						"2.5417": {
-							"vector": [-3.28, -0.8, 12.52],
+							"vector": [-3.12215, -0.23226, 0.21926],
 							"easing": "easeInOutCubic"
+						},
+						"2.5833": {
+							"vector": [-3.16357, 0.41619, 2.93753],
+							"easing": "easeOutSine"
+						},
+						"2.6667": {
+							"vector": [-3.6575, 1.03592, 0.39302],
+							"easing": "linear"
 						},
 						"3.0": {
 							"vector": [0, 0, 0],
@@ -368,7 +372,7 @@
 							"vector": [0, 0, 0],
 							"easing": "easeOutSine"
 						},
-						"1.5417": {
+						"1.5": {
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
@@ -396,7 +400,7 @@
 							"vector": [0, -3.96875, 1.5125],
 							"easing": "easeOutSine"
 						},
-						"1.5417": {
+						"1.5": {
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
@@ -418,7 +422,7 @@
 						"2.1667": {
 							"vector": [0, -90, 0]
 						},
-						"2.3333": {
+						"2.375": {
 							"vector": [0, -90, 0]
 						},
 						"2.4583": {
@@ -435,14 +439,27 @@
 							"easing": "easeInQuad"
 						},
 						"2.375": {
-							"vector": [0, 0, 2.75],
-							"easing": "easeInQuad"
+							"vector": [0, 0, 2.75]
 						},
 						"2.4583": {
 							"vector": [0, 0, 0],
-							"easing": "easeOutQuad"
+							"easing": "easeInQuad"
 						}
 					}
+				}
+			},
+			"sound_effects": {
+				"0.4167": {
+					"effect": "remove"
+				},
+				"1.25": {
+					"effect": "insert"
+				},
+				"2.125": {
+					"effect": "bolt_pull"
+				},
+				"2.4583": {
+					"effect": "bolt_release"
 				}
 			}
 		}

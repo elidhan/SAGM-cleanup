@@ -300,10 +300,10 @@ public class ModItems
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            ModSounds.RLD_SMG_1_REMOVE,//Remove Magazine
-                            ModSounds.RLD_SMG_1_INSERT, //Insert Magazine/Round
-                            ModSounds.RLD_SMG_1_BOLTBACK, //Bolt Pull
-                            ModSounds.RLD_SMG_1_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_SMG_2_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SMG_2_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SMG_2_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SMG_2_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
             new Vector2f(1f,1f),
@@ -484,6 +484,7 @@ public class ModItems
             entries.add(new ItemStack(ModItems.SHOTGUN_RIOT));
             entries.add(new ItemStack(ModItems.SMG_MACHINEPISTOL));
             entries.add(new ItemStack(ModItems.SMG_HEAVY));
+            entries.add(new ItemStack(ModItems.SMG_RAPID));
             entries.add(new ItemStack(ModItems.ASSAULTRIFLE_RUS));
             entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
             entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
