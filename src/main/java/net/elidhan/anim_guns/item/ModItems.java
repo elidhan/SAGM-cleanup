@@ -293,6 +293,25 @@ public class ModItems
             GunItem.fireType.AUTO
     ));
 
+    public static final Item SMG_RAPID = registerItem("smg_rapid", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+            "smg_rapid", ModItems.STANDARD_HANDGUN_BULLET,
+            ModConfigs.DMG_SMG_RAPID, 1, 1, 30, 60,
+            ModSounds.SHOT_SMG_RAPID,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_SMG_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SMG_1_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SMG_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SMG_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(1f,1f),
+            new Vector2f(1f,3f),
+            new Vector3f(0.125f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
+            GunItem.fireType.AUTO
+    ));
     public static final Item SMG_HEAVY = registerItem("smg_heavy", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "smg_heavy", ModItems.STANDARD_HANDGUN_BULLET,
             ModConfigs.DMG_SMG_HEAVY,1, 2, 25, 60,
