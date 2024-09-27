@@ -413,6 +413,26 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
+    public static final Item SNIPER_ARCTIC = registerItem("sniper_arctic", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "sniper_arctic", ModItems.MAX_POWER_RIFLE_BULLET,
+            ModConfigs.DMG_SNIPER_ARCTIC, 1, 21, 5, 60,
+            ModSounds.SHOT_SNIPER_ARCTIC,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
+                            ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SNIPER_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_SNIPER_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(0.125f,0.125f), //Spread
+            new Vector2f(1.25f,6.25f),
+            new Vector3f(0f,0.125f,0.5f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE},
+            GunItem.fireType.SEMI
+    ));
+
     public static final Item SNIPER_COWBOY = registerItem("sniper_cowboy", new GunSingleLoaderItem(new Item.Settings().maxCount(1),
             "sniper_cowboy", ModItems.HEAVY_RIFLE_BULLET,
             ModConfigs.DMG_SNIPER_COWBOY, 1, 10, 7, 50,
@@ -490,6 +510,7 @@ public class ModItems
             entries.add(new ItemStack(ModItems.ASSAULTRIFLE_LIGHT));
             entries.add(new ItemStack(ModItems.ASSAULTRIFLE_HEAVY));
             entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
+            entries.add(new ItemStack(ModItems.SNIPER_ARCTIC));
             entries.add(new ItemStack(ModItems.SNIPER_COWBOY));
             entries.add(new ItemStack(ModItems.SNIPER_DRAGUNOV));
         }).displayName(Text.translatable("guns")).build();
