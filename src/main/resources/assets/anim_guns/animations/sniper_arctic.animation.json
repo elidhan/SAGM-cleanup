@@ -224,13 +224,26 @@
 					"scale": {
 						"vector": [0, 0, 0]
 					}
+				},
+				"flash": {
+					"rotation": {
+						"vector": [0, 0, "math.random(-45,45)"]
+					},
+					"scale": {
+						"0.0": {
+							"vector": [1000, 1000, 1]
+						},
+						"0.0208": {
+							"vector": [1, 1, 1]
+						}
+					}
 				}
 			},
 			"sound_effects": {
 				"0.375": {
 					"effect": "bolt_pull"
 				},
-				"0.6667": {
+				"0.7188": {
 					"effect": "bolt_release"
 				}
 			}

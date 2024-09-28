@@ -7,8 +7,8 @@
 				"texture_width": 32,
 				"texture_height": 32,
 				"visible_bounds_width": 4,
-				"visible_bounds_height": 1.5,
-				"visible_bounds_offset": [0, 0.25, 0]
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
 			},
 			"bones": [
 				{
@@ -1355,8 +1355,50 @@
 					"name": "ads_node",
 					"parent": "gunbody",
 					"pivot": [0, 3.2615, 8]
+				},
+				{
+					"name": "sightPos",
+					"parent": "gunbody",
+					"pivot": [0, 2.41775, 0.2875]
+				},
+				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 1.51894, -30.53125]
+				},
+				{
+					"name": "flash",
+					"parent": "gun",
+					"pivot": [0, 1.51894, -30.5375],
+					"cubes": [
+						{
+							"origin": [-0.0125, 1.50644, -30.5375],
+							"size": [0.025, 0.025, 0],
+							"pivot": [0, 1.51894, -30.5375],
+							"rotation": [0, 0, -45],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [32, 32]},
+								"south": {"uv": [0, 0], "uv_size": [32, 32]}
+							}
+						}
+					]
 				}
-			]
+			],
+			"item_display_transforms": {
+				"firstperson_righthand": {
+					"translation": [-6.75, 4.75, 2.5]
+				},
+				"firstperson_lefthand": {
+					"translation": [-6.75, 4.75, 2.5]
+				},
+				"ground": {
+					"scale": [0.63, 0.63, 0.63]
+				},
+				"fixed": {
+					"rotation": [-90, -135, -90],
+					"scale": [0.62, 0.62, 0.62]
+				}
+			}
 		}
 	]
 }

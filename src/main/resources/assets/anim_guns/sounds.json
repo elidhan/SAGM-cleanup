@@ -15,6 +15,7 @@
 	"shot_assault_classic": {"category": "master", "sounds": ["anim_guns:shot_assault_classic"]},
 	"shot_assault_desert": {"category": "master", "sounds": ["anim_guns:shot_assault_desert"]},
 	"shot_sniper_classic": {"category": "master", "sounds": ["anim_guns:shot_sniper_classic"]},
+	"shot_sniper_arctic": {"category": "master", "sounds": ["anim_guns:shot_sniper_arctic"]},
 	"shot_dmr_brushgun": {"category": "master", "sounds": ["anim_guns:shot_dmr_brushgun"]},
 	"shot_dmr_marksman": {"category": "master", "sounds": ["anim_guns:shot_dmr_marksman"]},
 	"shot_dmr_ironcurtain": {"category": "master", "sounds": ["anim_guns:shot_dmr_ironcurtain"]},
