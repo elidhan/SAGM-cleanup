@@ -23,8 +23,8 @@
 			}
 		},
 		"firing": {
-			"loop": true,
-			"animation_length": 1.1875,
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.3125,
 			"bones": {
 				"leftArm": {
 					"rotation": {
@@ -164,9 +164,13 @@
 						"0.9167": {
 							"vector": ["2.4914 * query.x_rot_mult", "-0.1961 * query.y_rot_mult", "4.9962 * query.x_rot_mult"]
 						},
-						"1.1875": {
-							"vector": [0, 0, 0],
+						"1.1979": {
+							"vector": [-0.1875, 0.0625, -0.25],
 							"easing": "easeInOutSine"
+						},
+						"1.3125": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutSine"
 						}
 					},
 					"position": {
@@ -202,8 +206,12 @@
 							"easingArgs": [2]
 						},
 						"1.1875": {
-							"vector": [0, 0, 0],
+							"vector": [0.00625, -0.00625, 0],
 							"easing": "easeInOutSine"
+						},
+						"1.3021": {
+							"vector": [0, 0, 0],
+							"easing": "easeOutSine"
 						}
 					}
 				},
