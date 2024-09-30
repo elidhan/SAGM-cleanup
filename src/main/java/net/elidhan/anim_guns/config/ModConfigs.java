@@ -71,7 +71,7 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("damage.sniper_arctic", 26), "double");
 
         configs.addKeyValuePair(new Pair<>("damage.sniper_cowboy", 16), "double");
-        configs.addKeyValuePair(new Pair<>("damage.sniper_marksman", 11), "double");
+        configs.addKeyValuePair(new Pair<>("damage.sniper_marksman", 12.5), "double");
         configs.addKeyValuePair(new Pair<>("damage.sniper_dragunov", 16), "double");
 
         configs.addKeyValuePair(new Pair<>("damage.lmg_m60", 7), "double");
@@ -104,7 +104,7 @@ public class ModConfigs {
         DMG_SNIPER_ARCTIC = (float) CONFIG.getOrDefault("damage.sniper_arctic", 26);
 
         DMG_SNIPER_COWBOY = (float) CONFIG.getOrDefault("damage.sniper_cowboy", 16);
-        DMG_SNIPER_MARKSMAN = (float) CONFIG.getOrDefault("damage.sniper_marksman", 12);
+        DMG_SNIPER_MARKSMAN = (float) CONFIG.getOrDefault("damage.sniper_marksman", 12.5);
         DMG_SNIPER_DRAGUNOV = (float) CONFIG.getOrDefault("damage.sniper_dragunov", 16);
 
         DMG_LMG_M60 = (float) CONFIG.getOrDefault("damage.lmg_m60", 7);

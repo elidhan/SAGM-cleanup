@@ -60,7 +60,7 @@ public class GunGUIRenderer implements BuiltinItemRendererRegistry.DynamicItemRe
         }
         if (this.inventoryModel == null)
         {
-            this.inventoryModel = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier(itemId.withPath(itemId.getPath() + "_wv"), "inventory"));
+            this.inventoryModel = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier(itemId.withPath(itemId.getPath() + "_gui"), "inventory"));
         }
         if (mode == ModelTransformationMode.GUI)
         {

@@ -255,6 +255,27 @@
 					"effect": "bolt_release"
 				}
 			}
+		},
+		"reloading": {
+			"loop": true,
+			"bones": {
+				"rightArm": {
+					"rotation": {
+						"vector": [90, 0, -180]
+					},
+					"position": {
+						"vector": [5.25, -7.73, 4.53]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [83.53032, -22.45198, -130.53215]
+					},
+					"position": {
+						"vector": [-3.69914, -7.93024, -8.72402]
+					}
+				}
+			}
 		}
 	},
 	"azurelib_format_version": 2

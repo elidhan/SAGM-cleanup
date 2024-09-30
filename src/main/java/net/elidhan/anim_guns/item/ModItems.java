@@ -454,6 +454,26 @@ public class ModItems
             GunItem.fireType.SEMI
     ));
 
+    public static final Item SNIPER_MARKSMAN = registerItem("sniper_marksman", new GunMagFedItem(new Item.Settings().maxCount(1),
+            "sniper_marksman", ModItems.HEAVY_RIFLE_BULLET,
+            ModConfigs.DMG_SNIPER_MARKSMAN, 1, 3, 20, 60,
+            ModSounds.SHOT_DMR_MARKSMAN,
+            new SoundEvent[]
+                    {
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
+                            ModSounds.RLD_AR_2_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AR_2_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_AR_2_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
+                    },
+            new Vector2f(0.25f,0.25f), //Spread
+            new Vector2f(0.75f,2.5f),
+            new Vector3f(0f,0.25f,0.25f),
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE},
+            GunItem.fireType.SEMI
+    ));
+
     public static final Item SNIPER_DRAGUNOV = registerItem("sniper_dragunov", new GunMagFedItem(new Item.Settings().maxCount(1),
             "sniper_dragunov", ModItems.HEAVY_RIFLE_BULLET,
             ModConfigs.DMG_SNIPER_DRAGUNOV, 1, 9, 10, 60,
@@ -512,6 +532,7 @@ public class ModItems
             entries.add(new ItemStack(ModItems.SNIPER_CLASSIC));
             entries.add(new ItemStack(ModItems.SNIPER_ARCTIC));
             entries.add(new ItemStack(ModItems.SNIPER_COWBOY));
+            entries.add(new ItemStack(ModItems.SNIPER_MARKSMAN));
             entries.add(new ItemStack(ModItems.SNIPER_DRAGUNOV));
         }).displayName(Text.translatable("guns")).build();
 
