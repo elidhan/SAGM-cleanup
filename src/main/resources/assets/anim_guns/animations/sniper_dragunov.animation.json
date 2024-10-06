@@ -73,21 +73,67 @@
 				},
 				"gunbody": {
 					"rotation": {
-						"0.05": {
-							"vector": ["-3 * query.x_rot_mult", "-0.5 * query.y_rot_mult", "2 * query.y_rot_mult"]
+						"0.025": {
+							"vector": ["-6 * query.x_rot_mult", 0, 0]
 						},
-						"0.625": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutBack"
+						"0.4": {
+							"vector": ["1 * query.x_rot_mult", 0, 0],
+							"easing": "easeInOutSine"
+						},
+						"0.575": {
+							"vector": ["-0.125 * query.x_rot_mult", 0, 0]
+						},
+						"0.75": {
+							"vector": [0, 0, 0]
 						}
 					},
 					"position": {
 						"0.0": {
-							"vector": ["0.125 * query.y_rot_mult", "0.0625 * query.x_rot_mult", "1.5 * query.z_pos_mult"]
+							"vector": [0, 0, "2 * query.z_pos_mult"]
 						},
-						"0.575": {
-							"vector": [0, 0, 0],
-							"easing": "easeOutBack"
+						"0.025": {
+							"vector": [0, "0.0625 * query.x_rot_mult", "1.9575 * query.z_pos_mult"]
+						},
+						"0.05": {
+							"vector": [0, "0.125 * query.x_rot_mult", "1.9025 * query.z_pos_mult"]
+						},
+						"0.075": {
+							"vector": [0, "0.1988 * query.x_rot_mult", "1.8163 * query.z_pos_mult"]
+						},
+						"0.1": {
+							"vector": [0, "0.2738 * query.x_rot_mult", "1.515 * query.z_pos_mult"]
+						},
+						"0.15": {
+							"vector": [0, "0.3025 * query.x_rot_mult", "1.1188 * query.z_pos_mult"]
+						},
+						"0.2": {
+							"vector": [0, "0.1925 * query.x_rot_mult", "0.7162 * query.z_pos_mult"]
+						},
+						"0.25": {
+							"vector": [0, "0.05 * query.x_rot_mult", "0.3513 * query.z_pos_mult"]
+						},
+						"0.3": {
+							"vector": [0, "-0.02 * query.x_rot_mult", "0.1125 * query.z_pos_mult"]
+						},
+						"0.35": {
+							"vector": [0, "-0.0287 * query.x_rot_mult", "0.0112 * query.z_pos_mult"]
+						},
+						"0.375": {
+							"vector": [0, "-0.025 * query.x_rot_mult", "-0.0175 * query.z_pos_mult"]
+						},
+						"0.4": {
+							"vector": [0, "-0.0187 * query.x_rot_mult", "-0.0312 * query.z_pos_mult"],
+							"easing": "easeInSine"
+						},
+						"0.475": {
+							"vector": [0, 0, "-0.0125 * query.z_pos_mult "],
+							"easing": "linear"
+						},
+						"0.55": {
+							"vector": [0, 0, "0.0063 * query.z_pos_mult"]
+						},
+						"0.725": {
+							"vector": [0, 0, 0]
 						}
 					}
 				}

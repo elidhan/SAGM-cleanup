@@ -461,10 +461,10 @@ public class ModItems
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            ModSounds.RLD_AR_2_REMOVE,//Remove Magazine
-                            ModSounds.RLD_AR_2_INSERT, //Insert Magazine/Round
-                            ModSounds.RLD_AR_2_BOLTBACK, //Bolt Pull
-                            ModSounds.RLD_AR_2_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_DMR_2_REMOVE,//Remove Magazine
+                            ModSounds.RLD_DMR_2_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_DMR_2_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_DMR_2_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
             new Vector2f(0.25f,0.25f), //Spread
