@@ -50,7 +50,7 @@
 				"gunbody": {
 					"rotation": {
 						"0.025": {
-							"vector": ["-15 * query.x_rot_mult", 0, 0]
+							"vector": ["-12 * query.x_rot_mult", 0, 0]
 						},
 						"0.4": {
 							"vector": [0.25, 0, 0],

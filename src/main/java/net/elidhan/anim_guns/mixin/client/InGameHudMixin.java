@@ -2,7 +2,6 @@ package net.elidhan.anim_guns.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.elidhan.anim_guns.AnimatedGuns;
-import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;

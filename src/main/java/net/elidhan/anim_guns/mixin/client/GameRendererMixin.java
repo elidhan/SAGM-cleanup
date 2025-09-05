@@ -2,11 +2,9 @@ package net.elidhan.anim_guns.mixin.client;
 
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
