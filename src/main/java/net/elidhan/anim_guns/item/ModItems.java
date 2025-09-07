@@ -415,7 +415,7 @@ public class ModItems
 
     public static final Item SNIPER_ARCTIC = registerItem("sniper_arctic", new GunMagFedItem(new Item.Settings().maxCount(1),
             "sniper_arctic", ModItems.MAX_POWER_RIFLE_BULLET,
-            ModConfigs.DMG_SNIPER_ARCTIC, 1, 21, 5, 64,
+            ModConfigs.DMG_SNIPER_ARCTIC, 1, 21, 5, 60,
             ModSounds.SHOT_SNIPER_ARCTIC,
             new SoundEvent[]
                     {
@@ -496,7 +496,7 @@ public class ModItems
 
     public static final Item AMR_INTERVENTION = registerItem("amr_classic", new GunMagFedItem(new Item.Settings().maxCount(1),
             "amr_classic", ModItems.ANTI_MATERIEL_BULLET,
-            ModConfigs.DMG_AMR_CLASSIC, 1, 29, 5, 60,
+            ModConfigs.DMG_AMR_CLASSIC, 1, 29, 5, 62,
             ModSounds.SHOT_AMR_CLASSIC,
             new SoundEvent[]
                     {
