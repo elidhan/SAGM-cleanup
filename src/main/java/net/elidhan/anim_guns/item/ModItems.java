@@ -408,20 +408,20 @@ public class ModItems
             new int[] {20,30}, //Reload stages in ticks
             new Vector2f(0.125f,0.125f), //Spread
             new Vector2f(0.75f,3f),
-            new Vector3f(0f,0.125f,0.5f),
+            new Vector3f(0f,0.125f,0.25f),
             new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT, AttachmentItem.AttachType.SCOPE, AttachmentItem.AttachType.MUZZLE},
             GunItem.fireType.SEMI
     ));
 
     public static final Item SNIPER_ARCTIC = registerItem("sniper_arctic", new GunMagFedItem(new Item.Settings().maxCount(1),
             "sniper_arctic", ModItems.MAX_POWER_RIFLE_BULLET,
-            ModConfigs.DMG_SNIPER_ARCTIC, 1, 21, 5, 60,
+            ModConfigs.DMG_SNIPER_ARCTIC, 1, 21, 5, 64,
             ModSounds.SHOT_SNIPER_ARCTIC,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
-                            ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_SNIPER_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_SNIPER_1_INSERT, //Insert Magazine/Round
                             ModSounds.RLD_SNIPER_1_BOLTBACK, //Bolt Pull
                             ModSounds.RLD_SNIPER_1_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
@@ -496,15 +496,15 @@ public class ModItems
 
     public static final Item AMR_INTERVENTION = registerItem("amr_classic", new GunMagFedItem(new Item.Settings().maxCount(1),
             "amr_classic", ModItems.ANTI_MATERIEL_BULLET,
-            ModConfigs.DMG_AMR_CLASSIC, 1, 32, 5, 60,
-            ModSounds.SHOT_SNIPER_ARCTIC,
+            ModConfigs.DMG_AMR_CLASSIC, 1, 29, 5, 60,
+            ModSounds.SHOT_AMR_CLASSIC,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            SoundEvents.INTENTIONALLY_EMPTY,//Remove Magazine
-                            ModSounds.RLD_CARTRIDGE_INSERT, //Insert Magazine/Round
-                            ModSounds.RLD_SNIPER_1_BOLTBACK, //Bolt Pull
-                            ModSounds.RLD_SNIPER_1_BOLTFORWARD, //Bolt Release
+                            ModSounds.RLD_AMR_1_REMOVE,//Remove Magazine
+                            ModSounds.RLD_AMR_1_INSERT, //Insert Magazine/Round
+                            ModSounds.RLD_AMR_1_BOLTBACK, //Bolt Pull
+                            ModSounds.RLD_AMR_1_BOLTFORWARD, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
             new Vector2f(0.125f,0.125f), //Spread

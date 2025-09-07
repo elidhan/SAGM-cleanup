@@ -1381,7 +1381,7 @@
 				{
 					"name": "ads_node",
 					"parent": "gunbody",
-					"pivot": [0, 2.20625, 8]
+					"pivot": [0, 2.20625, 9]
 				},
 				{
 					"name": "sightPos",

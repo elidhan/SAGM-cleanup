@@ -86,9 +86,9 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
 
         GunItem gun = (GunItem)this.currentGun.getItem();
 
-        if(!(gun instanceof GunSingleLoaderItem) && InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem()) <= 0)
+        if((gun instanceof GunSingleLoaderItem) && InventoryUtil.itemCountInInventory((ServerPlayerEntity)(Object)this, gun.getAmmoItem()) <= 0)
         {
-            if (this.currentGun.getItem() instanceof GunItem) AnimationHandler.stopAnim((ServerPlayerEntity)(Object)this, this.currentGun, GeoItem.getId(this.currentGun));
+            if (this.currentGun.getItem() instanceof GunItem) AnimationHandler.playAnim((ServerPlayerEntity)(Object)this, this.currentGun, GeoItem.getId(this.currentGun), "reload_2");//AnimationHandler.stopAnim((ServerPlayerEntity)(Object)this, this.currentGun, GeoItem.getId(this.currentGun));
             stopReload();
         }
 

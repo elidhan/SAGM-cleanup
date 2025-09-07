@@ -624,6 +624,20 @@
 						}
 					}
 				}
+			},
+			"sound_effects": {
+				"0.4167": {
+					"effect": "remove"
+				},
+				"1.2813": {
+					"effect": "insert"
+				},
+				"1.9792": {
+					"effect": "bolt_pull"
+				},
+				"2.3229": {
+					"effect": "bolt_release"
+				}
 			}
 		}
 	},

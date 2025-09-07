@@ -75,11 +75,11 @@
 							"vector": [0, "-0.2481+0.6492 * query.x_rot_mult", "-0.0309+2.2641 * query.z_pos_mult"]
 						},
 						"0.2083": {
-							"vector": [0, 0.69875, 1.5025],
+							"vector": [0, "0.69875 * query.x_rot_mult", "1.5025 * query.z_pos_mult"],
 							"easing": "linear"
 						},
 						"0.3333": {
-							"vector": [0, 0.42625, 0.56375]
+							"vector": [0, "0.42625 * query.x_rot_mult", "0.56375 * query.z_pos_mult"]
 						},
 						"0.4375": {
 							"vector": [0, 0, 0],
@@ -251,10 +251,10 @@
 				}
 			},
 			"sound_effects": {
-				"0.375": {
+				"0.5104": {
 					"effect": "bolt_pull"
 				},
-				"0.7188": {
+				"0.8333": {
 					"effect": "bolt_release"
 				}
 			}
@@ -651,6 +651,20 @@
 							"easing": "easeOutSine"
 						}
 					}
+				}
+			},
+			"sound_effects": {
+				"0.5729": {
+					"effect": "remove"
+				},
+				"1.4583": {
+					"effect": "insert"
+				},
+				"2.3854": {
+					"effect": "bolt_pull"
+				},
+				"2.7083": {
+					"effect": "bolt_release"
 				}
 			}
 		}

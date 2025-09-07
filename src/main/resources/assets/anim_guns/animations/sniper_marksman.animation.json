@@ -44,8 +44,8 @@
 				},
 				"gunbody": {
 					"rotation": {
-						"0.025": {
-							"vector": ["-6 * query.x_rot_mult", 0, 0]
+						"0.0": {
+							"vector": ["-3 * query.x_rot_mult", 0, "-0.125 * query.y_rot_mult"]
 						},
 						"0.4": {
 							"vector": ["1 * query.x_rot_mult", 0, 0],
@@ -60,22 +60,22 @@
 					},
 					"position": {
 						"0.0": {
-							"vector": [0, 0, "2 * query.z_pos_mult"]
+							"vector": ["-0.25 * query.y_rot_mult", 0, "2 * query.z_pos_mult"]
 						},
 						"0.025": {
-							"vector": [0, "0.0625 * query.x_rot_mult", "1.9575 * query.z_pos_mult"]
+							"vector": ["-0.2 * query.y_rot_mult", "0.0625 * query.x_rot_mult", "1.9575 * query.z_pos_mult"]
 						},
 						"0.05": {
-							"vector": [0, "0.125 * query.x_rot_mult", "1.9025 * query.z_pos_mult"]
+							"vector": ["-0.15 * query.y_rot_mult", "0.125 * query.x_rot_mult", "1.9025 * query.z_pos_mult"]
 						},
 						"0.075": {
-							"vector": [0, "0.1988 * query.x_rot_mult", "1.8163 * query.z_pos_mult"]
+							"vector": ["-0.1 * query.y_rot_mult", "0.1988 * query.x_rot_mult", "1.8163 * query.z_pos_mult"]
 						},
 						"0.1": {
-							"vector": [0, "0.2738 * query.x_rot_mult", "1.515 * query.z_pos_mult"]
+							"vector": ["-0.05 * query.y_rot_mult", "0.2738 * query.x_rot_mult", "1.515 * query.z_pos_mult"]
 						},
 						"0.15": {
-							"vector": [0, "0.3025 * query.x_rot_mult", "1.1188 * query.z_pos_mult"]
+							"vector": ["-0.025 * query.y_rot_mult", "0.3025 * query.x_rot_mult", "1.1188 * query.z_pos_mult"]
 						},
 						"0.2": {
 							"vector": [0, "0.1925 * query.x_rot_mult", "0.7162 * query.z_pos_mult"]

@@ -37,6 +37,8 @@ public class ModSounds
     public static SoundEvent SHOT_DMR_MARKSMAN = registerSoundEvent("shot_dmr_marksman");
     public static SoundEvent SHOT_DMR_IRONCURTAIN = registerSoundEvent("shot_dmr_ironcurtain");
 
+    public static SoundEvent SHOT_AMR_CLASSIC = registerSoundEvent("shot_amr_classic");
+
     //RELOAD SOUNDS
     
     public static SoundEvent RLD_PISTOL_1_REMOVE = registerSoundEvent("pistol_1_remove");
@@ -93,8 +95,15 @@ public class ModSounds
     public static SoundEvent RLD_DMR_2_INSERT = registerSoundEvent("dmr_2_insert");
     public static SoundEvent RLD_DMR_2_BOLTBACK = registerSoundEvent("dmr_2_boltback");
     public static SoundEvent RLD_DMR_2_BOLTFORWARD = registerSoundEvent("dmr_2_boltforward");
+    public static SoundEvent RLD_SNIPER_1_REMOVE = registerSoundEvent("sniper_1_remove");
+    public static SoundEvent RLD_SNIPER_1_INSERT = registerSoundEvent("sniper_1_insert");
     public static SoundEvent RLD_SNIPER_1_BOLTBACK = registerSoundEvent("sniper_1_boltback");
     public static SoundEvent RLD_SNIPER_1_BOLTFORWARD = registerSoundEvent("sniper_1_boltforward");
+
+    public static SoundEvent RLD_AMR_1_REMOVE = registerSoundEvent("amr_1_remove");
+    public static SoundEvent RLD_AMR_1_INSERT = registerSoundEvent("amr_1_insert");
+    public static SoundEvent RLD_AMR_1_BOLTBACK = registerSoundEvent("amr_1_boltback");
+    public static SoundEvent RLD_AMR_1_BOLTFORWARD = registerSoundEvent("amr_1_boltforward");
 
     private static SoundEvent registerSoundEvent(String name)
     {

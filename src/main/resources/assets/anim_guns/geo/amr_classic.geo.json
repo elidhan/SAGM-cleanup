@@ -7,8 +7,8 @@
 				"texture_width": 32,
 				"texture_height": 32,
 				"visible_bounds_width": 5,
-				"visible_bounds_height": 1.5,
-				"visible_bounds_offset": [0, 0.25, 0]
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
 			},
 			"bones": [
 				{
@@ -996,6 +996,21 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "ads_node",
+					"parent": "gunbody",
+					"pivot": [0, 3.0125, 11.20625]
+				},
+				{
+					"name": "sightPos",
+					"parent": "gunbody",
+					"pivot": [0, 2.0125, 5.20625]
+				},
+				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 0.5125, -28.725]
 				},
 				{
 					"name": "flash",
