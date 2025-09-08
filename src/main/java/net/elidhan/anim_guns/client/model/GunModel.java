@@ -1,12 +1,11 @@
 package net.elidhan.anim_guns.client.model;
 
-import mod.azure.azurelib.core.molang.MolangParser;
-import mod.azure.azurelib.model.DefaultedItemGeoModel;
+import software.bernie.geckolib.core.molang.MolangParser;
+import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.client.RecoilHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

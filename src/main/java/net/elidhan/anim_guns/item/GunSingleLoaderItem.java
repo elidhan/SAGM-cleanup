@@ -1,9 +1,9 @@
 package net.elidhan.anim_guns.item;
 
-import mod.azure.azurelib.animatable.GeoItem;
-import mod.azure.azurelib.core.animation.AnimatableManager;
-import mod.azure.azurelib.core.animation.AnimationController;
-import mod.azure.azurelib.util.ClientUtils;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.util.ClientUtils;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.animations.GunAnimations;
 import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;

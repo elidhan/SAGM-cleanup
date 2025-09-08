@@ -1,8 +1,8 @@
 package net.elidhan.anim_guns.network;
 
-import mod.azure.azurelib.animatable.GeoItem;
-import mod.azure.azurelib.core.animatable.GeoAnimatable;
-import mod.azure.azurelib.core.animation.AnimationController;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animation.AnimationController;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.RecoilHandler;
@@ -103,7 +103,7 @@ public class ModNetworking
 
                     AnimationController<GeoAnimatable> animationController = animatable.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get(animatable.getID()+"_controller");
 
-                    animationController.setTransitionLength(animation.equals("firing") ? 0 : animation.equals("idle") ? 20 : 1);
+                    animationController.transitionLength(animation.equals("firing") ? 0 : animation.equals("idle") ? 20 : 1);
 
                     if (animationController.getCurrentAnimation() == null)
                     {

@@ -1,14 +1,14 @@
 package net.elidhan.anim_guns.item;
 
-import mod.azure.azurelib.animatable.GeoItem;
-import mod.azure.azurelib.animatable.SingletonGeoAnimatable;
-import mod.azure.azurelib.animatable.client.RenderProvider;
-import mod.azure.azurelib.cache.AnimatableIdCache;
-import mod.azure.azurelib.constant.DataTickets;
-import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
-import mod.azure.azurelib.core.animation.*;
-import mod.azure.azurelib.core.object.PlayState;
-import mod.azure.azurelib.util.AzureLibUtil;
+import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
+import software.bernie.geckolib.animatable.client.RenderProvider;
+import software.bernie.geckolib.cache.AnimatableIdCache;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.client.render.GunRenderer;
@@ -71,7 +71,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     private final fireType firingType;
 
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
-    protected final AnimatableInstanceCache animationCache = AzureLibUtil.createInstanceCache(this);
+    protected final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
 
     public GunItem(Settings settings, String id, Item ammoItem, float damage, int shotCount, int fireRate, int magSize, int reloadTime, SoundEvent shotSound, SoundEvent[] reloadSounds, Vector2f spread, Vector2f cameraRecoil, Vector3f viewModelRecoilMult, AttachmentItem.AttachType[] acceptedAttachmentTypes, fireType firingType)
     {

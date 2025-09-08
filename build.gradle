@@ -1,7 +1,9 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.11-SNAPSHOT'
 	id 'maven-publish'
 }
+
+apply plugin: 'idea'
 
 version = project.mod_version
 group = project.maven_group
@@ -17,11 +19,16 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	maven {
-		name = "Terraformers"
-		url = "https://maven.terraformersmc.com/"
+		name = 'GeckoLib'
+		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+		content {
+			includeGroupByRegex("software\\.bernie.*")
+			includeGroup("com.eliotlash.mclib")
+		}
 	}
-	maven {url 'https://maven.azuredoom.com/mods'}
 }
+
+
 
 dependencies {
 	// To change the versions see the gradle.properties file
@@ -36,8 +43,9 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-	modImplementation("com.terraformersmc:modmenu:7.2.2")
-	modImplementation "mod.azure.azurelib:azurelib-fabric-1.20.1:2.0.31"
+	//modImplementation("com.terraformersmc:modmenu:7.2.2")
+	modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")
+	implementation("com.eliotlash.mclib:mclib:20")
 }
 
 processResources {

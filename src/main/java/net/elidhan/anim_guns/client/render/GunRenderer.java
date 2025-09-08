@@ -1,11 +1,14 @@
 package net.elidhan.anim_guns.client.render;
 
-import mod.azure.azurelib.cache.AzureLibCache;
-import mod.azure.azurelib.cache.object.BakedGeoModel;
-import mod.azure.azurelib.cache.object.GeoBone;
-import mod.azure.azurelib.renderer.GeoItemRenderer;
-import mod.azure.azurelib.renderer.GeoRenderer;
-import mod.azure.azurelib.util.RenderUtils;
+import com.eliotlash.mclib.math.functions.limit.Min;
+import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.util.ModelIdentifier;
+import software.bernie.geckolib.cache.GeckoLibCache;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
+import software.bernie.geckolib.renderer.GeoRenderer;
+import software.bernie.geckolib.util.RenderUtils;
 import net.elidhan.anim_guns.AnimatedGuns;
 import net.elidhan.anim_guns.client.AttachmentRenderType;
 import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
@@ -54,7 +57,21 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
     @Override
     protected void renderInGui(ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
-    {}
+    {
+        if(currentItemStack.isEmpty() || !(currentItemStack.getItem() instanceof GunItem)) return;
+        Identifier itemID = Identifier.of("anim_guns",((GunItem)currentItemStack.getItem()).getID());
+        BakedModel bakedModel = MinecraftClient.getInstance().getBakedModelManager().getModel(new ModelIdentifier(itemID.withPath(itemID.getPath() + "_gui"), "inventory"));
+
+        poseStack.push();
+
+        bakedModel.getTransformation().getTransformation(transformType).apply(false, poseStack);
+
+        RenderLayer renderLayer = RenderLayers.getItemLayer(currentItemStack, true);
+        VertexConsumer vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(bufferSource, renderLayer, true, false);
+        MinecraftClient.getInstance().getItemRenderer().renderBakedItemModel(bakedModel, currentItemStack, 15728880, packedOverlay, poseStack, vertexConsumer);
+
+        poseStack.pop();
+    }
 
     @Override
     public void render(ItemStack stack, ModelTransformationMode transformType, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight, int packedOverlay)
@@ -136,7 +153,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
                 sightAdjust = 0;
                 sightAdjustForward = 0;
 
-                attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+sightID+".geo.json"));
+                attachmentModel = GeckoLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+sightID+".geo.json"));
 
                 if (attachmentModel == null) return;
 
@@ -177,7 +194,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             {
                 muzzleFlashAdjust = 0.0f;
 
-                attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+muzzleID+".geo.json"));
+                attachmentModel = GeckoLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+muzzleID+".geo.json"));
 
                 if (attachmentModel == null) return;
 
@@ -200,7 +217,7 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             }
             case "gripPos" ->
             {
-                attachmentModel = AzureLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+gripID+".geo.json"));
+                attachmentModel = GeckoLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+gripID+".geo.json"));
 
                 if (attachmentModel == null) return;
 

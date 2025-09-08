@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " r ",
+    "g#g",
+    "   "
+  ],
+  "key": {
+    "#": {
+      "item": "anim_guns:hardened_iron_ingot"
+    },
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "anim_guns:sight_8x_scope"
+  }
+}

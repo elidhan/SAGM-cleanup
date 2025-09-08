@@ -2,7 +2,7 @@ package net.elidhan.anim_guns.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import mod.azure.azurelib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.GeoItem;
 import net.elidhan.anim_guns.animations.AnimationHandler;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.item.GunSingleLoaderItem;

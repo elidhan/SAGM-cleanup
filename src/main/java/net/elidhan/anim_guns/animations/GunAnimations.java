@@ -1,7 +1,7 @@
 package net.elidhan.anim_guns.animations;
 
-import mod.azure.azurelib.core.animation.Animation;
-import mod.azure.azurelib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.animation.Animation;
+import  software.bernie.geckolib.core.animation.RawAnimation;
 
 public final class GunAnimations
 {

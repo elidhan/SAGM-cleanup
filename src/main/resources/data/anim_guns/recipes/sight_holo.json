@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " gn",
+    " #r"
+  ],
+  "key": {
+    "#": {
+      "item": "anim_guns:hardened_iron_ingot"
+    },
+    "g": {
+      "item": "minecraft:glass_pane"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "n": {
+      "item": "anim_guns:hardened_iron_nugget"
+    }
+  },
+  "result": {
+    "item": "anim_guns:sight_holo"
+  }
+}
