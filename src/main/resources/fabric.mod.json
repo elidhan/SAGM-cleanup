@@ -33,6 +33,7 @@
 		"fabric-api": "*",
 		"geckolib": ">=4.7.4"
 	},
+	"accessWidener" : "anim_guns.accesswidener",
 	"suggests": {
 		"another-mod": "*"
 	}
