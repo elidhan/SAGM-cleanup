@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "anim_guns",
 	"version": "${version}",
 	"name": "Simple Animated Guns",
 	"description": "3D animated guns",
