@@ -35,14 +35,14 @@
       "translation": [
         -6.75,
         3.75,
-        -2.25
+        -1
       ]
     },
     "firstperson_lefthand": {
       "translation": [
         -6.75,
         3.75,
-        -2.25
+        -1
       ]
     },
     "ground": {
@@ -50,13 +50,6 @@
         0.62,
         0.62,
         0.62
-      ]
-    },
-    "gui": {
-      "rotation": [
-        1,
-        0,
-        0
       ]
     },
     "fixed": {
