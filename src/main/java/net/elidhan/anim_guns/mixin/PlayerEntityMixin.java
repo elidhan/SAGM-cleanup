@@ -82,7 +82,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Unique
     private void tickReload()
     {
-        if (!(this.getWorld() instanceof ServerWorld)) return;
+        if (!(this.getWorld() instanceof ServerWorld) || !(this.currentGun.getItem() instanceof GunItem)) return;
 
         GunItem gun = (GunItem)this.currentGun.getItem();
 

@@ -13,9 +13,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
-import org.joml.Vector3f;
 
 public class ModNetworking
 {
@@ -28,47 +26,57 @@ public class ModNetworking
     public static void registerC2SPackets()
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_SELECT_BLUEPRINT, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
-        {
-            int i = buf.readInt();
-            Item blueprint = BlueprintItem.BLUEPRINT_ITEM_LIST.get(i);
+                server.execute(() ->
+                {
+                    {
+                        int i = buf.readInt();
+                        Item blueprint = BlueprintItem.BLUEPRINT_ITEM_LIST.get(i);
 
-            if (player.getMainHandStack().getItem() instanceof BlueprintItem || player.getMainHandStack().getItem() instanceof BlueprintBundleItem) {
-                player.getMainHandStack().decrement(1);
-            } else if (player.getOffHandStack().getItem() instanceof BlueprintItem || player.getOffHandStack().getItem() instanceof BlueprintBundleItem) {
-                player.getOffHandStack().decrement(1);
-            }
+                        if (player.getMainHandStack().getItem() instanceof BlueprintItem || player.getMainHandStack().getItem() instanceof BlueprintBundleItem) {
+                            player.getMainHandStack().decrement(1);
+                        } else if (player.getOffHandStack().getItem() instanceof BlueprintItem || player.getOffHandStack().getItem() instanceof BlueprintBundleItem) {
+                            player.getOffHandStack().decrement(1);
+                        }
 
-            if (player.getInventory().getEmptySlot() > -1) {
-                player.giveItemStack(new ItemStack(blueprint));
-            } else {
-                player.dropItem(new ItemStack(blueprint), false, true);
-            }
-
-        });
+                        if (player.getInventory().getEmptySlot() > -1) {
+                            player.giveItemStack(new ItemStack(blueprint));
+                        } else {
+                            player.dropItem(new ItemStack(blueprint), false, true);
+                        }
+                    }
+                }));
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
-        {
-            if (player.getMainHandStack().getItem() instanceof GunItem gun
-                    && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < ((GunItem)player.getMainHandStack().getItem()).getMagSize()
-                    && InventoryUtil.itemCountInInventory(player, gun.getAmmoItem()) > 0
-                    && !((IFPlayerWithGun) player).isReloading())
-            {
-                ((IFPlayerWithGun) player).startReload();
+                server.execute(() ->
+                {
+                    {
+                        if (player.getMainHandStack().getItem() instanceof GunItem gun
+                                && player.getMainHandStack().getOrCreateNbt().getInt("ammo") < gun.getMagSize()
+                                && InventoryUtil.itemCountInInventory(player, gun.getAmmoItem()) > 0
+                                && !((IFPlayerWithGun) player).isReloading()) {
+                            ((IFPlayerWithGun) player).startReload();
 
-                if (player.getMainHandStack().getItem() instanceof GunMagFedItem)
-                    AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reloading");
-                else if (player.getMainHandStack().getItem() instanceof GunSingleLoaderItem)
-                    AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reload_0");
-            }
-        });
+                            if (player.getMainHandStack().getItem() instanceof GunMagFedItem)
+                                AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reloading");
+                            else if (player.getMainHandStack().getItem() instanceof GunSingleLoaderItem)
+                                AnimationHandler.playAnim(player, (player).getMainHandStack(), GeoItem.getId((player).getMainHandStack()), "reload_0");
+                        }
+                    }
+                }));
         ServerPlayNetworking.registerGlobalReceiver(C2S_MELEE, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
-        {
-            if (player instanceof IFPlayerWithGun && ((IFPlayerWithGun) player).getMeleeProgress() <= 0)
-                ((IFPlayerWithGun) player).melee();
-        });
+                server.execute(() ->
+                {
+                    {
+                        if (player instanceof IFPlayerWithGun && ((IFPlayerWithGun) player).getMeleeProgress() <= 0) ((IFPlayerWithGun) player).melee();
+                    }
+                }));
         ServerPlayNetworking.registerGlobalReceiver(C2S_SHOOT, ((server, player, handler, buf, responseSender) ->
-        {
-            if (player.getMainHandStack().getItem() instanceof GunItem gun) gun.shoot(player, player.getMainHandStack());
-        }));
+                server.execute(() ->
+                {
+                    if (player.getMainHandStack().getItem() instanceof GunItem gun)
+                    {
+                        gun.shoot(player, player.getMainHandStack());
+                    }
+                })));
         ServerPlayNetworking.registerGlobalReceiver(C2S_PARTICLES, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
         {
 
