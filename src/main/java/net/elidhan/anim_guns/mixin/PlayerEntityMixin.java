@@ -48,7 +48,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Inject(method = "tickMovement", at = @At("HEAD"))
     public void getCurrentGun(CallbackInfo ci)
     {
-        if(this.getMainHandStack().getOrCreateNbt().get("AzureLibID") != this.currentGun.getOrCreateNbt().get("AzureLibID") && this.getWorld() instanceof ServerWorld)
+        if(this.getMainHandStack().getOrCreateNbt().get("GeckoLibID") != this.currentGun.getOrCreateNbt().get("GeckoLibID") && this.getWorld() instanceof ServerWorld)
         {
             toggleAim(false);
             stopReload();
@@ -161,7 +161,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IFPlayer
     @Inject(method = "dropItem(Lnet/minecraft/item/ItemStack;ZZ)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"))
     public void dropGun(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir)
     {
-        if (stack.getOrCreateNbt().getInt("AzureLibID") == this.currentGun.getOrCreateNbt().getInt("AzureLibID"))
+        if (stack.getOrCreateNbt().getInt("GeckoLibID") == this.currentGun.getOrCreateNbt().getInt("GeckoLibID"))
         {
             this.currentGun = ItemStack.EMPTY;
         }

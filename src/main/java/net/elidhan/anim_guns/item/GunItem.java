@@ -287,7 +287,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {return false;}
     //==============//
 
-    //=====AzureLib Stuff=====//
+    //=====GeckoLib Stuff=====//
     @Override
     public void createRenderer(Consumer<Object> consumer)
     {
