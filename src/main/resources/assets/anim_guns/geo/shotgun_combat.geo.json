@@ -1483,7 +1483,7 @@
 				{
 					"name": "ads_node",
 					"parent": "gunbody",
-					"pivot": [0, 3.075, 8]
+					"pivot": [0, 3.075, 10]
 				},
 				{
 					"name": "muzzlePos",
