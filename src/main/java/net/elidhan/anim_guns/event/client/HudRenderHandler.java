@@ -47,7 +47,7 @@ public class HudRenderHandler implements HudRenderCallback
         else
         {
             drawContext.drawTextWithShadow(client.textRenderer, text,
-                    scaledWidth/2 + client.textRenderer.getWidth(text) + 115 + (maxAmmo - 20),
+                    scaledWidth/2 + client.textRenderer.getWidth(text) + (115 + (maxAmmo - (ammoCount > 99 ? 32 : 20))),
                     scaledHeight - 35,
                     16777215);
 

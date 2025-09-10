@@ -74,8 +74,8 @@ public class ModConfigs {
         configs.addKeyValuePair(new Pair<>("damage.sniper_marksman", 12.5), "double");
         configs.addKeyValuePair(new Pair<>("damage.sniper_dragunov", 16), "double");
 
-        configs.addKeyValuePair(new Pair<>("damage.lmg_m60", 7), "double");
-        configs.addKeyValuePair(new Pair<>("damage.lmg_minigun", 5), "double");
+        configs.addKeyValuePair(new Pair<>("damage.lmg_m60", 8), "double");
+        configs.addKeyValuePair(new Pair<>("damage.lmg_minigun", 6), "double");
         configs.addKeyValuePair(new Pair<>("damage.amr_classic", 50), "double");
     }
 
@@ -107,8 +107,8 @@ public class ModConfigs {
         DMG_SNIPER_MARKSMAN = (float) CONFIG.getOrDefault("damage.sniper_marksman", 12.5);
         DMG_SNIPER_DRAGUNOV = (float) CONFIG.getOrDefault("damage.sniper_dragunov", 16);
 
-        DMG_LMG_M60 = (float) CONFIG.getOrDefault("damage.lmg_m60", 7);
-        DMG_LMG_MINIGUN = (float) CONFIG.getOrDefault("damage.lmg_minigun", 5);
+        DMG_LMG_M60 = (float) CONFIG.getOrDefault("damage.lmg_m60", 8);
+        DMG_LMG_MINIGUN = (float) CONFIG.getOrDefault("damage.lmg_minigun", 6);
         DMG_AMR_CLASSIC = (float) CONFIG.getOrDefault("damage.amr_classic", 50);
 
         System.out.println("All " + configs.getConfigsList().size() + " have been set properly");
