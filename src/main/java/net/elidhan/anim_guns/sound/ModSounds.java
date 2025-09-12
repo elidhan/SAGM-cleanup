@@ -39,6 +39,10 @@ public class ModSounds
 
     public static SoundEvent SHOT_AMR_CLASSIC = registerSoundEvent("shot_amr_classic");
 
+    public static SoundEvent SHOT_LMG_M60 = registerSoundEvent("shot_lmg_m60");
+
+    public static SoundEvent SHOT_SPECIAL_MINIGUN = registerSoundEvent("shot_special_minigun");
+
     //RELOAD SOUNDS
     
     public static SoundEvent RLD_PISTOL_1_REMOVE = registerSoundEvent("pistol_1_remove");

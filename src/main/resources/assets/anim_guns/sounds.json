@@ -20,6 +20,8 @@
 	"shot_dmr_marksman": {"category": "master", "sounds": ["anim_guns:shot_dmr_marksman"]},
 	"shot_dmr_ironcurtain": {"category": "master", "sounds": ["anim_guns:shot_dmr_ironcurtain"]},
 	"shot_amr_classic": {"category": "master", "sounds": ["anim_guns:shot_amr_classic"]},
+	"shot_lmg_m60": {"category": "master", "sounds": ["anim_guns:shot_lmg_m60"]},
+	"shot_special_minigun": {"category": "master", "sounds": ["anim_guns:shot_special_minigun"]},
 
 	"pistol_1_remove": 			{ "category": "players", "sounds": [ "anim_guns:pistol_1_remove" ] },
 	"pistol_1_insert": 			{ "category": "players", "sounds": [ "anim_guns:pistol_1_insert" ] },

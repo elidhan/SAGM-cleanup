@@ -517,38 +517,38 @@ public class ModItems
     public static final Item LMG_M60 = registerItem("lmg_m60", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "lmg_m60", ModItems.HEAVY_RIFLE_BULLET,
             ModConfigs.DMG_LMG_M60,1, 2, 100, 118,
-            ModSounds.SHOT_ASSAULT,
+            ModSounds.SHOT_LMG_M60,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
-                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Remove Magazine
+                            SoundEvents.INTENTIONALLY_EMPTY, //Insert Magazine/Round
                             SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
-                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(0.5f,0.5f), //Spread
-            new Vector2f(0.25f,1.25f), //Camera Recoil
+            new Vector2f(0.75f,0.75f), //Spread
+            new Vector2f(0.375f,1.5f), //Camera Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             new AttachmentItem.AttachType[]{},
             GunItem.fireType.AUTO
     ));
 
-    public static final Item LMG_MINIGUN = registerItem("lmg_minigun", new GunMagFedItem(new FabricItemSettings().maxCount(1),
+    public static final Item SPECIAL_MINIGUN = registerItem("lmg_minigun", new GunMagFedItem(new FabricItemSettings().maxCount(1),
             "lmg_minigun", ModItems.STANDARD_RIFLE_BULLET,
-            ModConfigs.DMG_LMG_MINIGUN,1, 1, 200, 140,
-            ModSounds.SHOT_ASSAULT,
+            ModConfigs.DMG_SPECIAL_MINIGUN,1, 1, 200, 140,
+            ModSounds.SHOT_SPECIAL_MINIGUN,
             new SoundEvent[]
                     {
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Ready, can be empty
-                            ModSounds.RLD_AR_1_REMOVE,//Remove Magazine
-                            ModSounds.RLD_AR_1_INSERT, //Insert Magazine/Round
+                            SoundEvents.INTENTIONALLY_EMPTY, //Remove Magazine
+                            SoundEvents.INTENTIONALLY_EMPTY, //Insert Magazine/Round
                             SoundEvents.INTENTIONALLY_EMPTY, //Bolt Pull
-                            ModSounds.RLD_AR_1_BOLTFORWARD, //Bolt Release
+                            SoundEvents.INTENTIONALLY_EMPTY, //Bolt Release
                             SoundEvents.INTENTIONALLY_EMPTY, //Reload Finish, can be empty
                     },
-            new Vector2f(0.5f,0.5f), //Spread
-            new Vector2f(0.25f,1.25f), //Camera Recoil
+            new Vector2f(3f,3f), //Spread
+            new Vector2f(0.475f,1.5f), //Camera Recoil
             new Vector3f(0f, 0.125f, 0.75f), //Viewmodel recoil aim multiplier
             new AttachmentItem.AttachType[]{},
             GunItem.fireType.AUTO
@@ -595,6 +595,8 @@ public class ModItems
             entries.add(new ItemStack(ModItems.SNIPER_MARKSMAN));
             entries.add(new ItemStack(ModItems.SNIPER_DRAGUNOV));
             entries.add(new ItemStack(ModItems.AMR_INTERVENTION));
+            entries.add(new ItemStack(ModItems.LMG_M60));
+            entries.add(new ItemStack(ModItems.SPECIAL_MINIGUN));
         }).displayName(Text.translatable("guns")).build();
 
         final ItemGroup CRAFTING = FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.ENRICHED_IRON)).entries((displayContext, entries) -> {

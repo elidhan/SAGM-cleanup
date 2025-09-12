@@ -34,7 +34,7 @@ public class ModConfigs {
     public static float DMG_SNIPER_DRAGUNOV;
 
     public static float DMG_LMG_M60;
-    public static float DMG_LMG_MINIGUN;
+    public static float DMG_SPECIAL_MINIGUN;
     public static float DMG_AMR_CLASSIC;
 
     public static void registerConfigs() {
@@ -108,7 +108,7 @@ public class ModConfigs {
         DMG_SNIPER_DRAGUNOV = (float) CONFIG.getOrDefault("damage.sniper_dragunov", 16);
 
         DMG_LMG_M60 = (float) CONFIG.getOrDefault("damage.lmg_m60", 8);
-        DMG_LMG_MINIGUN = (float) CONFIG.getOrDefault("damage.lmg_minigun", 6);
+        DMG_SPECIAL_MINIGUN = (float) CONFIG.getOrDefault("damage.lmg_minigun", 6);
         DMG_AMR_CLASSIC = (float) CONFIG.getOrDefault("damage.amr_classic", 50);
 
         System.out.println("All " + configs.getConfigsList().size() + " have been set properly");

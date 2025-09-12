@@ -76,6 +76,9 @@ public class AnimatedGunsClient implements ClientModInitializer
 		registerGunGUIModels(ModItems.SNIPER_DRAGUNOV);
 		registerGunGUIModels(ModItems.AMR_INTERVENTION);
 
+		registerGunGUIModels(ModItems.LMG_M60);
+		registerGunGUIModels(ModItems.SPECIAL_MINIGUN);
+
 		HandledScreens.register(AnimatedGuns.BLUEPRINT_SCREEN_HANDLER_TYPE, BlueprintScreen::new);
 
 		//Intercept Attack mouse key
