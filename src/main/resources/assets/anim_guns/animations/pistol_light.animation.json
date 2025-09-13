@@ -94,6 +94,9 @@
 					}
 				},
 				"muzzleflash": {
+					"rotation": {
+						"vector": [0, 0, "math.random(-45,45)"]
+					},
 					"scale": {
 						"0.0": {
 							"vector": [625, 625, 1]

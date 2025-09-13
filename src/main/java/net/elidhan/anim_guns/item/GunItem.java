@@ -1,5 +1,9 @@
 package net.elidhan.anim_guns.item;
 
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.text.Text;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.RenderProvider;
@@ -36,10 +40,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ClickType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector2f;
@@ -285,6 +285,21 @@ public class GunItem extends Item implements FabricItem, GeoItem
     public int getMaxUseTime(ItemStack stack) {return 72000;}
     @Override
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {return false;}
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
+    {
+        tooltip.add(Text.translatable("Damage: " + Math.round(this.damage)).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("Shot cooldown: " + this.fireRate + (this.fireRate > 1 ? " ticks" : " tick")).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("Accepted attachments:").formatted(Formatting.WHITE));
+        if (this.acceptedAttachmentTypes.length < 1)
+        {
+            tooltip.add(Text.translatable("NONE").formatted(Formatting.RED));
+        }
+        for (AttachmentItem.AttachType acceptedAttachmentType : this.acceptedAttachmentTypes) {
+            tooltip.add(Text.translatable(acceptedAttachmentType.toString()).formatted(Formatting.DARK_AQUA));
+        }
+        super.appendTooltip(stack, world, tooltip, context);
+    }
     //==============//
 
     //=====GeckoLib Stuff=====//

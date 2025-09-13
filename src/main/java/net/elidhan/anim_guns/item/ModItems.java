@@ -227,7 +227,7 @@ public class ModItems
             new Vector2f(15f,15f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.25f,0.325f),
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE},
+            new AttachmentItem.AttachType[]{},
             GunItem.fireType.SEMI
     ));
 
@@ -248,7 +248,7 @@ public class ModItems
             new Vector2f(10f,10f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.5f,0.125f),
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE},
+            new AttachmentItem.AttachType[]{},
             GunItem.fireType.SEMI
     ));
 
@@ -269,7 +269,7 @@ public class ModItems
             new Vector2f(22.5f,5f), //Spread
             new Vector2f(0.75f,6.25f), //Camera Recoil
             new Vector3f(0f,0.75f,0.1875f),
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.SIGHT},
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.SIGHT},
             GunItem.fireType.SEMI
     ));
 
@@ -289,7 +289,7 @@ public class ModItems
             new Vector2f(5f,5f),
             new Vector2f(1.25f,2.5f),
             new Vector3f( 0f, 0.375f, 0.75f),
-            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE, AttachmentItem.AttachType.GRIP},
+            new AttachmentItem.AttachType[]{AttachmentItem.AttachType.MUZZLE},
             GunItem.fireType.AUTO
     ));
 
