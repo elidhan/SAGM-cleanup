@@ -288,7 +288,7 @@ public class GunItem extends Item implements FabricItem, GeoItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(Text.translatable("Damage: " + Math.round(this.damage)).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("Damage: " + String.format("%.1f", this.damage)).formatted(Formatting.GRAY));
         tooltip.add(Text.translatable("Shot cooldown: " + this.fireRate + (this.fireRate > 1 ? " ticks" : " tick")).formatted(Formatting.GRAY));
         tooltip.add(Text.translatable("Accepted attachments:").formatted(Formatting.WHITE));
         if (this.acceptedAttachmentTypes.length < 1)
