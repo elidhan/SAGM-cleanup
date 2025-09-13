@@ -1052,6 +1052,11 @@
 					"pivot": [0, 2.82454, 10]
 				},
 				{
+					"name": "muzzlePos",
+					"parent": "gunbody",
+					"pivot": [0, 1.425, -4.14375]
+				},
+				{
 					"name": "muzzleflash",
 					"parent": "gun",
 					"pivot": [0, 1.425, -4.15625]
