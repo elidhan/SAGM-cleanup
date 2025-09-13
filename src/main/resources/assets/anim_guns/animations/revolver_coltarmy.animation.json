@@ -165,6 +165,9 @@
 					}
 				},
 				"flash": {
+					"rotation": {
+						"vector": [0, 0, "Math.random(-45,45)"]
+					},
 					"scale": {
 						"0.0": {
 							"vector": [1000, 1000, 1]
