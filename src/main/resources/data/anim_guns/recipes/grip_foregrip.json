@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "hhh",
+    " p ",
+    " p "
+  ],
+  "key": {
+    "p": {
+      "item": "anim_guns:plastic"
+    },
+    "h": {
+      "item": "anim_guns:hardened_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "anim_guns:grip_foregrip"
+  }
+}

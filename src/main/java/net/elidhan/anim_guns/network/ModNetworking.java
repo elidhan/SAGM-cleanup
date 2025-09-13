@@ -26,25 +26,22 @@ public class ModNetworking
     public static void registerC2SPackets()
     {
         ServerPlayNetworking.registerGlobalReceiver(C2S_SELECT_BLUEPRINT, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
-                server.execute(() ->
-                {
-                    {
-                        int i = buf.readInt();
-                        Item blueprint = BlueprintItem.BLUEPRINT_ITEM_LIST.get(i);
+        {
+            int i = buf.readInt();
+            Item blueprint = BlueprintItem.BLUEPRINT_ITEM_LIST.get(i);
 
-                        if (player.getMainHandStack().getItem() instanceof BlueprintItem || player.getMainHandStack().getItem() instanceof BlueprintBundleItem) {
-                            player.getMainHandStack().decrement(1);
-                        } else if (player.getOffHandStack().getItem() instanceof BlueprintItem || player.getOffHandStack().getItem() instanceof BlueprintBundleItem) {
-                            player.getOffHandStack().decrement(1);
-                        }
+            if (player.getMainHandStack().getItem() instanceof BlueprintItem || player.getMainHandStack().getItem() instanceof BlueprintBundleItem) {
+                player.getMainHandStack().decrement(1);
+            } else if (player.getOffHandStack().getItem() instanceof BlueprintItem || player.getOffHandStack().getItem() instanceof BlueprintBundleItem) {
+                player.getOffHandStack().decrement(1);
+            }
 
-                        if (player.getInventory().getEmptySlot() > -1) {
-                            player.giveItemStack(new ItemStack(blueprint));
-                        } else {
-                            player.dropItem(new ItemStack(blueprint), false, true);
-                        }
-                    }
-                }));
+            if (player.getInventory().getEmptySlot() > -1) {
+                player.giveItemStack(new ItemStack(blueprint));
+            } else {
+                player.dropItem(new ItemStack(blueprint), false, true);
+            }
+        });
         ServerPlayNetworking.registerGlobalReceiver(C2S_RELOAD, (server, player, serverPlayNetworkHandler, buf, packetSender) ->
                 server.execute(() ->
                 {

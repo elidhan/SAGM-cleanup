@@ -1,6 +1,5 @@
 package net.elidhan.anim_guns.client.render;
 
-import com.eliotlash.mclib.math.functions.limit.Min;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.ModelIdentifier;
 import software.bernie.geckolib.cache.GeckoLibCache;
@@ -15,7 +14,6 @@ import net.elidhan.anim_guns.client.MuzzleFlashRenderType;
 import net.elidhan.anim_guns.client.model.GunModel;
 import net.elidhan.anim_guns.item.GunItem;
 import net.elidhan.anim_guns.mixininterface.IFClientPlayerWithGun;
-import net.elidhan.anim_guns.mixininterface.IFPlayerWithGun;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -29,7 +27,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 
 public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer<GunItem>
 {
@@ -150,8 +147,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
             case "sightPos" ->
             {
                 //if (this.transformType == ModelTransformationMode.GROUND || this.transformType == ModelTransformationMode.FIXED) break;
-                sightAdjust = 0;
-                sightAdjustForward = 0;
 
                 attachmentModel = GeckoLibCache.getBakedModels().get(new Identifier(AnimatedGuns.MOD_ID,"geo/"+sightID+".geo.json"));
 
@@ -167,6 +162,9 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
                 if(attachmentBone != null)
                 {
+                    sightAdjust = 0;
+                    sightAdjustForward = 0;
+
                     sightAdjust = adsNode.getPivotY() - bone.getPivotY() - attachADSNode.getPivotY();
                     sightAdjustForward = (bone.getPivotZ() + attachADSNode.getPivotZ());
                     sightAdjustForward = Math.abs(sightAdjustForward - adsNode.getPivotZ()) - posZ*16;
@@ -294,13 +292,6 @@ public class GunRenderer extends GeoItemRenderer<GunItem> implements GeoRenderer
 
 
         poseStack.translate(centeredX * f, centeredY * f, adjustZ * f);
-    }
-    private void recoilTransforms(MatrixStack poseStack, float rotX, float rotY, float moveY, float moveZ)
-    {
-        poseStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(rotY));
-        poseStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotX));
-        poseStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(rotX));
-        poseStack.translate(0,moveY,(moveZ/16f));
     }
     //====================//
 }

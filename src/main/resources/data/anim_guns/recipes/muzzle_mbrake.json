@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "hh",
+    "nn"
+  ],
+  "key": {
+    "n": {
+      "item": "anim_guns:hardened_iron_nugget"
+    },
+    "h": {
+      "item": "anim_guns:hardened_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "anim_guns:muzzle_mbrake"
+  }
+}
